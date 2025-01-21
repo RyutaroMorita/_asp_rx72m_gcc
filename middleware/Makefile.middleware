@@ -1,0 +1,6 @@
+
+
+MIDDLEDIR = $(SRCDIR)/middleware
+
+
+#include $(MIDDLEDIR)/fatfs_ff11a/src/Makefile.fatfs
