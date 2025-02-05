@@ -8,56 +8,56 @@
 #  Copyright (C) 2006-2014 by Embedded and Real-Time Systems Laboratory
 #              Graduate School of Information Science, Nagoya Univ., JAPAN
 # 
-#  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
-#  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
-#  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
-#  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
-#      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
-#      スコード中に含まれていること．
-#  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
-#      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
-#      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
-#      の無保証規定を掲載すること．
-#  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
-#      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
-#      と．
-#    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
-#        作権表示，この利用条件および下記の無保証規定を掲載すること．
-#    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
-#        報告すること．
-#  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
-#      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
-#      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
-#      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
-#      免責すること．
+#  ��L���쌠�҂́C�ȉ���(1)�`(4)�̏����𖞂����ꍇ�Ɍ���C�{�\�t�g�E�F
+#  �A�i�{�\�t�g�E�F�A�����ς������̂��܂ށD�ȉ������j���g�p�E�����E��
+#  �ρE�Ĕz�z�i�ȉ��C���p�ƌĂԁj���邱�Ƃ𖳏��ŋ�������D
+#  (1) �{�\�t�g�E�F�A���\�[�X�R�[�h�̌`�ŗ��p����ꍇ�ɂ́C��L�̒���
+#      ���\���C���̗��p��������щ��L�̖��ۏ؋K�肪�C���̂܂܂̌`�Ń\�[
+#      �X�R�[�h���Ɋ܂܂�Ă��邱�ƁD
+#  (2) �{�\�t�g�E�F�A���C���C�u�����`���ȂǁC���̃\�t�g�E�F�A�J���Ɏg
+#      �p�ł���`�ōĔz�z����ꍇ�ɂ́C�Ĕz�z�ɔ����h�L�������g�i���p
+#      �҃}�j���A���Ȃǁj�ɁC��L�̒��쌠�\���C���̗��p��������щ��L
+#      �̖��ۏ؋K����f�ڂ��邱�ƁD
+#  (3) �{�\�t�g�E�F�A���C�@��ɑg�ݍ��ނȂǁC���̃\�t�g�E�F�A�J���Ɏg
+#      �p�ł��Ȃ��`�ōĔz�z����ꍇ�ɂ́C���̂����ꂩ�̏����𖞂�����
+#      �ƁD
+#    (a) �Ĕz�z�ɔ����h�L�������g�i���p�҃}�j���A���Ȃǁj�ɁC��L�̒�
+#        �쌠�\���C���̗��p��������щ��L�̖��ۏ؋K����f�ڂ��邱�ƁD
+#    (b) �Ĕz�z�̌`�Ԃ��C�ʂɒ�߂���@�ɂ���āCTOPPERS�v���W�F�N�g��
+#        �񍐂��邱�ƁD
+#  (4) �{�\�t�g�E�F�A�̗��p�ɂ�蒼�ړI�܂��͊ԐړI�ɐ����邢���Ȃ鑹
+#      �Q������C��L���쌠�҂����TOPPERS�v���W�F�N�g��Ɛӂ��邱�ƁD
+#      �܂��C�{�\�t�g�E�F�A�̃��[�U�܂��̓G���h���[�U����̂����Ȃ闝
+#      �R�Ɋ�Â�����������C��L���쌠�҂����TOPPERS�v���W�F�N�g��
+#      �Ɛӂ��邱�ƁD
 # 
-#  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
-#  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
-#  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
-#  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
-#  の責任を負わない．
+#  �{�\�t�g�E�F�A�́C���ۏ؂Œ񋟂���Ă�����̂ł���D��L���쌠�҂�
+#  ���TOPPERS�v���W�F�N�g�́C�{�\�t�g�E�F�A�Ɋւ��āC����̎g�p�ړI
+#  �ɑ΂���K�������܂߂āC�����Ȃ�ۏ؂��s��Ȃ��D�܂��C�{�\�t�g�E�F
+#  �A�̗��p�ɂ�蒼�ړI�܂��͊ԐړI�ɐ����������Ȃ鑹�Q�Ɋւ��Ă��C��
+#  �̐ӔC�𕉂�Ȃ��D
 # 
 #  $Id: Makefile 2728 2015-12-30 01:46:11Z ertl-honda $
 # 
 
 #
-#  ターゲットの指定（Makefile.targetで上書きされるのを防ぐため）
+#  �^�[�Q�b�g�̎w��iMakefile.target�ŏ㏑�������̂�h�����߁j
 #
 all:
 
 #
-#  ターゲット略称の定義
+#  �^�[�Q�b�g���̂̒�`
 #
 TARGET = RTK0EMXDE0C00000BJ_gcc
 
 #
-#  TCP/IP プロトコル・スタックの定義
+#  TCP/IP �v���g�R���E�X�^�b�N�̒�`
 #
 NET_SP = none
 #NET_SP = tinet
 
 #
-#  プログラミング言語の定義
+#  �v���O���~���O����̒�`
 #
 SRCLANG = c
 ifeq ($(SRCLANG),c)
@@ -70,44 +70,44 @@ ifeq ($(SRCLANG),c++)
 endif
 
 #
-#  ソースファイルのディレクトリの定義
+#  �\�[�X�t�@�C���̃f�B���N�g���̒�`
 #
 SRCDIR = ..
 
 #
-#  オブジェクトファイル名の拡張子の設定
+#  �I�u�W�F�N�g�t�@�C�����̊g���q�̐ݒ�
 #
 OBJEXT = exe
 
 #
-#  実行環境の定義（ターゲット依存に上書きされる場合がある）
+#  ���s���̒�`�i�^�[�Q�b�g�ˑ��ɏ㏑�������ꍇ������j
 #
 DBGENV := 
 
 #
-#  カーネルライブラリ（libkernel.a）のディレクトリ名
-#  （カーネルライブラリもmake対象にする時は，空に定義する）
+#  �J�[�l�����C�u�����ilibkernel.a�j�̃f�B���N�g����
+#  �i�J�[�l�����C�u������make�Ώۂɂ��鎞�́C��ɒ�`����j
 #
 KERNEL_LIB = 
 
 #
-#  カーネルを関数単位でコンパイルするかどうかの定義
+#  �J�[�l�����֐��P�ʂŃR���p�C�����邩�ǂ����̒�`
 #
 KERNEL_FUNCOBJS = 
 
 #
-#  トレースログを取得するかどうかの定義
+#  �g���[�X���O���擾���邩�ǂ����̒�`
 #
 ENABLE_TRACE = 
 
 #
-#  ユーティリティプログラムの名称
+#  ���[�e�B���e�B�v���O�����̖���
 #
 PERL = /usr/bin/perl
 CFG = $(SRCDIR)/cfg/cfg/cfg
 
 #
-#  オブジェクトファイル名の定義
+#  �I�u�W�F�N�g�t�@�C�����̒�`
 #
 OBJNAME = asp
 ifdef OBJEXT
@@ -119,17 +119,17 @@ else
 endif
 
 #
-#  ターゲット依存部のディレクトリの定義
+#  �^�[�Q�b�g�ˑ����̃f�B���N�g���̒�`
 #
 TARGETDIR = $(SRCDIR)/target/$(TARGET)
 
 #
-#  ターゲット依存の定義のインクルード
+#  �^�[�Q�b�g�ˑ��̒�`�̃C���N���[�h
 #
 include $(TARGETDIR)/Makefile.target
 
 #
-#  コンフィギュレータ関係の変数の定義
+#  �R���t�B�M�����[�^�֌W�̕ϐ��̒�`
 #
 CFG_TABS := --api-table $(SRCDIR)/kernel/kernel_api.csv \
 			--cfg1-def-table $(SRCDIR)/kernel/kernel_def.csv $(CFG_TABS)
@@ -140,7 +140,7 @@ CFG_OBJS := $(CFG_ASMOBJS) $(CFG_COBJS)
 CFG2_OUT_SRCS := kernel_cfg.h kernel_cfg.c $(CFG2_OUT_SRCS)
 
 #
-#  共通コンパイルオプションの定義
+#  ���ʃR���p�C���I�v�V�����̒�`
 #
 COPTS := $(COPTS) -g 
 ifndef OMIT_WARNING_ALL
@@ -157,22 +157,22 @@ LIBS := $(LIBS) $(CXXLIBS)
 CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
 
 #
-#  アプリケーションプログラムに関する定義
+#  �A�v���P�[�V�����v���O�����Ɋւ����`
 #
 APPLNAME = sample1
 APPLDIR = 
 APPL_CFG = $(APPLNAME).cfg
-APPL_SRCS = sample.o
+APPL_SRCS = sample1.o
 
 APPL_DIR = $(APPLDIR) $(SRCDIR)/library
 APPL_ASMOBJS =
 ifdef USE_CXX
 #  APPL_CXXOBJS = $(APPLNAME).o 
-  APPL_CXXOBJS = $(APPL_SRCS) 
+  APPL_CXXOBJS = $(APPL_SRCS)
   APPL_COBJS =
 else
 #  APPL_COBJS = $(APPLNAME).o 
-  APPL_COBJS = $(APPL_SRCS) 
+  APPL_COBJS = $(APPL_SRCS)
 endif
 APPL_COBJS := $(APPL_COBJS) log_output.o vasyslog.o t_perror.o strerror.o
 APPL_CFLAGS =
@@ -181,31 +181,31 @@ ifdef APPLDIR
   INCLUDES := $(INCLUDES) $(foreach dir,$(APPLDIR),-I$(dir))
 endif
 #
-#  ネットワークサービスの定義
+#  �l�b�g���[�N�T�[�r�X�̒�`
 #
 
-#  TINET の定義
+#  TINET �̒�`
 ifeq ($(NET_SP),tinet)
-  #  ネットワークインタフェースの選択、何れか一つ選択する。
+  #  �l�b�g���[�N�C���^�t�F�[�X�̑I���A���ꂩ��I������B
   NET_IF = ether
-  #  イーサネット・ディバイスドライバの選択
+  #  �C�[�T�l�b�g�E�f�B�o�C�X�h���C�o�̑I��
   #NET_DEV = if_ed
   NET_DEV = if_rx62n
-  #  ネットワーク層の選択、何れか一つ選択する。
+  #  �l�b�g���[�N�w�̑I���A���ꂩ��I������B
   SUPPORT_INET4 = true
   #SUPPORT_INET6 = true
-  #  トランスポート層の選択
+  #  �g�����X�|�[�g�w�̑I��
   SUPPORT_TCP = true
   SUPPORT_UDP = true
 
   #
-  # システムサービスの Makefile のインクルード
+  # �V�X�e���T�[�r�X�� Makefile �̃C���N���[�h
   #
   include $(SRCDIR)/tinet/Makefile.tinet
 endif
 
 #
-#  システムサービスに関する定義
+#  �V�X�e���T�[�r�X�Ɋւ����`
 #
 SYSSVC_DIR := $(SYSSVC_DIR) $(SRCDIR)/syssvc $(SRCDIR)/library
 SYSSVC_ASMOBJS := $(SYSSVC_ASMOBJS)
@@ -216,19 +216,19 @@ SYSSVC_LIBS := $(SYSSVC_LIBS)
 INCLUDES := $(INCLUDES)
 
 #
-#  カーネルに関する定義
+#  �J�[�l���Ɋւ����`
 #
-#  KERNEL_ASMOBJS: カーネルライブラリに含める，ソースがアセンブリ言語の
-#				   オブジェクトファイル．
-#  KERNEL_COBJS: カーネルのライブラリに含める，ソースがC言語で，ソース
-#				 ファイルと1対1に対応するオブジェクトファイル．
-#  KERNEL_LCSRCS: カーネルのライブラリに含めるC言語のソースファイルで，
-#				  1つのソースファイルから複数のオブジェクトファイルを生
-#				  成するもの．
-#  KERNEL_LCOBJS: 上のソースファイルから生成されるオブジェクトファイル．
-#  KERNEL_AUX_COBJS: ロードモジュールに含めないが，カーネルのソースファ
-#					 イルと同じオプションを適用してコンパイルすべき，ソー
-#					 スがC言語のオブジェクトファイル．
+#  KERNEL_ASMOBJS: �J�[�l�����C�u�����Ɋ܂߂�C�\�[�X���A�Z���u�������
+#				   �I�u�W�F�N�g�t�@�C���D
+#  KERNEL_COBJS: �J�[�l���̃��C�u�����Ɋ܂߂�C�\�[�X��C����ŁC�\�[�X
+#				 �t�@�C����1��1�ɑΉ�����I�u�W�F�N�g�t�@�C���D
+#  KERNEL_LCSRCS: �J�[�l���̃��C�u�����Ɋ܂߂�C����̃\�[�X�t�@�C���ŁC
+#				  1�̃\�[�X�t�@�C�����畡���̃I�u�W�F�N�g�t�@�C����
+#				  ��������́D
+#  KERNEL_LCOBJS: ��̃\�[�X�t�@�C�����琶�������I�u�W�F�N�g�t�@�C���D
+#  KERNEL_AUX_COBJS: ���[�h���W���[���Ɋ܂߂Ȃ����C�J�[�l���̃\�[�X�t�@
+#					 �C���Ɠ����I�v�V������K�p���ăR���p�C�����ׂ��C�\�[
+#					 �X��C����̃I�u�W�F�N�g�t�@�C���D
 #
 KERNEL_DIR := $(KERNEL_DIR) $(SRCDIR)/kernel
 KERNEL_ASMOBJS := $(KERNEL_ASMOBJS)
@@ -244,23 +244,23 @@ endif
 endif
 
 #
-#  ターゲットファイル（複数を同時に選択してはならない）
+#  �^�[�Q�b�g�t�@�C���i�����𓯎��ɑI�����Ă͂Ȃ�Ȃ��j
 #
 all: $(OBJFILE)
 #all: $(OBJNAME).bin
 #all: $(OBJNAME).srec
 
-##### 以下は編集しないこと #####
+##### �ȉ��͕ҏW���Ȃ����� #####
 
 #
-#  環境に依存するコンパイルオプションの定義
+#  ���Ɉˑ�����R���p�C���I�v�V�����̒�`
 #
 ifdef DBGENV
   CDEFS := $(CDEFS) -D$(DBGENV)
 endif
 
 #
-#  カーネルのファイル構成の定義
+#  �J�[�l���̃t�@�C���\���̒�`
 #
 include $(SRCDIR)/kernel/Makefile.kernel
 ifdef KERNEL_FUNCOBJS
@@ -273,14 +273,14 @@ else
 endif
 
 #
-#  ソースファイルのあるディレクトリに関する定義
+#  �\�[�X�t�@�C���̂���f�B���N�g���Ɋւ����`
 #
 vpath %.c $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
 vpath %.S $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
 vpath %.cfg $(APPL_DIR)
 
 #
-#  コンパイルのための変数の定義
+#  �R���p�C���̂��߂̕ϐ��̒�`
 #
 KERNEL_LIB_OBJS = $(KERNEL_ASMOBJS) $(KERNEL_COBJS) $(KERNEL_LCOBJS)
 SYSSVC_OBJS = $(SYSSVC_ASMOBJS) $(SYSSVC_COBJS)
@@ -311,7 +311,7 @@ ifdef LDSCRIPT
 endif
 
 #
-#  オフセットファイル（offset.h）の生成規則
+#  �I�t�Z�b�g�t�@�C���ioffset.h�j�̐����K��
 #
 ifdef OFFSET_TF
 offset.h: $(APPL_CFG) kernel_cfg.timestamp
@@ -324,7 +324,7 @@ offset.h: makeoffset.s $(SRCDIR)/utils/genoffset
 endif
 
 #
-#  カーネルのコンフィギュレーションファイルの生成
+#  �J�[�l���̃R���t�B�M�����[�V�����t�@�C���̐���
 #
 cfg1_out.c: $(APPL_CFG)
 	$(CFG) --pass 1 --kernel asp $(INCLUDES) $(CFG_TABS) $<
@@ -343,7 +343,7 @@ kernel_cfg.timestamp: $(APPL_CFG) \
 	touch -r kernel_cfg.c kernel_cfg.timestamp
 
 #
-#  カーネルライブラリファイルの生成
+#  �J�[�l�����C�u�����t�@�C���̐���
 #
 libkernel.a: $(OFFSET_H) $(KERNEL_LIB_OBJS)
 	rm -f libkernel.a
@@ -351,12 +351,12 @@ libkernel.a: $(OFFSET_H) $(KERNEL_LIB_OBJS)
 	$(RANLIB) libkernel.a
 
 #
-#  特別な依存関係の定義
+#  ���ʂȈˑ��֌W�̒�`
 #
 banner.o: kernel_cfg.timestamp $(filter-out banner.o,$(ALL_OBJS)) $(LIBS_DEP)
 
 #
-#  全体のリンク
+#  �S�̂̃����N
 #
 $(OBJFILE): $(APPL_CFG) kernel_cfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 	$(LINK) $(CFLAGS) $(LDFLAGS) -o $(OBJFILE) $(START_OBJS) \
@@ -371,19 +371,19 @@ $(OBJFILE): $(APPL_CFG) kernel_cfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 				-T $(TARGETDIR)/target_check.tf $(CFG_TABS) $<
 
 #
-#  バイナリファイルの生成
+#  �o�C�i���t�@�C���̐���
 #
 $(OBJNAME).bin: $(OBJFILE)
 	$(OBJCOPY) -O binary -S $(OBJFILE) $(OBJNAME).bin
 
 #
-#  Sレコードファイルの生成
+#  S���R�[�h�t�@�C���̐���
 #
 $(OBJNAME).srec: $(OBJFILE)
 	$(OBJCOPY) -O srec -S $(OBJFILE) $(OBJNAME).srec
 
 #
-#  コンパイル結果の消去
+#  �R���p�C�����ʂ̏���
 #
 .PHONY: clean
 clean:
@@ -415,12 +415,12 @@ realclean: cleandep clean
 	rm -f $(REALCLEAN_FILES)
 
 #
-#  コンフィギュレータが生成したファイルのコンパイルルールと依存関係作成
-#  ルールの定義
+#  �R���t�B�M�����[�^�����������t�@�C���̃R���p�C�����[���ƈˑ��֌W�쐬
+#  ���[���̒�`
 #
-#  コンフィギュレータが生成したファイルは，アプリケーションプログラム用，
-#  システムサービス用，カーネル用のすべてのオプションを付けてコンパイル
-#  する．
+#  �R���t�B�M�����[�^�����������t�@�C���́C�A�v���P�[�V�����v���O�����p�C
+#  �V�X�e���T�[�r�X�p�C�J�[�l���p�̂��ׂẴI�v�V������t���ăR���p�C��
+#  ����D
 #
 ALL_CFG_COBJS = $(CFG_COBJS) cfg1_out.o
 ALL_CFG_ASMOBJS = $(CFG_ASMOBJS)
@@ -444,7 +444,7 @@ $(ALL_CFG_ASMOBJS:.o=.d): %.d: %.S
 		-O "$(CFLAGS) $(CFG_CFLAGS)" $< >> Makefile.depend
 
 #
-#  特殊な依存関係作成ルールの定義
+#  ����Ȉˑ��֌W�쐬���[���̒�`
 #
 cfg1_out.depend: $(APPL_CFG)
 	@$(CFG) -M cfg1_out.c $(INCLUDES) $< >> Makefile.depend
@@ -454,7 +454,7 @@ makeoffset.d: makeoffset.c
 		-T "makeoffset.s" -O "$(CFLAGS) $(KERNEL_CFLAGS)" $< >> Makefile.depend
 
 #
-#  依存関係ファイルの生成
+#  �ˑ��֌W�t�@�C���̐���
 #
 .PHONY: gendepend
 gendepend:
@@ -473,16 +473,16 @@ depend: cleandep $(OFFSET_H) kernel_cfg.timestamp gendepend \
 endif
 
 #
-#  依存関係ファイルをインクルード
+#  �ˑ��֌W�t�@�C�����C���N���[�h
 #
 -include Makefile.depend
 
 #
-#  開発ツールのコマンド名の定義
+#  �J���c�[���̃R�}���h���̒�`
 #
 ifeq ($(TOOL),gcc)
   #
-  #  GNU開発環境用
+  #  GNU�J�����p
   #
   ifdef GCC_TARGET
     GCC_TARGET_PREFIX = $(GCC_TARGET)-
@@ -507,7 +507,7 @@ else
 endif
 
 #
-#  コンパイルルールの定義
+#  �R���p�C�����[���̒�`
 #
 KERNEL_ALL_COBJS = $(KERNEL_COBJS) $(KERNEL_AUX_COBJS)
 
@@ -551,7 +551,7 @@ $(APPL_ASMOBJS): %.o: %.S
 	$(CC) -c $(CFLAGS) $(APPL_CFLAGS) $<
 
 #
-#  依存関係作成ルールの定義
+#  �ˑ��֌W�쐬���[���̒�`
 #
 $(KERNEL_COBJS:.o=.d): %.d: %.c
 	@$(PERL) $(SRCDIR)/utils/makedep -C $(CC) $(MAKEDEP_OPTS) \
@@ -586,7 +586,7 @@ $(APPL_ASMOBJS:.o=.d): %.d: %.S
 		-O "$(CFLAGS) $(APPL_CFLAGS)" $< >> Makefile.depend
 
 #
-#  デフォルトコンパイルルールを上書き
+#  �f�t�H���g�R���p�C�����[�����㏑��
 #
 %.o: %.c
 	@echo "*** Default compile rules should not be used."

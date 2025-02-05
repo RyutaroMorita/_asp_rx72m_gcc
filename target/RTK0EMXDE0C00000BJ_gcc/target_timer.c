@@ -43,7 +43,7 @@
  */
 
 /*
- *		タイマドライバ（Renesas Starter Kit for RX72M 用）
+ *		タイマドライバ（Renesas RTK0EMXDE0C00000BJ for RX72M 用）
  */
 
 #include "kernel_impl.h"

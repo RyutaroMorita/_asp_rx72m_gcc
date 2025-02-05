@@ -55,8 +55,8 @@
 /*
  *  SIOの割込みハンドラのベクタ番号
  */
-#define INHNO_SIO_TX	INT_SCI1_TEI1			/* 割込みハンドラ番号 */
-#define INTNO_SIO_TX	INT_SCI1_TEI1			/* 割込み番号 */
+#define INHNO_SIO_TX	INT_ICU_GROUPBL0		/* 割込みハンドラ番号 */
+#define INTNO_SIO_TX	INT_ICU_GROUPBL0		/* 割込み番号 */
 #define INHNO_SIO_RX	INT_SCI1_RXI1			/* 割込みハンドラ番号 */
 #define INTNO_SIO_RX	INT_SCI1_RXI1			/* 割込み番号 */
 #define INTPRI_SIO		-4						/* 割込み優先度 */

@@ -131,7 +131,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI0_SSR_ADDR,
 		INT_SCI0_TXI0,
 		INT_SCI0_RXI0,
-		INT_SCI0_TEI0,
+		INT_ICU_GROUPBL0,
 		0,
 		SYSTEM_MSTPCRB_MSTPB31_BIT,
 	} ,			/* UART0 */
@@ -148,7 +148,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI1_SSR_ADDR,
 		INT_SCI1_TXI1,
 		INT_SCI1_RXI1,
-		INT_SCI1_TEI1,
+		INT_ICU_GROUPBL0,
 		1,
 		SYSTEM_MSTPCRB_MSTPB30_BIT,
 	} ,			/* UART1 */
@@ -166,7 +166,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI2_SSR_ADDR,
 		INT_SCI2_TXI2,
 		INT_SCI2_RXI2,
-		INT_SCI2_TEI2,
+		INT_ICU_GROUPBL0,
 		2,
 		SYSTEM_MSTPCRB_MSTPB29_BIT,
 	} ,			/* UART2 */
@@ -184,7 +184,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI3_SSR_ADDR,
 		INT_SCI3_TXI3,
 		INT_SCI3_RXI3,
-		INT_SCI3_TEI3,
+		INT_ICU_GROUPBL0,
 		3,
 		SYSTEM_MSTPCRB_MSTPB28_BIT,
 	} ,			/* UART3 */
@@ -202,7 +202,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI4_SSR_ADDR,
 		INT_SCI4_TXI4,
 		INT_SCI4_RXI4,
-		INT_SCI4_TEI4,
+		INT_ICU_GROUPBL0,
 		4,
 		SYSTEM_MSTPCRB_MSTPB27_BIT,
 	} ,		/* UART4 */
@@ -220,7 +220,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI5_SSR_ADDR,
 		INT_SCI5_TXI5,
 		INT_SCI5_RXI5,
-		INT_SCI5_TEI5,
+		INT_ICU_GROUPBL0,
 		5,
 		SYSTEM_MSTPCRB_MSTPB26_BIT,
 	} ,		/* UART5 */
@@ -238,7 +238,7 @@ static const SIOPINIB siopinib_table[TNUM_SIOP] =
 		(volatile uint8_t *)SCI6_SSR_ADDR,
 		INT_SCI6_TXI6,
 		INT_SCI6_RXI6,
-		INT_SCI6_TEI6,
+		INT_ICU_GROUPBL0,
 		6,
 		SYSTEM_MSTPCRB_MSTPB25_BIT,
 	} ,		/* UART6 */

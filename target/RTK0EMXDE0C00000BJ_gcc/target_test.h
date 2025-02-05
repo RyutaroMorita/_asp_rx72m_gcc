@@ -43,7 +43,7 @@
  */
 
 /*
- *		テストプログラムのターゲット依存定義（Starter Kit用）
+ *		テストプログラムのターゲット依存定義（RTK0EMXDE0C00000BJ用）
  */
 
 #ifndef TOPPERS_TARGET_TEST_H

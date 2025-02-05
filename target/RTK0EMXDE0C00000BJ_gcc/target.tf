@@ -37,12 +37,12 @@ $
 $ 
 
 $ 
-$  ターゲット依存テンプレート（GR-SAKURA用）
+$  ターゲット依存テンプレート（RTK0EMXDE0C00000BJ用）
 $ 
 
 
 /*$NL$
-$SPC$*  Target-dependent Definitions (GR-SAKURA)$NL$
+$SPC$*  Target-dependent Definitions (RTK0EMXDE0C00000BJ)$NL$
 $SPC$*/$NL$
 $NL$
 
@@ -50,7 +50,7 @@ $INCLUDE "target_asm_config.tf"$
 
 
 $ 
-$  RX63n依存部の読み込み
+$  RX72M依存部の読み込み
 $ 
-$INCLUDE "rx63n_gcc/rx63n.tf"$
+$INCLUDE "rx72m_gcc/rx72m.tf"$
 

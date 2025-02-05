@@ -43,217 +43,260 @@
  */
 
 volatile uint8_t * const ipr_reg_addr[ INHNO_MAX ] = {
-	NULL, NULL, NULL, NULL, NULL,	/* No.0 - 4   ó\ñÒ */
-	NULL, NULL, NULL, NULL, NULL,	/* No.5 - 9   ó\ñÒ */
-	NULL, NULL, NULL, NULL, NULL,	/* No.10 - 14 ó\ñÒ */
-	NULL,							/* No.15  ó\ñÒ */
-	ICU_IPR00_ADDR,					/* No.16   ÉoÉXÉGÉâÅ[ BUSERR  */
-	NULL, NULL, NULL, NULL,			/* No.17 - 20 ó\ñÒ */
-	ICU_IPR01_ADDR,					/* No.21   FCU FIFERR  */
-	NULL,							/* No.22  ó\ñÒ */
-	ICU_IPR02_ADDR,					/* No.23   FCU FRDYI  */
-	NULL, NULL, NULL,		        /* No.24 -26  ó\ñÒ */
-	ICU_IPR03_ADDR,                 /* No.27  ICU SWINT  */
-	ICU_IPR04_ADDR,					/* No.28   CMTÉÜÉjÉbÉg0 CMT0  */
-	ICU_IPR05_ADDR,					/* No.29   CMTÉÜÉjÉbÉg0 CMT1  */
-	ICU_IPR06_ADDR,					/* No.30   CMTÉÜÉjÉbÉg1 CMT2  */
-	ICU_IPR07_ADDR,					/* No.31   CMTÉÜÉjÉbÉg1 CMT3  */
-	ICU_IPR20_ADDR,                 /* No.32   Ether EINT  */
-	ICU_IPR21_ADDR,                 /* No.33   USB D0FIFO0  */
-	ICU_IPR22_ADDR,                 /* No.34   USB D1FIFO0  */
-	ICU_IPR23_ADDR,                 /* No.35   USB USBI0  */
-	ICU_IPR24_ADDR,                 /* No.36   USB D0FIFO1  */
-	ICU_IPR25_ADDR,                 /* No.37   USB D1FIFO1  */
-	ICU_IPR26_ADDR,                 /* No.38   USB USBI1  */
-	ICU_IPR27_ADDR,                 /* No.39   RSPI0 SPRI0  */
-	ICU_IPR27_ADDR,                 /* No.40   RSPI0 SPTI0  */
-	ICU_IPR27_ADDR,                 /* No.41   RSPI0 SPII0  */
-	ICU_IPR2A_ADDR,                 /* No.42   RSPI1 SPRI0  */
-	ICU_IPR2A_ADDR,                 /* No.43   RSPI1 SPTI0  */
-	ICU_IPR2A_ADDR,                 /* No.44   RSPI1 SPII0  */
-	ICU_IPR2D_ADDR,                 /* No.45   RSPI1 SPRI0  */
-	ICU_IPR2D_ADDR,                 /* No.46   RSPI1 SPTI0  */
-	ICU_IPR2D_ADDR,                 /* No.47   RSPI1 SPII0  */
-	ICU_IPR30_ADDR,                 /* NO.48  CAN0 RXF0*/
-	ICU_IPR30_ADDR,                 /* NO.49  CAN0 TXF0*/
-	ICU_IPR30_ADDR,                 /* NO.50  CAN0 RXM0*/
-	ICU_IPR30_ADDR,                 /* NO.51  CAN0 TXM0*/
-	ICU_IPR34_ADDR,                 /* NO.52  CAN1 RXF1*/
-	ICU_IPR34_ADDR,                 /* NO.53  CAN1 TXF1*/
-	ICU_IPR34_ADDR,                 /* NO.54  CAN1 RXM1*/
-	ICU_IPR34_ADDR,                 /* NO.55  CAN1 TXM1*/
-	ICU_IPR38_ADDR,                 /* NO.56  CAN2 RXF2*/
-	ICU_IPR38_ADDR,                 /* NO.57  CAN2 TXF2*/
-	ICU_IPR38_ADDR,                 /* NO.58  CAN2 RXM2*/
-	ICU_IPR38_ADDR,                 /* NO.59  CAN2 TXM2*/
-	NULL, NULL,                     /* No.60 - 61 ó\ñÒ */
-	ICU_IPR3E_ADDR,                 /* NO 62 RTC CUP */
-	NULL,						    /* No.63 ó\ñÒ */
-	ICU_IPR40_ADDR,					/* No.64   äOïîí[éq IRQ0  */
-	ICU_IPR41_ADDR,					/* No.65   äOïîí[éq IRQ1  */
-	ICU_IPR42_ADDR,					/* No.66   äOïîí[éq IRQ2  */
-	ICU_IPR43_ADDR,					/* No.67   äOïîí[éq IRQ3  */
-	ICU_IPR44_ADDR,					/* No.68   äOïîí[éq IRQ4  */
-	ICU_IPR45_ADDR,					/* No.69   äOïîí[éq IRQ5  */
-	ICU_IPR46_ADDR,					/* No.70   äOïîí[éq IRQ6  */
-	ICU_IPR47_ADDR,					/* No.71   äOïîí[éq IRQ7  */
-	ICU_IPR48_ADDR,					/* No.72   äOïîí[éq IRQ8  */
-	ICU_IPR49_ADDR,					/* No.73   äOïîí[éq IRQ9  */
-	ICU_IPR4A_ADDR,					/* No.74   äOïîí[éq IRQ10  */
-	ICU_IPR4B_ADDR,					/* No.75   äOïîí[éq IRQ11  */
-	ICU_IPR4C_ADDR,					/* No.76   äOïîí[éq IRQ12  */
-	ICU_IPR4D_ADDR,					/* No.77   äOïîí[éq IRQ13  */
-	ICU_IPR4E_ADDR,					/* No.78   äOïîí[éq IRQ14  */
-	ICU_IPR4F_ADDR,					/* No.79   äOïîí[éq IRQ15  */
-	NULL, NULL, NULL, NULL, NULL,	/* No.80 - 84 ó\ñÒ */
-	NULL, NULL, NULL, NULL, NULL,	/* No.85 - 89 ó\ñÒ */
-    ICU_IPR5A_ADDR,                 /* No.90  USB USBR0  */
-	ICU_IPR5B_ADDR,                 /* No.91  USB USBR1  */
-	ICU_IPR5C_ADDR,                 /* No.92  RTC ALM  */
-	ICU_IPR5D_ADDR,                 /* No.93  RTC PRD  */
-	NULL, NULL, NULL, NULL,         /* No.94 - 97  ó\ñÒ */
-	ICU_IPR62_ADDR,					/* No.98   AD0 ADI0  */
-    NULL, NULL, NULL,               /* No.99 - 101 ó\ñÒ */
-	ICU_IPR66_ADDR,					/* No.102  S12AD S12ADI0  */
-	NULL, NULL, NULL,               /* No.103 - 105 ó\ñÒ */
-	ICU_IPR6A_ADDR,					/* No.106  ICU GROUP0  */
-	ICU_IPR6B_ADDR,					/* No.107  ICU GROUP1  */
-	ICU_IPR6C_ADDR,					/* No.108  ICU GROUP2  */
-	ICU_IPR6D_ADDR,					/* No.109  ICU GROUP3  */
-	ICU_IPR6E_ADDR,					/* No.110  ICU GROUP4  */
-	ICU_IPR6F_ADDR,					/* No.111  ICU GROUP5  */
-	ICU_IPR70_ADDR,					/* No.112  ICU GROUP6  */
-	NULL,                           /* No.113 ó\ñÒ */
-	ICU_IPR72_ADDR,                 /* No.114  ICU Group12  */
-	NULL, NULL, NULL, NULL, NULL,   /* No.115 - 119 ó\ñÒ */
-	NULL, NULL,                     /* No.120 - 121 ó\ñÒ */
-	ICU_IPR7A_ADDR,                 /* No.122  SCI12 SCIX0  */
-	ICU_IPR7A_ADDR,                 /* No.123  SCI12 SCIX1  */
-	ICU_IPR7A_ADDR,                 /* No.124  SCI12 SCIX2  */
-	ICU_IPR7A_ADDR,                 /* No.125  SCI12 SCIX3  */
-	ICU_IPR7E_ADDR,                 /* No.126  TPU0 TGI0A  */
-	ICU_IPR7E_ADDR,                 /* No.127  TPU0 TGI0B  */
-	ICU_IPR7E_ADDR,                 /* No.128  TPU0 TGI0C  */
-	ICU_IPR7E_ADDR,                 /* No.129  TPU0 TGI0D  */
-	ICU_IPR82_ADDR,                 /* No.130  TPU1 TGI1A  */
-	ICU_IPR82_ADDR,                 /* No.131  TPU1 TGI1B  */
-    ICU_IPR84_ADDR,                 /* No.132  TPU2 TGI2A  */
-    ICU_IPR84_ADDR,                 /* No.133  TPU2 TGI2B  */
-    ICU_IPR86_ADDR,                 /* No.134  TPU3 TGI3A  */
-    ICU_IPR86_ADDR,                 /* No.135  TPU3 TGI3B  */
-    ICU_IPR86_ADDR,                 /* No.136  TPU3 TGI3C  */
-    ICU_IPR86_ADDR,                 /* No.137  TPU3 TGI3D  */
-    ICU_IPR8A_ADDR,                 /* No.138  TPU4 TGI4A  */
-    ICU_IPR8A_ADDR,                 /* No.139  TPU4 TGI4B  */
-    ICU_IPR8C_ADDR,                 /* No.140  TPU5 TGI5A  */
-    ICU_IPR8C_ADDR,                 /* No.141  TPU5 TGI5B  */
-    ICU_IPR8E_ADDR,                 /* No.142  TPU6 TGI6A, MTU0 TGIA0  */
-    ICU_IPR8E_ADDR,                 /* No.143  TPU6 TGI6B, MTU0 TGIB0  */
-    ICU_IPR8E_ADDR,                 /* No.144  TPU6 TGI6C, MTU0 TGIC0  */
-    ICU_IPR8E_ADDR,                 /* No.145  TPU6 TGI6D, MTU0 TGID0  */
-    ICU_IPR92_ADDR,                 /* No.146  MTU0 TGIE0  */
-    ICU_IPR92_ADDR,                 /* No.147  MTU0 TGIF0  */
-    ICU_IPR94_ADDR,                 /* No.148  TPU7 TGI7A, MTU1 TGIA1  */
-    ICU_IPR94_ADDR,                 /* No.149  TPU7 TGI7B, MTU1 TGIB1  */
-    ICU_IPR96_ADDR,                 /* No.150  TPU8 TGI8A, MTU2 TGIA2  */
-    ICU_IPR96_ADDR,                 /* No.151  TPU8 TGI8B, MTU2 TGIB2  */
-    ICU_IPR98_ADDR,                 /* No.152  TPU9 TGI9A, MTU3 TGIA3  */
-    ICU_IPR98_ADDR,                 /* No.153  TPU9 TGI9B, MTU3 TGIB3  */
-    ICU_IPR98_ADDR,                 /* No.154  TPU9 TGI9C, MTU3 TGIC3  */
-    ICU_IPR98_ADDR,                 /* No.155  TPU9 TGI9D, MTU3 TGID3  */
-    ICU_IPR9C_ADDR,                 /* No.156  TPU10 TGI10A, MTU4 TGIA4  */
-    ICU_IPR9C_ADDR,                 /* No.157  TPU10 TGI10B, MTU4 TGIB4  */
-    ICU_IPR9C_ADDR,                 /* No.158  MTU4 TGIC4  */
-    ICU_IPR9C_ADDR,                 /* No.159  MTU4 TGID4  */
-    ICU_IPRA0_ADDR,                 /* No.160  MTU4 TGIV4  */
-    ICU_IPRA1_ADDR,                 /* No.161  MTU5 TGIU5  */
-    ICU_IPRA1_ADDR,                 /* No.162  MTU5 TGIV5  */
-    ICU_IPRA1_ADDR,                 /* No.163  MTU5 TGIW5  */
-    ICU_IPRA4_ADDR,                 /* No.164  TPU11 TGI11A  */
-    ICU_IPRA4_ADDR,                 /* No.165  TPU11 TGI11B  */
-    ICU_IPRA6_ADDR,                 /* No.166  POE OEI1  */
-    ICU_IPRA6_ADDR,                 /* No.167  POE OEI2  */
-	NULL, NULL,                     /* No.168 - 169 ó\ñÒ */
-    ICU_IPRAA_ADDR,                 /* No.170  TMR0 CMIA0  */
-    ICU_IPRAA_ADDR,                 /* No.171  TMR0 CMIB0  */
-    ICU_IPRAA_ADDR,                 /* No.172  TMR0 OVI0  */
-    ICU_IPRAD_ADDR,                 /* No.173  TMR1 CMIA1  */
-    ICU_IPRAD_ADDR,                 /* No.174  TMR1 CMIB1  */
-    ICU_IPRAD_ADDR,                 /* No.175  TMR1 OVI1  */
-    ICU_IPRB0_ADDR,                 /* No.176  TMR2 CMIA2  */
-    ICU_IPRB0_ADDR,                 /* No.177  TMR2 CMIB2  */
-    ICU_IPRB0_ADDR,                 /* No.178  TMR2 OVI2  */
-    ICU_IPRB3_ADDR,                 /* No.179  TMR3 CMIA3  */
-    ICU_IPRB3_ADDR,                 /* No.180  TMR3 CMIB3  */
-    ICU_IPRB3_ADDR,                 /* No.181  TMR3 OVI3  */
-    ICU_IPRB6_ADDR,                 /* No.182  RIIC0 EEI0  */
-    ICU_IPRB7_ADDR,                 /* No.183  RIIC0 RXI0  */
-    ICU_IPRB8_ADDR,                 /* No.184  RIIC0 TXI0  */
-    ICU_IPRB9_ADDR,                 /* No.185  RIIC0 TEI0  */
-    ICU_IPRBA_ADDR,                 /* No.186  RIIC1 EEI1  */
-    ICU_IPRBB_ADDR,                 /* No.187  RIIC1 RXI1  */
-    ICU_IPRBC_ADDR,                 /* No.188  RIIC1 TXI1  */
-    ICU_IPRBD_ADDR,                 /* No.189  RIIC1 TEI1  */
-    ICU_IPRBE_ADDR,                 /* No.190  RIIC2 EEI2  */
-    ICU_IPRBF_ADDR,                 /* No.191  RIIC2 RXI2  */
-    ICU_IPRC0_ADDR,                 /* No.192  RIIC2 TXI2  */
-    ICU_IPRC1_ADDR,                 /* No.193  RIIC2 TEI2  */
-    ICU_IPRC2_ADDR,                 /* No.194  RIIC3 EEI3  */
-    ICU_IPRC3_ADDR,                 /* No.195  RIIC3 RXI3  */
-    ICU_IPRC4_ADDR,                 /* No.196  RIIC3 TXI3  */
-    ICU_IPRC5_ADDR,                 /* No.197  RIIC3 TEI3  */
-    ICU_IPRC6_ADDR,                 /* No.198  DMAC DMAC0I  */
-    ICU_IPRC7_ADDR,                 /* No.199  DMAC DMAC1I  */
-    ICU_IPRC8_ADDR,                 /* No.200  DMAC DMAC2I  */
-    ICU_IPRC9_ADDR,                 /* No.201  DMAC DMAC3I  */
-    ICU_IPRCA_ADDR,                 /* No.202  EXDMAC EXDMAC0I  */
-    ICU_IPRCB_ADDR,                 /* No.203  EXDMAC EXDMAC1I  */
-	NULL, NULL,                     /* No.204 - 205 ó\ñÒ */
-    ICU_IPRCE_ADDR,                 /* No.206  DEU DEU0  */
-    ICU_IPRCF_ADDR,                 /* No.207  DEU DEU0  */
-    ICU_IPRD0_ADDR,                 /* No.208  PDC PCDFI  */
-    ICU_IPRD1_ADDR,                 /* No.209  PDC PCFEI  */
-    ICU_IPRD2_ADDR,                 /* No.210  PDC PCERI  */
-	NULL, NULL, NULL,               /* No.211 - 213 ó\ñÒ */
-    ICU_IPRD6_ADDR,                 /* No.214  SCI0 RXI0  */
-    ICU_IPRD6_ADDR,                 /* No.215  SCI0 TXI0  */
-    ICU_IPRD6_ADDR,                 /* No.216  SCI0 TEI0  */
-    ICU_IPRD9_ADDR,                 /* No.217  SCI1 RXI1  */
-    ICU_IPRD9_ADDR,                 /* No.218  SCI1 TXI1  */
-    ICU_IPRD9_ADDR,                 /* No.219  SCI1 TEI1  */
-    ICU_IPRDC_ADDR,                 /* No.220  SCI2 RXI2  */
-    ICU_IPRDC_ADDR,                 /* No.221  SCI2 TXI2  */
-    ICU_IPRDC_ADDR,                 /* No.222  SCI2 TEI2  */
-    ICU_IPRDF_ADDR,                 /* No.223  SCI3 RXI3  */
-    ICU_IPRDF_ADDR,                 /* No.224  SCI3 TXI3  */
-    ICU_IPRDF_ADDR,                 /* No.225  SCI3 TEI3  */
-    ICU_IPRE2_ADDR,                 /* No.226  SCI4 RXI4  */
-    ICU_IPRE2_ADDR,                 /* No.227  SCI4 TXI4  */
-    ICU_IPRE2_ADDR,                 /* No.228  SCI4 TEI4  */
-    ICU_IPRE5_ADDR,                 /* No.229  SCI5 RXI5  */
-    ICU_IPRE5_ADDR,                 /* No.230  SCI5 TXI5  */
-    ICU_IPRE5_ADDR,                 /* No.231  SCI5 TEI5  */
-    ICU_IPRE8_ADDR,                 /* No.232  SCI6 RXI6  */
-    ICU_IPRE8_ADDR,                 /* No.233  SCI6 TXI6  */
-    ICU_IPRE8_ADDR,                 /* No.234  SCI6 TEI6  */
-    ICU_IPREB_ADDR,                 /* No.235  SCI7 RXI7  */
-    ICU_IPREB_ADDR,                 /* No.236  SCI7 TXI7  */
-    ICU_IPREB_ADDR,                 /* No.237  SCI7 TEI7  */
-    ICU_IPREE_ADDR,                 /* No.238  SCI8 RXI8  */
-    ICU_IPREE_ADDR,                 /* No.239  SCI8 TXI8  */
-    ICU_IPREE_ADDR,                 /* No.240  SCI8 TEI8  */
-    ICU_IPRF1_ADDR,                 /* No.241  SCI9 RXI9  */
-    ICU_IPRF1_ADDR,                 /* No.242  SCI9 TXI9  */
-    ICU_IPRF1_ADDR,                 /* No.243  SCI9 TEI9  */
-    ICU_IPRF4_ADDR,                 /* No.244  SCI10 RXI10  */
-    ICU_IPRF4_ADDR,                 /* No.245  SCI10 TXI10  */
-    ICU_IPRF4_ADDR,                 /* No.246  SCI10 TEI10  */
-    ICU_IPRF7_ADDR,                 /* No.247  SCI11 RXI11  */
-    ICU_IPRF7_ADDR,                 /* No.248  SCI11 TXI11  */
-    ICU_IPRF7_ADDR,                 /* No.249  SCI11 TEI11  */
-    ICU_IPRFA_ADDR,                 /* No.250  SCI12 RXI12  */
-    ICU_IPRFA_ADDR,                 /* No.251  SCI12 TXI12  */
-    ICU_IPRFA_ADDR,                 /* No.252  SCI12 TEI12  */
-    ICU_IPRFD_ADDR,                 /* No.253  IEB IEBINT  */
-	NULL, NULL,						/* No.254 - 255 ó\ñÒ */
+	NULL,				//   0 - ó\ñÒ
+	NULL,				//   1 - ó\ñÒ
+	NULL,				//   2 - ó\ñÒ
+	NULL,				//   3 - ó\ñÒ
+	NULL,				//   4 - ó\ñÒ
+	NULL,				//   5 - ó\ñÒ
+	NULL,				//   6 - ó\ñÒ
+	NULL,				//   7 - ó\ñÒ
+	NULL,				//   8 - ó\ñÒ
+	NULL,				//   9 - ó\ñÒ
+	NULL,				//  10 - ó\ñÒ
+	NULL,				//  11 - ó\ñÒ
+	NULL,				//  12 - ó\ñÒ
+	NULL,				//  13 - ó\ñÒ
+	NULL,				//  14 - ó\ñÒ
+	NULL,				//  15 - ó\ñÒ
+	ICU_IPR000_ADDR,	//  16 - BUSERR
+	ICU_IPR000_ADDR,	//  17 - GROUPIE0
+	ICU_IPR000_ADDR,	//  18 - RAMERR
+	NULL,				//  19 - ó\ñÒ
+	NULL,				//  20 - ó\ñÒ
+	ICU_IPR001_ADDR,	//  21 - FIFERR
+	NULL,				//  22 - ó\ñÒ
+	ICU_IPR002_ADDR,	//  23 - FRDYI
+	NULL,				//  24 - ó\ñÒ
+	NULL,				//  25 - ó\ñÒ
+	ICU_IPR003_ADDR,	//  26 - SWINT2
+	ICU_IPR003_ADDR,	//  27 - SWINT
+	ICU_IPR004_ADDR,	//  28 - CMI0
+	ICU_IPR005_ADDR,	//  29 - CMI1
+	ICU_IPR006_ADDR,	//  30 - CMWI0
+	ICU_IPR007_ADDR,	//  31 - CMWI1
+	NULL,				//  32 - ó\ñÒ
+	NULL,				//  33 - ó\ñÒ
+	ICU_IPR034_ADDR,	//  34 - D0FIFO0
+	ICU_IPR035_ADDR,	//  35 - D1FIFO0
+	NULL,				//  36 - ó\ñÒ
+	NULL,				//  37 - ó\ñÒ
+	ICU_IPR038_ADDR,	//  38 - SPRI0
+	ICU_IPR039_ADDR,	//  39 - SPTI0
+	ICU_IPR040_ADDR,	//  40 - SPRI1
+	ICU_IPR041_ADDR,	//  41 - SPTI1
+	ICU_IPR042_ADDR,	//  42 - SPRI
+	ICU_IPR043_ADDR,	//  43 - SPTI
+	ICU_IPR044_ADDR,	//  44 - SBFAI
+	ICU_IPR045_ADDR,	//  45 - MBFAI
+	ICU_IPR046_ADDR,	//  46 - SSITXI0
+	ICU_IPR047_ADDR,	//  47 - SSIRXI0
+	ICU_IPR048_ADDR,	//  48 - SSIRTI1
+	NULL,				//  49 - ó\ñÒ
+	ICU_IPR050_ADDR,	//  50 - RXI1
+	ICU_IPR051_ADDR,	//  51 - TXI1
+	ICU_IPR052_ADDR,	//  52 - RXI0
+	ICU_IPR053_ADDR,	//  53 - TXI0
+	ICU_IPR054_ADDR,	//  54 - RXI2
+	ICU_IPR055_ADDR,	//  55 - TXI2
+	NULL,				//  56 - ó\ñÒ
+	NULL,				//  57 - ó\ñÒ
+	ICU_IPR058_ADDR,	//  58 - RXI0
+	ICU_IPR059_ADDR,	//  59 - TXI0
+	ICU_IPR060_ADDR,	//  60 - RXI1
+	ICU_IPR061_ADDR,	//  61 - TXI1
+	ICU_IPR062_ADDR,	//  62 - RXI2
+	ICU_IPR063_ADDR,	//  63 - TXI2
+	ICU_IPR064_ADDR,	//  64 - IRQ0
+	ICU_IPR065_ADDR,	//  65 - IRQ1
+	ICU_IPR066_ADDR,	//  66 - IRQ2
+	ICU_IPR067_ADDR,	//  67 - IRQ3
+	ICU_IPR068_ADDR,	//  68 - IRQ4
+	ICU_IPR069_ADDR,	//  69 - IRQ5
+	ICU_IPR070_ADDR,	//  70 - IRQ6
+	ICU_IPR071_ADDR,	//  71 - IRQ7
+	ICU_IPR072_ADDR,	//  72 - IRQ8
+	ICU_IPR073_ADDR,	//  73 - IRQ9
+	ICU_IPR074_ADDR,	//  74 - IRQ10
+	ICU_IPR075_ADDR,	//  75 - IRQ11
+	ICU_IPR076_ADDR,	//  76 - IRQ12
+	ICU_IPR077_ADDR,	//  77 - IRQ13
+	ICU_IPR078_ADDR,	//  78 - IRQ14
+	ICU_IPR079_ADDR,	//  79 - IRQ15
+	ICU_IPR080_ADDR,	//  80 - RXI3
+	ICU_IPR081_ADDR,	//  81 - TXI3
+	ICU_IPR082_ADDR,	//  82 - RXI4
+	ICU_IPR083_ADDR,	//  83 - TXI4
+	ICU_IPR084_ADDR,	//  84 - RXI5
+	ICU_IPR085_ADDR,	//  85 - TXI5
+	ICU_IPR086_ADDR,	//  86 - RXI6
+	ICU_IPR087_ADDR,	//  87 - TXI6
+	ICU_IPR088_ADDR,	//  88 - LVD1
+	ICU_IPR089_ADDR,	//  89 - LVD2
+	ICU_IPR090_ADDR,	//  90 - USBR0
+	NULL,				//  91 - ó\ñÒ
+	ICU_IPR092_ADDR,	//  92 - ALM
+	ICU_IPR093_ADDR,	//  93 - PRD
+	NULL,				//  94 - ó\ñÒ
+	ICU_IPR095_ADDR,	//  95 - IWUNI
+	ICU_IPR096_ADDR,	//  96 - WUNI
+	ICU_IPR097_ADDR,	//  97 - PCDFI
+	ICU_IPR098_ADDR,	//  98 - RXI7
+	ICU_IPR099_ADDR,	//  99 - TXI7
+	ICU_IPR100_ADDR,	// 100 - RXI8
+	ICU_IPR101_ADDR,	// 101 - TXI8
+	ICU_IPR102_ADDR,	// 102 - RXI9
+	ICU_IPR103_ADDR,	// 103 - TXI9
+	ICU_IPR104_ADDR,	// 104 - RXI10
+	ICU_IPR105_ADDR,	// 105 - TXI10
+	ICU_IPR106_ADDR,	// 106 - GROUPBE0
+	ICU_IPR107_ADDR,	// 107 - GROUPBL2
+	ICU_IPR108_ADDR,	// 108 - SPRI2
+	ICU_IPR109_ADDR,	// 109 - SPTI2
+	ICU_IPR110_ADDR,	// 110 - GROUPBL0
+	ICU_IPR111_ADDR,	// 111 - GROUPBL1
+	ICU_IPR112_ADDR,	// 112 - GROUPAL0
+	ICU_IPR113_ADDR,	// 113 - GROUPAL1
+	ICU_IPR114_ADDR,	// 114 - RXI11
+	ICU_IPR115_ADDR,	// 115 - TXI11
+	ICU_IPR116_ADDR,	// 116 - RXI12
+	ICU_IPR117_ADDR,	// 117 - TXI12
+	NULL,				// 118 - ó\ñÒ
+	NULL,				// 119 - ó\ñÒ
+	ICU_IPR120_ADDR,	// 120 - DMAC0I
+	ICU_IPR121_ADDR,	// 121 - DMAC1I
+	ICU_IPR122_ADDR,	// 122 - DMAC2I
+	ICU_IPR123_ADDR,	// 123 - DMAC3I
+	ICU_IPR124_ADDR,	// 124 - DMAC74I
+	ICU_IPR125_ADDR,	// 125 - OSTDI
+	ICU_IPR126_ADDR,	// 126 - EXDMAC0I
+	ICU_IPR127_ADDR,	// 127 - EXDMAC1I
+	ICU_IPR128_ADDR,	// 128 - INTB128
+	ICU_IPR129_ADDR,	// 129 - INTB129
+	ICU_IPR130_ADDR,	// 130 - INTB130
+	ICU_IPR131_ADDR,	// 131 - INTB131
+	ICU_IPR132_ADDR,	// 132 - INTB132
+	ICU_IPR133_ADDR,	// 133 - INTB133
+	ICU_IPR134_ADDR,	// 134 - INTB134
+	ICU_IPR135_ADDR,	// 135 - INTB135
+	ICU_IPR136_ADDR,	// 136 - INTB136
+	ICU_IPR137_ADDR,	// 137 - INTB137
+	ICU_IPR138_ADDR,	// 138 - INTB138
+	ICU_IPR139_ADDR,	// 139 - INTB139
+	ICU_IPR140_ADDR,	// 140 - INTB140
+	ICU_IPR141_ADDR,	// 141 - INTB141
+	ICU_IPR142_ADDR,	// 142 - INTB142
+	ICU_IPR143_ADDR,	// 143 - INTB143
+	ICU_IPR144_ADDR,	// 144 - INTB144
+	ICU_IPR145_ADDR,	// 145 - INTB145
+	ICU_IPR146_ADDR,	// 146 - INTB146
+	ICU_IPR147_ADDR,	// 147 - INTB147
+	ICU_IPR148_ADDR,	// 148 - INTB148
+	ICU_IPR149_ADDR,	// 149 - INTB149
+	ICU_IPR150_ADDR,	// 150 - INTB150
+	ICU_IPR151_ADDR,	// 151 - INTB151
+	ICU_IPR152_ADDR,	// 152 - INTB152
+	ICU_IPR153_ADDR,	// 153 - INTB153
+	ICU_IPR154_ADDR,	// 154 - INTB154
+	ICU_IPR155_ADDR,	// 155 - INTB155
+	ICU_IPR156_ADDR,	// 156 - INTB156
+	ICU_IPR157_ADDR,	// 157 - INTB157
+	ICU_IPR158_ADDR,	// 158 - INTB158
+	ICU_IPR159_ADDR,	// 159 - INTB159
+	ICU_IPR160_ADDR,	// 160 - INTB160
+	ICU_IPR161_ADDR,	// 161 - INTB161
+	ICU_IPR162_ADDR,	// 162 - INTB162
+	ICU_IPR163_ADDR,	// 163 - INTB163
+	ICU_IPR164_ADDR,	// 164 - INTB164
+	ICU_IPR165_ADDR,	// 165 - INTB165
+	ICU_IPR166_ADDR,	// 166 - INTB166
+	ICU_IPR167_ADDR,	// 167 - INTB167
+	ICU_IPR168_ADDR,	// 168 - INTB168
+	ICU_IPR169_ADDR,	// 169 - INTB169
+	ICU_IPR170_ADDR,	// 170 - INTB170
+	ICU_IPR171_ADDR,	// 171 - INTB171
+	ICU_IPR172_ADDR,	// 172 - INTB172
+	ICU_IPR173_ADDR,	// 173 - INTB173
+	ICU_IPR174_ADDR,	// 174 - INTB174
+	ICU_IPR175_ADDR,	// 175 - INTB175
+	ICU_IPR176_ADDR,	// 176 - INTB176
+	ICU_IPR177_ADDR,	// 177 - INTB177
+	ICU_IPR178_ADDR,	// 178 - INTB178
+	ICU_IPR179_ADDR,	// 179 - INTB179
+	ICU_IPR180_ADDR,	// 180 - INTB180
+	ICU_IPR181_ADDR,	// 181 - INTB181
+	ICU_IPR182_ADDR,	// 182 - INTB182
+	ICU_IPR183_ADDR,	// 183 - INTB183
+	ICU_IPR184_ADDR,	// 184 - INTB184
+	ICU_IPR185_ADDR,	// 185 - INTB185
+	ICU_IPR186_ADDR,	// 186 - INTB186
+	ICU_IPR187_ADDR,	// 187 - INTB187
+	ICU_IPR188_ADDR,	// 188 - INTB188
+	ICU_IPR189_ADDR,	// 189 - INTB189
+	ICU_IPR190_ADDR,	// 190 - INTB190
+	ICU_IPR191_ADDR,	// 191 - INTB191
+	ICU_IPR192_ADDR,	// 192 - INTB192
+	ICU_IPR193_ADDR,	// 193 - INTB193
+	ICU_IPR194_ADDR,	// 194 - INTB194
+	ICU_IPR195_ADDR,	// 195 - INTB195
+	ICU_IPR196_ADDR,	// 196 - INTB196
+	ICU_IPR197_ADDR,	// 197 - INTB197
+	ICU_IPR198_ADDR,	// 198 - INTB198
+	ICU_IPR199_ADDR,	// 199 - INTB199
+	ICU_IPR200_ADDR,	// 200 - INTB200
+	ICU_IPR201_ADDR,	// 201 - INTB201
+	ICU_IPR202_ADDR,	// 202 - INTB202
+	ICU_IPR203_ADDR,	// 203 - INTB203
+	ICU_IPR204_ADDR,	// 204 - INTB204
+	ICU_IPR205_ADDR,	// 205 - INTB205
+	ICU_IPR206_ADDR,	// 206 - INTB206
+	ICU_IPR207_ADDR,	// 207 - INTB207
+	ICU_IPR208_ADDR,	// 208 - INTB208
+	ICU_IPR209_ADDR,	// 209 - INTB209
+	ICU_IPR210_ADDR,	// 210 - INTB210
+	ICU_IPR211_ADDR,	// 211 - INTB211
+	ICU_IPR212_ADDR,	// 212 - INTB212
+	ICU_IPR213_ADDR,	// 213 - INTB213
+	ICU_IPR214_ADDR,	// 214 - INTB214
+	ICU_IPR215_ADDR,	// 215 - INTB215
+	ICU_IPR216_ADDR,	// 216 - INTB216
+	ICU_IPR217_ADDR,	// 217 - INTB217
+	ICU_IPR218_ADDR,	// 218 - INTB218
+	ICU_IPR219_ADDR,	// 219 - INTB219
+	ICU_IPR220_ADDR,	// 220 - INTB220
+	ICU_IPR221_ADDR,	// 221 - INTB221
+	ICU_IPR222_ADDR,	// 222 - INTB222
+	ICU_IPR223_ADDR,	// 223 - INTB223
+	ICU_IPR224_ADDR,	// 224 - INTB224
+	ICU_IPR225_ADDR,	// 225 - INTB225
+	ICU_IPR226_ADDR,	// 226 - INTB226
+	ICU_IPR227_ADDR,	// 227 - INTB227
+	ICU_IPR228_ADDR,	// 228 - INTB228
+	ICU_IPR229_ADDR,	// 229 - INTB229
+	ICU_IPR230_ADDR,	// 230 - INTB230
+	ICU_IPR231_ADDR,	// 231 - INTB231
+	ICU_IPR232_ADDR,	// 232 - INTB232
+	ICU_IPR233_ADDR,	// 233 - INTB233
+	ICU_IPR234_ADDR,	// 234 - INTB234
+	ICU_IPR235_ADDR,	// 235 - INTB235
+	ICU_IPR236_ADDR,	// 236 - INTB236
+	ICU_IPR237_ADDR,	// 237 - INTB237
+	ICU_IPR238_ADDR,	// 238 - INTB238
+	ICU_IPR239_ADDR,	// 239 - INTB239
+	ICU_IPR240_ADDR,	// 240 - INTB240
+	ICU_IPR241_ADDR,	// 241 - INTB241
+	ICU_IPR242_ADDR,	// 242 - INTB242
+	ICU_IPR243_ADDR,	// 243 - INTB243
+	ICU_IPR244_ADDR,	// 244 - INTB244
+	ICU_IPR245_ADDR,	// 245 - INTB245
+	ICU_IPR246_ADDR,	// 246 - INTB246
+	ICU_IPR247_ADDR,	// 247 - INTB247
+	ICU_IPR248_ADDR,	// 248 - INTB248
+	ICU_IPR249_ADDR,	// 249 - INTB249
+	ICU_IPR250_ADDR,	// 250 - INTB250
+	ICU_IPR251_ADDR,	// 251 - INTB251
+	ICU_IPR252_ADDR,	// 252 - INTB252
+	ICU_IPR253_ADDR,	// 253 - INTB253
+	ICU_IPR254_ADDR,	// 254 - INTB254
+	ICU_IPR255_ADDR		// 255 - INTB255
 };

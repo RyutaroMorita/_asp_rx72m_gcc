@@ -76,7 +76,7 @@ _start:
 	;
 	mov.l	#DFLRE, r5
 	mov.w	#DB_BLOCK_ENABLE, [R5]
-	
+
 	;
 	;  スタックポインタの設定
 	;
@@ -106,14 +106,6 @@ init_D:
 	mov.l	#__idata_start, r2
 	mov.l	#__data_start, r1
 	mov.l	#__data_end, r3
-	sub	r1, r3
-	smovf
-	;
-	;  FCUプログラムの展開
-	;
-	mov.l	#__ifcu_start, r2
-	mov.l	#__fcu_start, r1
-	mov.l	#__fcu_end, r3
 	sub	r1, r3
 	smovf
 	;
