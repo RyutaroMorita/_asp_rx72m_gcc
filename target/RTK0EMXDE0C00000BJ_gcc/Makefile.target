@@ -19,6 +19,7 @@ INCLUDES := $(INCLUDES) \
 	-I$(TARGETDIR) \
 	-I$(TARGETDIR)/smc_gen/r_bsp \
 	-I$(TARGETDIR)/smc_gen/r_bsp/mcu/$(PRC) \
+	-I$(TARGETDIR)/smc_gen/r_cmt_rx \
 	-I$(TARGETDIR)/smc_gen/r_config \
 	-I$(SRCDIR)/pdic
 #COPTS :=
@@ -35,10 +36,16 @@ INCLUDES := $(INCLUDES) \
 #include $(DRIVERDIR)/Makefile.driver
 DRIVERDIR = \
 	$(TARGETDIR)/smc_gen/r_bsp/mcu/all \
-	$(TARGETDIR)/smc_gen/r_bsp/mcu/rx72m
+	$(TARGETDIR)/smc_gen/r_bsp/mcu/rx72m \
+	$(TARGETDIR)/smc_gen/r_cmt_rx/src
 DRIVER_COBJS = \
 	mcu_clocks.o \
-	r_bsp_common.o
+	mcu_locks.o \
+	r_bsp_common.o \
+	r_bsp_cpu.o \
+	r_bsp_locking.o \
+	r_cmt_rx.o \
+	target_r_interrupts.o
 
 #
 #  カーネルに関する定義
@@ -99,7 +106,7 @@ CFG1_OUT_LDFLAGS := -nostdlib $(CFG1_OUT_LDFLAGS)
 LIBS := $(LIBS) -lgcc
 
 
-CFG_ASMOBJS := $(CFG_ASMOBJS) kernel_cfg_asm.o sectrx.o DTCa_vecter.o
+CFG_ASMOBJS := $(CFG_ASMOBJS) kernel_cfg_asm.o sectrx.o
 
 #
 #  依存関係の定義

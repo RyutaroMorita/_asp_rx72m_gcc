@@ -50,6 +50,7 @@
 #include "time_event.h"
 #include <sil.h>
 #include "target_timer.h"
+#include "r_cmt_rx_if.h"
 
 /*
  *  タイマの初期化処理
@@ -57,50 +58,8 @@
 void
 target_timer_initialize(intptr_t exinf)
 {
-  //unlock register access 
-  sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
-  /*
-   * モジュールストップ機能の設定(CMT)
-   */
-  *SYSTEM_MSTPCRA_ADDR &= ~(SYSTEM_MSTPCRA_MSTPA15_BIT); /* CMT0 */
-  //lock register access
-  sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY );
-
-  /* 
-   * タイマ停止
-   */
-  *CMT_CMSTR0_ADDR &= ~CMT_CMSTR0_STR0_BIT;
-
-  /*
-   * カウントアップに用いられるクロック設定
-   * PCLK/32を選択
-   */
-  *CMT0_CMCR_ADDR = CMT_PCLK_DIV_8;
-
-  /* 
-   * コンペアマッチタイマカウンタ設定
-   */
-  *CMT0_CMCNT_ADDR = 0U;
-
-  /* 
-   * コンペアマッチタイマ周期設定
-   */
-  *CMT0_CMCOR_ADDR = CMCOR_PERIOD;
-
-  /*
-   *  タイマ動作開始前の割込み要求をクリア
-   */
-	x_clear_int(INTNO_TIMER);
-
-  /* 
-   * コンペアマッチタイマ割り込みを許可
-   */
-  *CMT0_CMCR_ADDR |= CMT0_CMCR_CMIE_BIT;
-
-  /* 
-   * タイマ動作開始
-   */
-  *CMT_CMSTR0_ADDR |= CMT_CMSTR0_STR0_BIT;
+	if (!R_CMT_CreatePeriodicAssignChannelPriority(10, NULL, 0, -(INTPRI_TIMER)))
+		target_exit();
 }
 
 /*

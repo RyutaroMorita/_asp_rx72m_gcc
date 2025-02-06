@@ -14,56 +14,44 @@
 * following link:
 * http://www.renesas.com/disclaimer
 *
-* Copyright (C) 2022 Renesas Electronics Corporation. All rights reserved.
+* Copyright (C) 2025 Renesas Electronics Corporation. All rights reserved.
 ***********************************************************************************************************************/
-
 /***********************************************************************************************************************
-* File Name        : r_smc_interrupt.c
-* Version          : 1.2.50
-* Device(s)        : R5F572MNDxBD
-* Description      : This file implements interrupt setting.
+* File Name    : r_sci_rx_pinset.c
+* Version      : 1.0.2
+* Device(s)    : R5F572MNDxBD
+* Tool-Chain   : RXC toolchain
+* Description  : Setting of port and mpc registers
 ***********************************************************************************************************************/
-
-/***********************************************************************************************************************
-Pragma directive
-***********************************************************************************************************************/
-/* Start user code for pragma. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
 Includes
 ***********************************************************************************************************************/
-#include "r_cg_macrodriver.h"
-#include "r_smc_interrupt.h"
-/* Start user code for include. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
-#include "r_cg_userdefine.h"
+#include "r_sci_rx_pinset.h"
+#include "platform.h"
 
 /***********************************************************************************************************************
 Global variables and functions
 ***********************************************************************************************************************/
-/* Start user code for global. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
-* Function Name: R_Interrupt_Create
-* Description  : This function Used to set the fast interrupt or group interrupt 
-* Arguments    : None
-* Return Value : None
+* Function Name: R_SCI_PinSet_SCI6
+* Description  : This function initializes pins for r_sci_rx module
+* Arguments    : none
+* Return Value : none
 ***********************************************************************************************************************/
-
-void R_Interrupt_Create(void)
+void R_SCI_PinSet_SCI6()
 {
-    /* Disable group BL0 interrupt*/
-    IEN(ICU,GROUPBL0) = 0U;
-    
+    R_BSP_RegisterProtectDisable(BSP_REG_PROTECT_MPC);
 
-    /* Set group BL0 interrupt priority level */
-    IPR(ICU,GROUPBL0) = _03_ICU_PRIORITY_LEVEL3;
+    /* Set RXD6/SMISO6/SSCL6 pin */
+    MPC.PB0PFS.BYTE = 0x0BU;
+    PORTB.PMR.BIT.B0 = 1U;
 
-    /* Enable group BL0 interrupt */
-    IEN(ICU,GROUPBL0) = 1U;
+    /* Set TXD6/SMOSI6/SSDA6 pin */
+    MPC.PB1PFS.BYTE = 0x0BU;
+    PORTB.PMR.BIT.B1 = 1U;
+
+    R_BSP_RegisterProtectEnable(BSP_REG_PROTECT_MPC);
 }
 
-/* Start user code for adding. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */

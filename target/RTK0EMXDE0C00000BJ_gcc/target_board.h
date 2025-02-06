@@ -44,7 +44,7 @@
 #include <rx72m_gcc/rx72m.h>
 
 #ifndef TOPPERS_MACRO_ONLY
-#include "target_device/target_device.h"
+//#include "target_device/target_device.h"
 #endif
 
 #define F_PCLKA		96000000UL	/* PCLKA frequency (configured by SCKCR.PCK) */

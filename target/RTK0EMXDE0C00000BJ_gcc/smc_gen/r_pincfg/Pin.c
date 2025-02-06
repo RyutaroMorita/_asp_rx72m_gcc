@@ -53,6 +53,18 @@ Global variables and functions
 
 void R_Pins_Create(void)
 {
-    /* No pins have been configured in the Pins tab. */
+    R_BSP_RegisterProtectDisable(BSP_REG_PROTECT_MPC);
+
+    /* Set RXD6 pin */
+    MPC.PB0PFS.BYTE = 0x0BU;
+    PORTB.PMR.BYTE |= 0x01U;
+
+    /* Set TXD6 pin */
+    PORTB.PODR.BYTE |= 0x02U;
+    MPC.PB1PFS.BYTE = 0x0BU;
+    PORTB.PDR.BYTE |= 0x02U;
+    // PORTB.PMR.BIT.B1 = 1U; // Please set the PMR bit after TE bit is set to 1.
+
+    R_BSP_RegisterProtectEnable(BSP_REG_PROTECT_MPC);
 }
 

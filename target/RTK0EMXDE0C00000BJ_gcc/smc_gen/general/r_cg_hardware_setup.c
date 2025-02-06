@@ -87,6 +87,9 @@ void R_Systeminit(void)
     /* Initialize clocks settings */
     R_CGC_Create();
 
+    /* Set interrupt settings */
+    R_Interrupt_Create();
+
 #if BSP_CFG_BOOTLOADER_PROJECT == 0
     /* Disable the following codes in the bootloader project. */
     /* Register undefined interrupt */

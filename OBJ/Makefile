@@ -48,7 +48,7 @@ all:
 #
 #  ターゲット略称の定義
 #
-TARGET = RTK0EMXDE0C00000BJ_gcc
+TARGET = rtk0emxde0c00000bj_gcc
 
 #
 #  TCP/IP プロトコル・スタックの定義
@@ -336,7 +336,6 @@ kernel_cfg.timestamp: $(APPL_CFG) \
 						$(START_OBJS) cfg1_out.o $(END_OBJS)
 	$(NM) -n $(CFG1_OUT) > cfg1_out.syms
 	$(OBJCOPY) -O binary -S $(CFG1_OUT) cfg1_out.bin
-	$(OBJCOPY) -O ihex -S $(CFG1_OUT) cfg1_out.hex
 	$(OBJCOPY) -O srec -S $(CFG1_OUT) cfg1_out.srec
 	$(CFG) --pass 2 --kernel asp $(INCLUDES) \
 				-T $(TARGETDIR)/target.tf $(CFG_TABS) $<
@@ -405,7 +404,7 @@ cleankernel:
 cleandep:
 	if ! [ -f Makefile.depend ]; then \
 		rm -f kernel_cfg.timestamp $(CFG2_OUT_SRCS); \
-		rm -f cfg1_out.c cfg1_out.o $(CFG1_OUT) cfg1_out.syms cfg1_out.srec; \
+		rm -f cfg1_out.c cfg1_out.o $(CFG1_OUT) cfg1_out.syms cfg1_out.srec cfg1_out.bin; \
 		rm -f makeoffset.s offset.h; \
 	fi
 	rm -f Makefile.depend

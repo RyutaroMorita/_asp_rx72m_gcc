@@ -42,7 +42,7 @@
  */
 
 /*
- *  t_stddef.hのターゲット依存部（Starter_Kit用）
+ *  t_stddef.hのターゲット依存部（RTK0EMXDE0C00000BJ用）
  *
  *  このインクルードファイルは，t_stddef.hの先頭でインクルードされる．
  *  他のファイルからは直接インクルードすることはない．他のインクルード
@@ -56,14 +56,17 @@
 /*
  *  ターゲットを識別するためのマクロの定義
  */
-#define TOPPERS_STARTER_KIT			/* システム略称 */
+#define TOPPERS_RTK0EMXDE0C00000BJ			/* システム略称 */
 
 
 /*
  *  開発環境で共通な定義
  */
-#define TOPPERS_STDINT_TYPE1
-#define TOPPERS_STDFLOAT_TYPE1
+//#define TOPPERS_STDINT_TYPE1
+//#define TOPPERS_STDFLOAT_TYPE1
+#ifndef TOPPERS_MACRO_ONLY
+#include <stdint.h>
+#endif
 #include "gcc/tool_stddef.h"
 
 

@@ -1,3 +1,0 @@
-
-KERNEL_DIR := $(KERNEL_DIR) $(TARGETDIR)/target_device/device_init
-KERNEL_COBJS := $(KERNEL_COBJS) RSPI_init.o mmc_rspi_init.o mmc_gpio_init.o

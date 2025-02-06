@@ -45,7 +45,7 @@
 #include <sil.h>
 #include "target_board.h"
 #include "renesas/scic_uart.h"
-#include <target_device/target_device.h>
+//#include <target_device/target_device.h>
 
 #include "mcu_clocks.h"
 

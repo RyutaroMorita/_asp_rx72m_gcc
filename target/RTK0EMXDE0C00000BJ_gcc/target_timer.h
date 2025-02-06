@@ -58,7 +58,7 @@
  */
 #define INHNO_TIMER		INT_CMT0_CMI0		/* 割込みハンドラ番号 */
 #define INTNO_TIMER		INT_CMT0_CMI0		/* 割込み番号 */
-#define INTPRI_TIMER	-5					/* 割込み優先度 */
+#define INTPRI_TIMER	-7					/* 割込み優先度 */
 #define INTATR_TIMER	TA_ENAINT | TA_EDGE	/* 割込み属性 */
 
 #ifndef TOPPERS_MACRO_ONLY
@@ -73,7 +73,7 @@ typedef uint16_t	CLOCK;
  *
  *  1msのタイマー割り込みを使用するのでそのクロックを定義する．
  */
-#define TIMER_CLOCK				(6250U)		/* 6.25MHz */
+#define TIMER_CLOCK				(7500U)		/* 7.5MHz */
 #define TO_CLOCK(nume, deno)	((CLOCK)(TIMER_CLOCK * (nume) / (deno)))
 #define	TO_USEC(clock)			((SYSUTM)((clock) * 1000U / TIMER_CLOCK))
 
@@ -109,7 +109,7 @@ typedef uint16_t	CLOCK;
  *  周辺モジュールクロック（PCLK）50MHzを8分周するので，
  *  1周期あたり160nsecとなり，6250周期で1ms（タイムティックの周期）とする．
  */
-#define CMCOR_PERIOD			(6250U)
+#define CMCOR_PERIOD			(7500U)
 
 /*
  * コンペアマッチタイマ割り込み要求先設定レジスタi（ISELRi）（i= 割り込みベクタ番号）
@@ -136,7 +136,7 @@ extern void	target_timer_terminate(intptr_t exinf);
 /*
  *  タイマレジスタ値の読み出し
  */
-Inline uint16_t rx600_cmt_getcount(void)
+Inline uint16_t rx72m_cmt_getcount(void)
 {
 	return *CMT0_CMCNT_ADDR;
 }
@@ -144,7 +144,7 @@ Inline uint16_t rx600_cmt_getcount(void)
 /*
  *  タイマレジスタ値の書き込み
  */
-Inline void rx600_cmt_setcount(uint16_t count)
+Inline void rx72m_cmt_setcount(uint16_t count)
 {
 	*CMT0_CMCNT_ADDR = count;
 }
@@ -156,7 +156,7 @@ Inline CLOCK
 target_timer_get_current(void)
 {
 	/* アップカウントのためタイマレジスタ値をそのまま返す	*/
-	return (rx600_cmt_getcount());
+	return (rx72m_cmt_getcount());
 }
 
 /*
