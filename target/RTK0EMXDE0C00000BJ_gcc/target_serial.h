@@ -50,20 +50,32 @@
 #define TOPPERS_TARGET_SERIAL_H
 
 #include "target_board.h"
-#include "renesas/scic_uart.h"
+//#include "renesas/scic_uart.h"
 
 /*
  *  SIOの割込みハンドラのベクタ番号
  */
-#define INHNO_SIO_TX	INT_ICU_GROUPBL0		/* 割込みハンドラ番号 */
-#define INTNO_SIO_TX	INT_ICU_GROUPBL0		/* 割込み番号 */
-#define INHNO_SIO_RX	INT_SCI1_RXI1			/* 割込みハンドラ番号 */
-#define INTNO_SIO_RX	INT_SCI1_RXI1			/* 割込み番号 */
-#define INTPRI_SIO		-4						/* 割込み優先度 */
-#define INTATR_SIO		(TA_NULL)				/* 割込み属性 */
+#define INHNO_SIO_TX		INT_ICU_GROUPBL0		/* 割込みハンドラ番号 */
+#define INTNO_SIO_TX		INT_ICU_GROUPBL0		/* 割込み番号 */
+#define INHNO_SIO_RX		INT_SCI6_RXI6			/* 割込みハンドラ番号 */
+#define INTNO_SIO_RX		INT_SCI6_RXI6			/* 割込み番号 */
+#define INTPRI_SIO			-4						/* 割込み優先度 */
+#define INTATR_SIO			(TA_NULL)				/* 割込み属性 */
+
+#define R_SCI_PinSet_SCI	R_SCI_PinSet_SCI6
 
 #ifndef TOPPERS_MACRO_ONLY
 
+/*
+ *  シリアルI/Oポート管理ブロックの定義
+ */
+typedef struct sio_port_control_block	SIOPCB;
+
+/*
+ *  コールバックルーチンの識別番号
+ */
+#define SIO_RDY_SND    (1U)        /* 送信可能コールバック */
+#define SIO_RDY_RCV    (2U)        /* 受信通知コールバック */
 
 /*
  *  SIOドライバの初期化

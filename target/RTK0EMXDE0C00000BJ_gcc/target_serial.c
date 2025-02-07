@@ -50,6 +50,72 @@
 #include <t_syslog.h>
 #include "target_board.h"
 #include "target_serial.h"
+#include "r_sci_rx_if.h"
+#include "r_sci_rx_pinset.h"
+#include "r_sci_rx_private.h"
+
+ID g_siopid;
+
+/*
+ *  シリアルI/Oポート初期化ブロックの定義
+ */
+typedef struct sio_port_initialization_block {
+	sci_hdl_t	hdl;
+	uint8_t		chan;
+} SIOPINIB;
+
+/*
+ *  シリアルI/Oポート管理ブロックの定義
+ */
+struct sio_port_control_block {
+	const SIOPINIB	*p_siopinib; 				/* シリアルI/Oポート初期化ブロック */
+	intptr_t 	exinf;			 				/* 拡張情報 */
+	bool_t		openflag;						/* オープン済みフラグ */
+	bool_t		sendflag;						/* 送信割込みイネーブルフラグ */
+	bool_t		getready;						/* 文字を受信した状態 */
+	bool_t		putready;						/* 文字を送信できる状態 */
+	bool_t		is_initialized; 				/* デバイス初期化済みフラグ */
+};
+
+/*
+ *  シリアルI/Oポート管理ブロックのエリア
+ */
+static SIOPCB	siopcb_table[TNUM_SIOP];
+
+/*  レジスタテーブル */
+static SIOPINIB siopinib_table[TNUM_SIOP];
+
+/*
+ *  シリアルI/OポートIDから管理ブロックを取り出すためのマクロ
+ */
+#define INDEX_SIOP(siopid)	 ((uint_t)((siopid) - 1))
+#define get_siopcb(siopid)	 (&(siopcb_table[INDEX_SIOP(siopid)]))
+#define get_siopinib(siopid) (&(siopinib_table[INDEX_SIOP(siopid)]))
+
+/*
+ *  SIOのコールバック関数
+ */
+void sio_callback(void *p_args)
+{
+	SIOPCB	*p_siopcb = get_siopcb(g_siopid);
+	sci_cb_args_t *args;
+	args = (sci_cb_args_t *)p_args;
+	if (args->event == SCI_EVT_RX_CHAR)
+	{
+		/*
+		 *  受信通知コールバックルーチンを呼び出す．
+		 */
+		sio_irdy_rcv(p_siopcb->exinf);
+	}
+	else
+	if (args->event == SCI_EVT_TEI)
+	{
+		/*
+		 *  送信可能コールバックルーチンを呼び出す．
+		 */
+		sio_irdy_snd(p_siopcb->exinf);
+	}
+}
 
 /*
  *  SIOドライバの初期化
@@ -57,18 +123,31 @@
 void
 sio_initialize(intptr_t exinf)
 {
-	scic_uart_initialize();
+	SIOPCB	*p_siopcb;
+	uint_t	i;
+
+	/*
+	 *  シリアルI/Oポート管理ブロックの初期化
+	 */
+	for (p_siopcb = siopcb_table, i = 0; i < TNUM_SIOP; p_siopcb++, i++){
+		siopinib_table[i].hdl = NULL;
+		siopinib_table[i].chan = i;
+		p_siopcb->p_siopinib = &(siopinib_table[i]);
+		p_siopcb->openflag = false;
+		p_siopcb->sendflag = false;
+	}
 }
 
 /*
  *  シリアルI/Oポートのオープン
  */
-SIOPCB *
-sio_opn_por(ID siopid, intptr_t exinf)
+SIOPCB* sio_opn_por(ID siopid, intptr_t exinf)
 {
-	SIOPCB  *p_siopcb = NULL;
-	ER      ercd;
-	
+	SIOPCB          *p_siopcb;
+	const SIOPINIB  *p_siopinib;
+	ER      		ercd;
+	sci_cfg_t		cfg;
+
 	/*
 	 *  シリアルI/O割込みをマスクする．
 	 *  (dis_int関数は、"\kernel\interrupt.c"に記述)
@@ -78,8 +157,29 @@ sio_opn_por(ID siopid, intptr_t exinf)
 	ercd = dis_int(INTNO_SIO_RX);
 	assert(ercd == E_OK);
 	
-	p_siopcb = 
-		scic_uart_opn_por(siopid , exinf , UART_BAUDRATE , UART_CLKSRC);
+	p_siopcb = get_siopcb(siopid);
+	p_siopinib = p_siopcb->p_siopinib;
+
+	//p_siopcb =
+	//	scic_uart_opn_por(siopid , exinf , UART_BAUDRATE , UART_CLKSRC);
+	cfg.async.baud_rate = 9600;
+	cfg.async.clk_src = SCI_CLK_INT;
+	cfg.async.data_size = SCI_DATA_8BIT;
+	cfg.async.parity_en = SCI_PARITY_OFF;
+	cfg.async.parity_type = SCI_EVEN_PARITY;
+	cfg.async.stop_bits = SCI_STOPBITS_1;
+	cfg.async.int_priority = 3;
+
+	R_SCI_Open(
+			p_siopinib->chan,
+			SCI_MODE_ASYNC,
+			&cfg,
+			sio_callback,
+			(sci_hdl_t * const)p_siopinib->hdl
+	);
+
+	// PORTB.PMR.BIT.B1 = 1U; // Please set the PMR bit after TE bit is set to 1.
+	R_SCI_PinSet_SCI();
 
 	/*
 	 *  シリアルI/O割込みをマスク解除する．
@@ -104,7 +204,8 @@ sio_cls_por(SIOPCB *p_siopcb)
 	/*
 	 *  デバイス依存のクローズ処理．
 	 */
-	scic_uart_cls_por(p_siopcb);
+	R_SCI_Close(p_siopcb->p_siopinib->hdl);
+
 	
 	/*
 	 *  シリアルI/O割込みをマスクする．
@@ -120,7 +221,10 @@ sio_cls_por(SIOPCB *p_siopcb)
  */
 void sio_tx_isr(intptr_t exinf)
 {
-	scic_uart_tx_isr(exinf);
+	ID siopid = (ID)exinf;
+	SIOPCB	*p_siopcb = get_siopcb(siopid);
+	g_siopid = siopid;
+	tei_handler(p_siopcb->p_siopinib->hdl);
 }
 
 /*
@@ -128,7 +232,10 @@ void sio_tx_isr(intptr_t exinf)
  */
 void sio_rx_isr(intptr_t exinf)
 {
-	scic_uart_rx_isr(exinf);
+	ID siopid = (ID)exinf;
+	SIOPCB	*p_siopcb = get_siopcb(siopid);
+	g_siopid = siopid;
+	rxi_handler(p_siopcb->p_siopinib->hdl);
 }
 
 /*
@@ -166,24 +273,3 @@ sio_dis_cbr(SIOPCB *siopcb, uint_t cbrtn)
 {
 	scic_uart_dis_cbr(siopcb, cbrtn);
 }
-
-/*
- *  シリアルI/Oポートからの送信可能コールバック
- */
-void
-scic_uart_irdy_snd(intptr_t exinf)
-{
-	/* 共通部（syssvc\serial.c）にあるsio_irdy_snd関数を呼び出し*/
-	sio_irdy_snd(exinf);
-}
-
-/*
- *  シリアルI/Oポートからの受信通知コールバック
- */
-void
-scic_uart_irdy_rcv(intptr_t exinf)
-{
-	/* 共通部（syssvc\serial.c）にあるsio_irdy_rcv関数を呼び出し*/
-	sio_irdy_rcv(exinf);
-}
-

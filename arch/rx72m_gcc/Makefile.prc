@@ -60,11 +60,11 @@ TOOLDIR = $(SRCDIR)/arch/$(TOOL)
 #
 #  コンパイルオプション
 #
-COPTS := $(COPTS)
+COPTS := $(COPTS) -misa=v3 -mlittle-endian-data -std=gnu99
 INCLUDES := $(INCLUDES) -I$(TOOLDIR)
-LDFLAGS := -nostdlib $(LDFLAGS) 
+LDFLAGS := -nostdlib $(LDFLAGS)
 CDEFS := $(CDEFS)
-LIBS := $(LIBS)  -lgcc
+LIBS := $(LIBS)
 
 #
 #  カーネルに関する定義

@@ -66,6 +66,11 @@
 
 
 /*
+ *  SIOのコールバック関数
+ */
+extern void sio_callback(void *p_args);
+
+/*
  *  SIOドライバの初期化
  */
 extern void		sio_initialize(intptr_t exinf);

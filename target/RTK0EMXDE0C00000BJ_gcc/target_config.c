@@ -41,13 +41,15 @@
  *	ターゲットシステム依存モジュール（RTK0EMXDE0C00000BJ用）
  */
 
+#include <stdbool.h>
 #include "kernel_impl.h"
 #include <sil.h>
 #include "target_board.h"
-#include "renesas/scic_uart.h"
+//#include "renesas/scic_uart.h"
 //#include <target_device/target_device.h>
 
 #include "mcu_clocks.h"
+#include "r_bsp_cpu.h"
 
 /*
  *  ターゲットシステム依存 初期化ルーチン
@@ -153,6 +155,9 @@ void target_initialize( void )
 
 	//target_clock_config();
 	mcu_clock_setup();
+
+    /* Initialize RAM */
+    bsp_ram_initialize();
 
 	//target_port_config();
 	//sakura_ip_wakeup();

@@ -106,7 +106,7 @@ extern void	target_fput_log( char c );
 /*
  *  使用するシリアルポートID
  */
-#define	SIO_PORTID			UINT_C( 2 )
+#define	SIO_PORTID			UINT_C( 6 )
 
 #define LOGTASK_PORTID		SIO_PORTID
 
