@@ -50,7 +50,6 @@
 #define TOPPERS_TARGET_SERIAL_H
 
 #include "target_board.h"
-//#include "renesas/scic_uart.h"
 
 /*
  *  SIOの割込みハンドラのベクタ番号
@@ -61,8 +60,8 @@
 #define INTNO_SIO_RX		INT_SCI6_RXI6			/* 割込み番号 */
 #define INTPRI_SIO			-4						/* 割込み優先度 */
 #define INTATR_SIO			(TA_NULL)				/* 割込み属性 */
-
 #define R_SCI_PinSet_SCI	R_SCI_PinSet_SCI6
+#define SCI_SCR_ADDR		SCI6_SCR_ADDR
 
 #ifndef TOPPERS_MACRO_ONLY
 
@@ -85,7 +84,7 @@ extern void		sio_initialize(intptr_t exinf);
 /*
  *  シリアルI/Oポートのオープン
  */
-extern SIOPCB	*sio_opn_por(ID siopid, intptr_t exinf);
+extern SIOPCB*	sio_opn_por(ID siopid, intptr_t exinf);
 
 /*
  *  シリアルI/Oポートのクローズ

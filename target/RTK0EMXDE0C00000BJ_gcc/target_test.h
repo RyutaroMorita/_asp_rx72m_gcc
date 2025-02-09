@@ -57,7 +57,7 @@
 /*
  *  タスクで使用するシリアルポートID
  */
-#define	TASK_PORTID		( 2 )
+#define	TASK_PORTID		( 1 )
 
 
 #endif /* TOPPERS_TARGET_TEST_H */

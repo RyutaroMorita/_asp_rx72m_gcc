@@ -42,113 +42,31 @@
  */
 
 #include <stdbool.h>
-#include "kernel_impl.h"
 #include <sil.h>
-#include "target_board.h"
+#include "kernel_impl.h"
 //#include "renesas/scic_uart.h"
 //#include <target_device/target_device.h>
-
 #include "mcu_clocks.h"
+#include "platform.h"
 #include "r_bsp_cpu.h"
+#include "r_sci_rx72m_private.h"
+
+//#include "target_board.h"
+
+
+static void usart_early_init()
+{
+	//
+	MSTP(SCI6) = 0;
+	ch6_rom.regs->SCR.BYTE = 0;
+    /* Configure SMR */
+	ch6_rom.regs->SMR.BYTE = (uint8_t)((SCI_DATA_8BIT | SCI_STOPBITS_1) | (SCI_PARITY_OFF | SCI_EVEN_PARITY));
+	//sci_init_bit_rate();
+}
 
 /*
  *  ターゲットシステム依存 初期化ルーチン
  */
-#if 0
-void
-sakura_clock_waitcount_config(void){
-  //unlock lopwermode register access
-  sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
-
-  //clock wait count set
-  sil_wrb_mem((void *)(SYSTEM_MOSCWTR_ADDR), SYSTEM_CLKWAIT_HE);
-  sil_wrb_mem((void *)(SYSTEM_PLLWTCR_ADDR), SYSTEM_CLKWAIT_HA);
-  
-  //lock lopwermode register access
-  sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
-}
-
-static void target_clock_config( void ){
-	//const uint16_t wait_count = 1250; //pll lock wait count
-	uint16_t i;
-	//sakura_clock_waitcount_config();
-
-	//unlock access of clock setting register
-	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC0);
-	//RTK0EMXDE0C00000BJ Bord OSC is 12MHz
-	//set clock freq(PLL 196MHz, PCKB 48MHz PCKA 98MHz ICK 98MHz)
-	//pll set div 1, mul 16
-	sil_wrh_mem((void *)(CKG_PLLCR_ADDR), CKG_PLLCR_PLIDIV1 | CKG_PLLCR_STC16);
-	//set bus clock rate
-	sil_wrw_mem((void *)(CKG_SCKCR_ADDR),
-			  CKG_SCKCR_PB_DIV04
-			| CKG_SCKCR_PA_DIV02
-			| CKG_SCKCR_BCK_DIV04
-			| CKG_SCKCR_PSTOP0
-			| CKG_SCKCR_PSTOP1
-			| CKG_SCKCR_FCK_DIV04
-			| CKG_SCKCR_ICK_DIV02
-			| CKG_SCKCR_RESERVE);
-
-	sil_wrh_mem((void *)(CKG_SCKCR2_ADDR), CKG_SCKCR2_IEBCK_DIV4 | CKG_SCKCR2_UCK_NOT_USE);
-
-	//Main clock enable
-	sil_wrb_mem((void *)(CKG_MOSCCR_ADDR), CKG_CLOCK_ENABLE);
-	//Wait Main clock lock
-	while(sil_reb_mem((void *)(CKG_MOSCCR_ADDR)) != CKG_CLOCK_ENABLE);
-
-	//pll enable
-	sil_wrb_mem((void *)(CKG_PLLCR2_ADDR), CKG_CLOCK_ENABLE);
-	while(sil_reb_mem((void *)(CKG_PLLCR2_ADDR)) != CKG_CLOCK_ENABLE);
-	//PLL lock wait
-	//wait over 10ms, LOCO freq 125Khz, wait count is 125*10 = 1250;
-	//switch clock(PLL select)
-	sil_wrh_mem((void *)(CKG_SCKCR3_ADDR),   CKG_SCKCR3_PLL);
-	//lock access of clock setting register
-	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY );
-}
-
-static void target_port_config( void )
-{
-	/*
-	 *  ?|?[?g????
-	 */
-	scic_uart_init( TARGET_PUTC_PORTID, UART_BAUDRATE, UART_CLKSRC );
-
-	/* ?|?[?gP50??TxD2, ?|?[?gP52??RxD2?? */
-	/* MPC setting */
-	/* unlock PFS write protection */
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSWE_BIT);
-	/* p50 is set as TxD2 mode */
-	sil_wrb_mem((void *)(MPC_P50PFS_ADDR), MPC_PFS_PSELA);
-	/* p52 is set as RxD2 mode*/
-	sil_wrb_mem((void *)(MPC_P52PFS_ADDR), MPC_PFS_PSELA);
-	/* lock PFS write */
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_B0WI_BIT);
-
-	/* port mode setting */
-	/* Port Mode Register(PMR) config. P50 and P52(RxD2) are setted to IP use */
-	sil_wrb_mem((void *)(PORT5_PMR_ADDR) , 
-					sil_reb_mem((void *)(PORT2_PMR_ADDR)) | PORT_PMR_B0_BIT | PORT_PMR_B2_BIT);
-}
-
-void
-sakura_ip_wakeup( void )
-{
-  //unlock register access 
-  sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
-  /*
-   * ???W???[???X?g?b?v?@?\????(SCI2)
-   */
-  *SYSTEM_MSTPCRB_ADDR &= ~(SYSTEM_MSTPCRB_MSTPB29_BIT); /* CMT0 */
-  //lock register access
-  sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY );
-}
-#endif
-
-
 void target_initialize( void )
 {
 	prc_initialize();
@@ -159,36 +77,26 @@ void target_initialize( void )
     /* Initialize RAM */
     bsp_ram_initialize();
 
-	//target_port_config();
-	//sakura_ip_wakeup();
-	//target_device_init();
+    //usart_early_init();
 }
 
-
 /*
- *  ?^?[?Q?b?g?V?X?e????I?????[?`??
+ *  ターゲットシステムの終了ルーチン
  */
 void
 target_exit( void )
 {
 	/*
-	 *	?v???Z?b?T?????I??????
+	 *	プロセッサ依存の終了処理
 	 */
 	prc_terminate();
-
 	while ( 1 );
 }
 
-
 /*
- *  ?V?X?e?????O????x???o???????????o??
+ *  システムログの低レベル出力のための文字出力
  */
 void target_fput_log( char c )
 {
-	if( c == '\n' ){
-	   scic_uart_pol_putc( '\r' , TARGET_PUTC_PORTID );
-	}
-    scic_uart_pol_putc( c , TARGET_PUTC_PORTID );
+	(void)c;
 }
-
-

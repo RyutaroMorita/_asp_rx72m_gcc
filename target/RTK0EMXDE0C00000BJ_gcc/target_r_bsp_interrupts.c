@@ -41,7 +41,7 @@
 #include "platform.h"
 
 
-static bsp_int_err_t bsp_fit_interrupts_control(bool enable, bsp_int_ctrl_t * pdata);
+//static bsp_int_err_t bsp_fit_interrupts_control(bool enable, bsp_int_ctrl_t * pdata);
 
 
 void R_BSP_InterruptRequestEnable(uint32_t vector)
@@ -53,6 +53,12 @@ void R_BSP_InterruptRequestEnable(uint32_t vector)
 void R_BSP_InterruptRequestDisable(uint32_t vector)
 {
 	dis_int((INTNO)vector);
+}
+
+
+bsp_int_err_t R_BSP_InterruptWrite(bsp_int_src_t vector,  bsp_int_cb_t callback)
+{
+	return BSP_INT_SUCCESS;
 }
 
 
@@ -108,7 +114,7 @@ bsp_int_err_t R_BSP_InterruptControl(bsp_int_src_t vector, bsp_int_cmd_t cmd, vo
             {
                 /* キャストは、型が右側または引数と一致するため有効です */
                 //err = bsp_gr_int_enable_disable(vector, true, ((bsp_int_ctrl_t *)pdata)->ipl);
-                ena_int((INTNO)vector);	// 仮実装
+                //ena_int((INTNO)vector);	// 仮実装
             }
             else
             {
@@ -126,14 +132,14 @@ bsp_int_err_t R_BSP_InterruptControl(bsp_int_src_t vector, bsp_int_cmd_t cmd, vo
 
             /* キャストは、型が右側または引数と一致するため有効です */
             //err = bsp_fit_interrupts_control(true, (bsp_int_ctrl_t *)pdata);
-			dis_int((INTNO)vector);	// 仮実装
+			//dis_int((INTNO)vector);	// 仮実装
             break;
 
         case (BSP_INT_CMD_FIT_INTERRUPT_DISABLE):
 
             /* キャストは、型が右側または引数と一致するため有効です */
             //err = bsp_fit_interrupts_control(false, (bsp_int_ctrl_t *)pdata);
-        	dis_int((INTNO)vector);	// 仮実装
+        	//dis_int((INTNO)vector);	// 仮実装
             break;
 
         default:

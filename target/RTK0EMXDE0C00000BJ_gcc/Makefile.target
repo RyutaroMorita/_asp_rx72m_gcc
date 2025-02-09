@@ -26,7 +26,7 @@ INCLUDES := $(INCLUDES) \
 	-I$(TARGETDIR)/smc_gen/r_pincfg \
 	-I$(TARGETDIR)/smc_gen/r_sci_rx \
 	-I$(TARGETDIR)/smc_gen/r_sci_rx/src \
-	-I$(TARGETDIR)/smc_gen/r_sci_rx/src/target/rx72m
+	-I$(TARGETDIR)/smc_gen/r_sci_rx/src/targets/rx72m
 #COPTS :=
 #CDEFS :=
 #LDFLAGS :=
@@ -44,6 +44,7 @@ DRIVERDIR = \
 	$(TARGETDIR)/smc_gen/r_bsp/mcu/$(PRC) \
 	$(TARGETDIR)/smc_gen/r_byteq/src \
 	$(TARGETDIR)/smc_gen/r_cmt_rx/src \
+	$(TARGETDIR)/smc_gen/r_pincfg \
 	$(TARGETDIR)/smc_gen/r_sci_rx/src \
 	$(TARGETDIR)/smc_gen/r_sci_rx/src/targets/rx72m
 DRIVER_COBJS = \
@@ -57,10 +58,11 @@ DRIVER_COBJS = \
 	r_cmt_rx.o \
 	r_rx_intrinsic_functions.o \
 	r_sci_rx.o \
+	r_sci_rx_pinset.o \
 	r_sci_rx72m.o \
 	r_sci_rx72m_data.o \
 	sbrk.o \
-	target_r_interrupts.o
+	target_r_bsp_interrupts.o
 
 #
 #  カーネルに関する定義

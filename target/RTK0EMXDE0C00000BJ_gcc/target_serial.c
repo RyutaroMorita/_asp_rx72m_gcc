@@ -55,6 +55,7 @@
 #include "r_sci_rx_private.h"
 
 ID g_siopid;
+//sci_hdl_t g_uart_ctrl[TNUM_SIOP];
 
 /*
  *  シリアルI/Oポート初期化ブロックの定義
@@ -68,13 +69,13 @@ typedef struct sio_port_initialization_block {
  *  シリアルI/Oポート管理ブロックの定義
  */
 struct sio_port_control_block {
-	const SIOPINIB	*p_siopinib; 				/* シリアルI/Oポート初期化ブロック */
-	intptr_t 	exinf;			 				/* 拡張情報 */
-	bool_t		openflag;						/* オープン済みフラグ */
-	bool_t		sendflag;						/* 送信割込みイネーブルフラグ */
-	bool_t		getready;						/* 文字を受信した状態 */
-	bool_t		putready;						/* 文字を送信できる状態 */
-	bool_t		is_initialized; 				/* デバイス初期化済みフラグ */
+	const SIOPINIB*	p_siopinib; 	/* シリアルI/Oポート初期化ブロック */
+	intptr_t		exinf;			/* 拡張情報 */
+	bool_t			openflag;		/* オープン済みフラグ */
+	bool_t			sendflag;		/* 送信割込みイネーブルフラグ */
+	bool_t			getready;		/* 文字を受信した状態 */
+	bool_t			putready;		/* 文字を送信できる状態 */
+	bool_t			is_initialized; /* デバイス初期化済みフラグ */
 };
 
 /*
@@ -120,8 +121,7 @@ void sio_callback(void *p_args)
 /*
  *  SIOドライバの初期化
  */
-void
-sio_initialize(intptr_t exinf)
+void sio_initialize(intptr_t exinf)
 {
 	SIOPCB	*p_siopcb;
 	uint_t	i;
@@ -130,8 +130,8 @@ sio_initialize(intptr_t exinf)
 	 *  シリアルI/Oポート管理ブロックの初期化
 	 */
 	for (p_siopcb = siopcb_table, i = 0; i < TNUM_SIOP; p_siopcb++, i++){
-		siopinib_table[i].hdl = NULL;
-		siopinib_table[i].chan = i;
+		//siopinib_table[i].hdl = &g_uart_ctrl[i];
+		siopinib_table[i].chan = (6 + i);	// SCI6を1番目のポートとする
 		p_siopcb->p_siopinib = &(siopinib_table[i]);
 		p_siopcb->openflag = false;
 		p_siopcb->sendflag = false;
@@ -145,50 +145,55 @@ SIOPCB* sio_opn_por(ID siopid, intptr_t exinf)
 {
 	SIOPCB          *p_siopcb;
 	const SIOPINIB  *p_siopinib;
-	ER      		ercd;
 	sci_cfg_t		cfg;
 
 	/*
 	 *  シリアルI/O割込みをマスクする．
 	 *  (dis_int関数は、"\kernel\interrupt.c"に記述)
 	 */
-	ercd = dis_int(INTNO_SIO_TX);
-	assert(ercd == E_OK);
-	ercd = dis_int(INTNO_SIO_RX);
-	assert(ercd == E_OK);
+	dis_int(INTNO_SIO_TX);
+	dis_int(INTNO_SIO_RX);
 	
 	p_siopcb = get_siopcb(siopid);
 	p_siopinib = p_siopcb->p_siopinib;
 
-	//p_siopcb =
-	//	scic_uart_opn_por(siopid , exinf , UART_BAUDRATE , UART_CLKSRC);
-	cfg.async.baud_rate = 9600;
-	cfg.async.clk_src = SCI_CLK_INT;
-	cfg.async.data_size = SCI_DATA_8BIT;
-	cfg.async.parity_en = SCI_PARITY_OFF;
-	cfg.async.parity_type = SCI_EVEN_PARITY;
-	cfg.async.stop_bits = SCI_STOPBITS_1;
-	cfg.async.int_priority = 3;
+	/*
+	 *  ハードウェアの初期化
+	 *
+	 *  既に初期化している場合は, 二重に初期化しない.
+	 */
+	if (!(p_siopcb->is_initialized)) {
+		cfg.async.baud_rate = 9600;
+		cfg.async.clk_src = SCI_CLK_INT;
+		cfg.async.data_size = SCI_DATA_8BIT;
+		cfg.async.parity_en = SCI_PARITY_OFF;
+		cfg.async.parity_type = SCI_EVEN_PARITY;
+		cfg.async.stop_bits = SCI_STOPBITS_1;
+		cfg.async.int_priority = 3;
 
-	R_SCI_Open(
-			p_siopinib->chan,
-			SCI_MODE_ASYNC,
-			&cfg,
-			sio_callback,
-			(sci_hdl_t * const)p_siopinib->hdl
-	);
+		R_SCI_Open(
+				p_siopinib->chan,
+				SCI_MODE_ASYNC,
+				&cfg,
+				sio_callback,
+				(sci_hdl_t * const)&p_siopinib->hdl
+		);
+		// PORTB.PMR.BIT.B1 = 1U; // Please set the PMR bit after TE bit is set to 1.
+		R_SCI_PinSet_SCI();
 
-	// PORTB.PMR.BIT.B1 = 1U; // Please set the PMR bit after TE bit is set to 1.
-	R_SCI_PinSet_SCI();
+		p_siopcb->is_initialized = true;
+	}
+
+	p_siopcb->exinf = exinf;
+	p_siopcb->getready = p_siopcb->putready = false;
+	p_siopcb->openflag = true;
 
 	/*
 	 *  シリアルI/O割込みをマスク解除する．
 	 *  (ena_int関数は、"\kernel\interrupt.c"に記述)
 	 */
-	ercd = ena_int(INTNO_SIO_TX);
-	assert(ercd == E_OK);
-	ercd = ena_int(INTNO_SIO_RX);
-	assert(ercd == E_OK);
+	ena_int(INTNO_SIO_TX);
+	ena_int(INTNO_SIO_RX);
 
 	return(p_siopcb);
 }
@@ -196,24 +201,21 @@ SIOPCB* sio_opn_por(ID siopid, intptr_t exinf)
 /*
  *  シリアルI/Oポートのクローズ
  */
-void
-sio_cls_por(SIOPCB *p_siopcb)
+void sio_cls_por(SIOPCB *p_siopcb)
 {
-	ER        ercd;
-
 	/*
 	 *  デバイス依存のクローズ処理．
 	 */
 	R_SCI_Close(p_siopcb->p_siopinib->hdl);
 
-	
+	p_siopcb->openflag = false;
+	p_siopcb->is_initialized = false;
+
 	/*
 	 *  シリアルI/O割込みをマスクする．
 	 */
-	ercd = dis_int(INTNO_SIO_TX);
-	assert(ercd == E_OK);
-	ercd = dis_int(INTNO_SIO_RX);
-	assert(ercd == E_OK);
+	dis_int(INTNO_SIO_TX);
+	dis_int(INTNO_SIO_RX);
 }
 
 /*
@@ -242,34 +244,52 @@ void sio_rx_isr(intptr_t exinf)
  *  シリアルI/Oポートへの文字送信
  */
 bool_t
-sio_snd_chr(SIOPCB *siopcb, char c)
+sio_snd_chr(SIOPCB *p_siopcb, char c)
 {
-	return(scic_uart_snd_chr(siopcb, c));
+	if (R_SCI_Send(p_siopcb->p_siopinib->hdl, (uint8_t*)&c, 1) != SCI_SUCCESS)
+		return false;
+	return true;
 }
 
 /*
  *  シリアルI/Oポートからの文字受信
  */
 int_t
-sio_rcv_chr(SIOPCB *siopcb)
+sio_rcv_chr(SIOPCB *p_siopcb)
 {
-	return(scic_uart_rcv_chr(siopcb));
+	int_t	c;
+	R_SCI_Receive(p_siopcb->p_siopinib->hdl, (uint8_t*)&c, 1);
+	return c;
 }
 
 /*
  *  シリアルI/Oポートからのコールバックの許可
  */
 void
-sio_ena_cbr(SIOPCB *siopcb, uint_t cbrtn)
+sio_ena_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
 {
-	scic_uart_ena_cbr(siopcb, cbrtn);
+	switch (cbrtn) {
+	case SIO_RDY_SND:
+		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_TEIE_BIT;
+		break;
+	case SIO_RDY_RCV:
+		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_RIE_BIT;
+		break;
+	}
 }
 
 /*
  *  シリアルI/Oポートからのコールバックの禁止
  */
 void
-sio_dis_cbr(SIOPCB *siopcb, uint_t cbrtn)
+sio_dis_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
 {
-	scic_uart_dis_cbr(siopcb, cbrtn);
+	switch (cbrtn) {
+	case SIO_RDY_SND:
+		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_TEIE_BIT;
+		break;
+	case SIO_RDY_RCV:
+		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_RIE_BIT;
+		break;
+	}
 }

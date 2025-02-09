@@ -54,4 +54,3 @@ void R_SCI_PinSet_SCI6()
 
     R_BSP_RegisterProtectEnable(BSP_REG_PROTECT_MPC);
 }
-

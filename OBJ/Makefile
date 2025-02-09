@@ -61,7 +61,7 @@ NET_SP = none
 #
 SRCLANG = c
 ifeq ($(SRCLANG),c)
-  LIBS = -lc
+#  LIBS = -lc
 endif
 ifeq ($(SRCLANG),c++)
   USE_CXX = true

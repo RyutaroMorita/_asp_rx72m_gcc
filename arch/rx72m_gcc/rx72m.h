@@ -1261,6 +1261,6 @@
 /*
  *  ƒVƒŠƒAƒ‹I/O‚ÌŒÂ”
  */
-#define TNUM_SIOP			(13)
+#define TNUM_SIOP			(4)
 
 #endif	/* TOPPERS_RX72M_H */

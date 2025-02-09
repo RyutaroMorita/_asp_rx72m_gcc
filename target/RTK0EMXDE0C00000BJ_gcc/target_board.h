@@ -34,8 +34,8 @@
  * 
  */
 
-#ifndef	TOPPERS_STARTER_KIT_H
-#define	TOPPERS_STARTER_KIT_H
+#ifndef	TOPPERS_RTK0EMXDE0C00000BJ_H
+#define	TOPPERS_RTK0EMXDE0C00000BJ_H
 
 
 /*
@@ -54,15 +54,13 @@
  *  ボーレート設定
  */
 #define BAUD_38400BPS		UINT_C( 0x28 )
-
 #define UART_BAUDRATE		BAUD_38400BPS
-
 
 /*
  *  クロックソース
  */
 #define UART_CLKSRC			CLK_F1
 
-#endif	/* TOPPERS_STARTER_KIT_H */
+#endif	/* TOPPERS_RTK0EMXDE0C00000BJ_H */
 
 

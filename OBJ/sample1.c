@@ -8,101 +8,101 @@
  *  Copyright (C) 2004-2012 by Embedded and Real-Time Systems Laboratory
  *              Graduate School of Information Science, Nagoya Univ., JAPAN
  * 
- *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
- *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
- *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
- *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
- *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
- *      スコード中に含まれていること．
- *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
- *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
- *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
- *      の無保証規定を掲載すること．
- *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
- *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
- *      と．
- *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
- *        作権表示，この利用条件および下記の無保証規定を掲載すること．
- *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
- *        報告すること．
- *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
- *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
- *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
- *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
- *      免責すること．
+ *  ��L���쌠�҂́C�ȉ���(1)�`(4)�̏����𖞂����ꍇ�Ɍ���C�{�\�t�g�E�F
+ *  �A�i�{�\�t�g�E�F�A�����ς������̂��܂ށD�ȉ������j���g�p�E�����E��
+ *  �ρE�Ĕz�z�i�ȉ��C���p�ƌĂԁj���邱�Ƃ𖳏��ŋ�������D
+ *  (1) �{�\�t�g�E�F�A���\�[�X�R�[�h�̌`�ŗ��p����ꍇ�ɂ́C��L�̒���
+ *      ���\���C���̗��p��������щ��L�̖��ۏ؋K�肪�C���̂܂܂̌`�Ń\�[
+ *      �X�R�[�h���Ɋ܂܂�Ă��邱�ƁD
+ *  (2) �{�\�t�g�E�F�A���C���C�u�����`���ȂǁC���̃\�t�g�E�F�A�J���Ɏg
+ *      �p�ł���`�ōĔz�z����ꍇ�ɂ́C�Ĕz�z�ɔ����h�L�������g�i���p
+ *      �҃}�j���A���Ȃǁj�ɁC��L�̒��쌠�\���C���̗��p��������щ��L
+ *      �̖��ۏ؋K����f�ڂ��邱�ƁD
+ *  (3) �{�\�t�g�E�F�A���C�@��ɑg�ݍ��ނȂǁC���̃\�t�g�E�F�A�J���Ɏg
+ *      �p�ł��Ȃ��`�ōĔz�z����ꍇ�ɂ́C���̂����ꂩ�̏����𖞂�����
+ *      �ƁD
+ *    (a) �Ĕz�z�ɔ����h�L�������g�i���p�҃}�j���A���Ȃǁj�ɁC��L�̒�
+ *        �쌠�\���C���̗��p��������щ��L�̖��ۏ؋K����f�ڂ��邱�ƁD
+ *    (b) �Ĕz�z�̌`�Ԃ��C�ʂɒ�߂���@�ɂ���āCTOPPERS�v���W�F�N�g��
+ *        �񍐂��邱�ƁD
+ *  (4) �{�\�t�g�E�F�A�̗��p�ɂ�蒼�ړI�܂��͊ԐړI�ɐ����邢���Ȃ鑹
+ *      �Q������C��L���쌠�҂����TOPPERS�v���W�F�N�g��Ɛӂ��邱�ƁD
+ *      �܂��C�{�\�t�g�E�F�A�̃��[�U�܂��̓G���h���[�U����̂����Ȃ闝
+ *      �R�Ɋ�Â�����������C��L���쌠�҂����TOPPERS�v���W�F�N�g��
+ *      �Ɛӂ��邱�ƁD
  * 
- *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
- *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
- *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
- *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
- *  の責任を負わない．
+ *  �{�\�t�g�E�F�A�́C���ۏ؂Œ񋟂���Ă�����̂ł���D��L���쌠�҂�
+ *  ���TOPPERS�v���W�F�N�g�́C�{�\�t�g�E�F�A�Ɋւ��āC����̎g�p�ړI
+ *  �ɑ΂���K�������܂߂āC�����Ȃ�ۏ؂��s��Ȃ��D�܂��C�{�\�t�g�E�F
+ *  �A�̗��p�ɂ�蒼�ړI�܂��͊ԐړI�ɐ����������Ȃ鑹�Q�Ɋւ��Ă��C��
+ *  �̐ӔC�𕉂�Ȃ��D
  * 
  *  $Id: sample1.c 2728 2015-12-30 01:46:11Z ertl-honda $
  */
 
 /* 
- *  サンプルプログラム(1)の本体
+ *  �T���v���v���O����(1)�̖{��
  *
- *  ASPカーネルの基本的な動作を確認するためのサンプルプログラム．
+ *  ASP�J�[�l���̊�{�I�ȓ�����m�F���邽�߂̃T���v���v���O�����D
  *
- *  プログラムの概要:
+ *  �v���O�����̊T�v:
  *
- *  ユーザインタフェースを受け持つメインタスク（タスクID: MAIN_TASK，優
- *  先度: MAIN_PRIORITY）と，3つの並行実行されるタスク（タスクID:
- *  TASK1～TASK3，初期優先度: MID_PRIORITY）で構成される．また，起動周
- *  期が2秒の周期ハンドラ（周期ハンドラID: CYCHDR1）を用いる．
+ *  ���[�U�C���^�t�F�[�X���󂯎����C���^�X�N�i�^�X�NID: MAIN_TASK�C�D
+ *  ��x: MAIN_PRIORITY�j�ƁC3�̕��s���s�����^�X�N�i�^�X�NID:
+ *  TASK1�`TASK3�C�����D��x: MID_PRIORITY�j�ō\�������D�܂��C�N����
+ *  ����2�b�̎����n���h���i�����n���h��ID: CYCHDR1�j��p����D
  *
- *  並行実行されるタスクは，task_loop回空ループを実行する度に，タスクが
- *  実行中であることをあらわすメッセージを表示する．空ループを実行する
- *  のは，空ループなしでメッセージを出力すると，多量のメッセージが出力
- *  され，プログラムの動作が確認しずらくなるためである．また，低速なシ
- *  リアルポートを用いてメッセージを出力する場合に，すべてのメッセージ
- *  が出力できるように，メッセージの量を制限するという理由もある．
+ *  ���s���s�����^�X�N�́Ctask_loop��󃋁[�v�����s����x�ɁC�^�X�N��
+ *  ���s���ł��邱�Ƃ�����킷���b�Z�[�W��\������D�󃋁[�v�����s����
+ *  �̂́C�󃋁[�v�Ȃ��Ń��b�Z�[�W���o�͂���ƁC���ʂ̃��b�Z�[�W���o��
+ *  ����C�v���O�����̓��삪�m�F�����炭�Ȃ邽�߂ł���D�܂��C�ᑬ�ȃV
+ *  ���A���|�[�g��p���ă��b�Z�[�W���o�͂���ꍇ�ɁC���ׂẴ��b�Z�[�W
+ *  ���o�͂ł���悤�ɁC���b�Z�[�W�̗ʂ𐧌�����Ƃ������R������D
  *
- *  周期ハンドラは，三つの優先度（HIGH_PRIORITY，MID_PRIORITY，
- *  LOW_PRIORITY）のレディキューを回転させる．プログラムの起動直後は，
- *  周期ハンドラは停止状態になっている．
+ *  �����n���h���́C�O�̗D��x�iHIGH_PRIORITY�CMID_PRIORITY�C
+ *  LOW_PRIORITY�j�̃��f�B�L���[����]������D�v���O�����̋N������́C
+ *  �����n���h���͒�~��ԂɂȂ��Ă���D
  *
- *  メインタスクは，シリアルI/Oポートからの文字入力を行い（文字入力を
- *  待っている間は，並行実行されるタスクが実行されている），入力された
- *  文字に対応した処理を実行する．入力された文字と処理の関係は次の通り．
- *  Control-Cまたは'Q'が入力されると，プログラムを終了する．
+ *  ���C���^�X�N�́C�V���A��I/O�|�[�g����̕������͂��s���i�������͂�
+ *  �҂��Ă���Ԃ́C���s���s�����^�X�N�����s����Ă���j�C���͂��ꂽ
+ *  �����ɑΉ��������������s����D���͂��ꂽ�����Ə����̊֌W�͎��̒ʂ�D
+ *  Control-C�܂���'Q'�����͂����ƁC�v���O�������I������D
  *
- *  '1' : 対象タスクをTASK1に切り換える（初期設定）．
- *  '2' : 対象タスクをTASK2に切り換える．
- *  '3' : 対象タスクをTASK3に切り換える．
- *  'a' : 対象タスクをact_tskにより起動する．
- *  'A' : 対象タスクに対する起動要求をcan_actによりキャンセルする．
- *  'e' : 対象タスクにext_tskを呼び出させ，終了させる．
- *  't' : 対象タスクをter_tskにより強制終了する．
- *  '>' : 対象タスクの優先度をHIGH_PRIORITYにする．
- *  '=' : 対象タスクの優先度をMID_PRIORITYにする．
- *  '<' : 対象タスクの優先度をLOW_PRIORITYにする．
- *  'G' : 対象タスクの優先度をget_priで読み出す．
- *  's' : 対象タスクにslp_tskを呼び出させ，起床待ちにさせる．
- *  'S' : 対象タスクにtslp_tsk(10秒)を呼び出させ，起床待ちにさせる．
- *  'w' : 対象タスクをwup_tskにより起床する．
- *  'W' : 対象タスクに対する起床要求をcan_wupによりキャンセルする．
- *  'l' : 対象タスクをrel_waiにより強制的に待ち解除にする．
- *  'u' : 対象タスクをsus_tskにより強制待ち状態にする．
- *  'm' : 対象タスクの強制待ち状態をrsm_tskにより解除する．
- *  'd' : 対象タスクにdly_tsk(10秒)を呼び出させ，時間経過待ちにさせる．
- *  'x' : 対象タスクに例外パターン0x0001の例外処理を要求する．
- *  'X' : 対象タスクに例外パターン0x0002の例外処理を要求する．
- *  'y' : 対象タスクにdis_texを呼び出させ，タスク例外を禁止する．
- *  'Y' : 対象タスクにena_texを呼び出させ，タスク例外を許可する．
- *  'r' : 3つの優先度（HIGH_PRIORITY，MID_PRIORITY，LOW_PRIORITY）のレ
- *        ディキューを回転させる．
- *  'c' : 周期ハンドラを動作開始させる．
- *  'C' : 周期ハンドラを動作停止させる．
- *  'b' : アラームハンドラを5秒後に起動するよう動作開始させる．
- *  'B' : アラームハンドラを動作停止させる．
- *  'z' : 対象タスクにCPU例外を発生させる（タスクを終了させる）．
- *  'Z' : 対象タスクにCPUロック状態でCPU例外を発生させる（プログラムを
- *        終了する）．
- *  'V' : get_utmで性能評価用システム時刻を2回読む．
- *  'v' : 発行したシステムコールを表示する（デフォルト）．
- *  'q' : 発行したシステムコールを表示しない．
+ *  '1' : �Ώۃ^�X�N��TASK1�ɐ؂芷����i�����ݒ�j�D
+ *  '2' : �Ώۃ^�X�N��TASK2�ɐ؂芷����D
+ *  '3' : �Ώۃ^�X�N��TASK3�ɐ؂芷����D
+ *  'a' : �Ώۃ^�X�N��act_tsk�ɂ��N������D
+ *  'A' : �Ώۃ^�X�N�ɑ΂���N���v����can_act�ɂ��L�����Z������D
+ *  'e' : �Ώۃ^�X�N��ext_tsk���Ăяo�����C�I��������D
+ *  't' : �Ώۃ^�X�N��ter_tsk�ɂ�苭���I������D
+ *  '>' : �Ώۃ^�X�N�̗D��x��HIGH_PRIORITY�ɂ���D
+ *  '=' : �Ώۃ^�X�N�̗D��x��MID_PRIORITY�ɂ���D
+ *  '<' : �Ώۃ^�X�N�̗D��x��LOW_PRIORITY�ɂ���D
+ *  'G' : �Ώۃ^�X�N�̗D��x��get_pri�œǂݏo���D
+ *  's' : �Ώۃ^�X�N��slp_tsk���Ăяo�����C�N���҂��ɂ�����D
+ *  'S' : �Ώۃ^�X�N��tslp_tsk(10�b)���Ăяo�����C�N���҂��ɂ�����D
+ *  'w' : �Ώۃ^�X�N��wup_tsk�ɂ��N������D
+ *  'W' : �Ώۃ^�X�N�ɑ΂���N���v����can_wup�ɂ��L�����Z������D
+ *  'l' : �Ώۃ^�X�N��rel_wai�ɂ�苭���I�ɑ҂������ɂ���D
+ *  'u' : �Ώۃ^�X�N��sus_tsk�ɂ�苭���҂���Ԃɂ���D
+ *  'm' : �Ώۃ^�X�N�̋����҂���Ԃ�rsm_tsk�ɂ���������D
+ *  'd' : �Ώۃ^�X�N��dly_tsk(10�b)���Ăяo�����C���Ԍo�ߑ҂��ɂ�����D
+ *  'x' : �Ώۃ^�X�N�ɗ�O�p�^�[��0x0001�̗�O������v������D
+ *  'X' : �Ώۃ^�X�N�ɗ�O�p�^�[��0x0002�̗�O������v������D
+ *  'y' : �Ώۃ^�X�N��dis_tex���Ăяo�����C�^�X�N��O���֎~����D
+ *  'Y' : �Ώۃ^�X�N��ena_tex���Ăяo�����C�^�X�N��O��������D
+ *  'r' : 3�̗D��x�iHIGH_PRIORITY�CMID_PRIORITY�CLOW_PRIORITY�j�̃�
+ *        �f�B�L���[����]������D
+ *  'c' : �����n���h���𓮍�J�n������D
+ *  'C' : �����n���h���𓮍��~������D
+ *  'b' : �A���[���n���h����5�b��ɋN������悤����J�n������D
+ *  'B' : �A���[���n���h���𓮍��~������D
+ *  'z' : �Ώۃ^�X�N��CPU��O�𔭐�������i�^�X�N���I��������j�D
+ *  'Z' : �Ώۃ^�X�N��CPU���b�N��Ԃ�CPU��O�𔭐�������i�v���O������
+ *        �I������j�D
+ *  'V' : get_utm�Ő��\�]���p�V�X�e��������2��ǂށD
+ *  'v' : ���s�����V�X�e���R�[����\������i�f�t�H���g�j�D
+ *  'q' : ���s�����V�X�e���R�[����\�����Ȃ��D
  */
 
 #include <kernel.h>
@@ -114,7 +114,7 @@
 #include "sample1.h"
 
 /*
- *  サービスコールのエラーのログ出力
+ *  �T�[�r�X�R�[���̃G���[�̃��O�o��
  */
 Inline void
 svc_perror(const char *file, int_t line, const char *expr, ER ercd)
@@ -127,18 +127,18 @@ svc_perror(const char *file, int_t line, const char *expr, ER ercd)
 #define	SVC_PERROR(expr)	svc_perror(__FILE__, __LINE__, #expr, (expr))
 
 /*
- *  並行実行されるタスクへのメッセージ領域
+ *  ���s���s�����^�X�N�ւ̃��b�Z�[�W�̈�
  */
 char	message[3];
 
 /*
- *  ループ回数
+ *  ���[�v��
  */
-ulong_t	task_loop;		/* タスク内でのループ回数 */
-ulong_t	tex_loop;		/* 例外処理ルーチン内でのループ回数 */
+ulong_t	task_loop;		/* �^�X�N���ł̃��[�v�� */
+ulong_t	tex_loop;		/* ��O�������[�`�����ł̃��[�v�� */
 
 /*
- *  並行実行されるタスク
+ *  ���s���s�����^�X�N
  */
 void task(intptr_t exinf)
 {
@@ -199,7 +199,7 @@ void task(intptr_t exinf)
 }
 
 /*
- *  並行して実行されるタスク用のタスク例外処理ルーチン
+ *  ���s���Ď��s�����^�X�N�p�̃^�X�N��O�������[�`��
  */
 void tex_routine(TEXPTN texptn, intptr_t exinf)
 {
@@ -217,7 +217,7 @@ void tex_routine(TEXPTN texptn, intptr_t exinf)
 }
 
 /*
- *  CPU例外ハンドラ
+ *  CPU��O�n���h��
  */
 #ifdef CPUEXC1
 
@@ -253,10 +253,10 @@ cpuexc_handler(void *p_excinf)
 #endif /* CPUEXC1 */
 
 /*
- *  周期ハンドラ
+ *  �����n���h��
  *
- *  HIGH_PRIORITY，MID_PRIORITY，LOW_PRIORITY の各優先度のレディキュー
- *  を回転させる．
+ *  HIGH_PRIORITY�CMID_PRIORITY�CLOW_PRIORITY �̊e�D��x�̃��f�B�L���[
+ *  ����]������D
  */
 void cyclic_handler(intptr_t exinf)
 {
@@ -266,10 +266,10 @@ void cyclic_handler(intptr_t exinf)
 }
 
 /*
- *  アラームハンドラ
+ *  �A���[���n���h��
  *
- *  HIGH_PRIORITY，MID_PRIORITY，LOW_PRIORITY の各優先度のレディキュー
- *  を回転させる．
+ *  HIGH_PRIORITY�CMID_PRIORITY�CLOW_PRIORITY �̊e�D��x�̃��f�B�L���[
+ *  ����]������D
  */
 void alarm_handler(intptr_t exinf)
 {
@@ -279,7 +279,7 @@ void alarm_handler(intptr_t exinf)
 }
 
 /*
- *  メインタスク
+ *  ���C���^�X�N
  */
 void main_task(intptr_t exinf)
 {
@@ -300,11 +300,11 @@ void main_task(intptr_t exinf)
 	syslog(LOG_NOTICE, "Sample program starts (exinf = %d).", (int_t) exinf);
 
 	/*
-	 *  シリアルポートの初期化
+	 *  �V���A���|�[�g�̏�����
 	 *
-	 *  システムログタスクと同じシリアルポートを使う場合など，シリアル
-	 *  ポートがオープン済みの場合にはここでE_OBJエラーになるが，支障は
-	 *  ない．
+	 *  �V�X�e�����O�^�X�N�Ɠ����V���A���|�[�g���g���ꍇ�ȂǁC�V���A��
+	 *  �|�[�g���I�[�v���ς݂̏ꍇ�ɂ͂�����E_OBJ�G���[�ɂȂ邪�C�x���
+	 *  �Ȃ��D
 	 */
 	ercd = serial_opn_por(TASK_PORTID);
 	if (ercd < 0 && MERCD(ercd) != E_OBJ) {
@@ -315,35 +315,35 @@ void main_task(intptr_t exinf)
 							(IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
 
 	/*
- 	 *  ループ回数の設定
+ 	 *  ���[�v�񐔂̐ݒ�
 	 *
-	 *  並行実行されるタスク内での空ループの回数（task_loop）は，空ルー
-	 *  プの実行時間が約0.4秒になるように設定する．この設定のために，
-	 *  LOOP_REF回の空ループの実行時間を，その前後でget_timを呼ぶことで
-	 *  測定し，その測定結果から空ループの実行時間が0.4秒になるループ回
-	 *  数を求め，task_loopに設定する．
+	 *  ���s���s�����^�X�N���ł̋󃋁[�v�̉񐔁itask_loop�j�́C�󃋁[
+	 *  �v�̎��s���Ԃ���0.4�b�ɂȂ�悤�ɐݒ肷��D���̐ݒ�̂��߂ɁC
+	 *  LOOP_REF��̋󃋁[�v�̎��s���Ԃ��C���̑O���get_tim���ĂԂ��Ƃ�
+	 *  ���肵�C���̑��茋�ʂ���󃋁[�v�̎��s���Ԃ�0.4�b�ɂȂ郋�[�v��
+	 *  �������߁Ctask_loop�ɐݒ肷��D
 	 *
-	 *  LOOP_REFは，デフォルトでは1,000,000に設定しているが，想定したよ
-	 *  り遅いプロセッサでは，サンプルプログラムの実行開始に時間がかか
-	 *  りすぎるという問題を生じる．逆に想定したより速いプロセッサでは，
-	 *  LOOP_REF回の空ループの実行時間が短くなり，task_loopに設定する値
-	 *  の誤差が大きくなるという問題がある．
+	 *  LOOP_REF�́C�f�t�H���g�ł�1,000,000�ɐݒ肵�Ă��邪�C�z�肵����
+	 *  ��x���v���Z�b�T�ł́C�T���v���v���O�����̎��s�J�n�Ɏ��Ԃ�����
+	 *  �肷����Ƃ������𐶂���D�t�ɑz�肵����葬���v���Z�b�T�ł́C
+	 *  LOOP_REF��̋󃋁[�v�̎��s���Ԃ��Z���Ȃ�Ctask_loop�ɐݒ肷��l
+	 *  �̌덷���傫���Ȃ�Ƃ�����肪����D
 	 *
-	 *  そこで，そのようなターゲットでは，target_test.hで，LOOP_REFを適
-	 *  切な値に定義するのが望ましい．
+	 *  �����ŁC���̂悤�ȃ^�[�Q�b�g�ł́Ctarget_test.h�ŁCLOOP_REF��K
+	 *  �؂Ȓl�ɒ�`����̂��]�܂����D
 	 *
-	 *  また，task_loopの値を固定したい場合には，その値をTASK_LOOPにマ
-	 *  クロ定義する．TASK_LOOPがマクロ定義されている場合，上記の測定を
-	 *  行わずに，TASK_LOOPに定義された値を空ループの回数とする．
+	 *  �܂��Ctask_loop�̒l���Œ肵�����ꍇ�ɂ́C���̒l��TASK_LOOP�Ƀ}
+	 *  �N����`����DTASK_LOOP���}�N����`����Ă���ꍇ�C��L�̑����
+	 *  �s�킸�ɁCTASK_LOOP�ɒ�`���ꂽ�l���󃋁[�v�̉񐔂Ƃ���D
 	 *
-	 * ターゲットによっては，空ループの実行時間の1回目の測定で，本来よ
-	 * りも長めになるものがある．このようなターゲットでは，MEASURE_TWICE
-	 * をマクロ定義することで，1回目の測定結果を捨てて，2回目の測定結果
-	 * を使う．
+	 * �^�[�Q�b�g�ɂ���ẮC�󃋁[�v�̎��s���Ԃ�1��ڂ̑���ŁC�{����
+	 * ������߂ɂȂ���̂�����D���̂悤�ȃ^�[�Q�b�g�ł́CMEASURE_TWICE
+	 * ���}�N����`���邱�ƂŁC1��ڂ̑��茋�ʂ��̂ĂāC2��ڂ̑��茋��
+	 * ���g���D
 	 *
-	 *  タスク例外処理ルーチン内での空ループの回数（tex_loop）は，
-	 *  task_loopの4分の1の値（空ループの実行時間が0.1秒になるループ回
-	 *  数）に設定する．
+	 *  �^�X�N��O�������[�`�����ł̋󃋁[�v�̉񐔁itex_loop�j�́C
+	 *  task_loop��4����1�̒l�i�󃋁[�v�̎��s���Ԃ�0.1�b�ɂȂ郋�[�v��
+	 *  ���j�ɐݒ肷��D
 	 */
 #ifdef TASK_LOOP
 	task_loop = TASK_LOOP;
@@ -366,14 +366,14 @@ void main_task(intptr_t exinf)
 	tex_loop = task_loop / 4;
 
 	/*
- 	 *  タスクの起動
+ 	 *  �^�X�N�̋N��
 	 */
 	SVC_PERROR(act_tsk(TASK1));
 	SVC_PERROR(act_tsk(TASK2));
 	SVC_PERROR(act_tsk(TASK3));
 
 	/*
- 	 *  メインループ
+ 	 *  ���C�����[�v
 	 */
 	do {
 		SVC_PERROR(serial_rea_dat(TASK_PORTID, &c, 1));
