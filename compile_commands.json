@@ -1,36 +1,6 @@
 [
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
-    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/asm_config.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/asm_config.inc\"",
-    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/asm_config.inc"
-  },
-  {
-    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
-    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/cfg1_out.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/cfg1_out.c\"",
-    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/cfg1_out.c"
-  },
-  {
-    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
-    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/kernel_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/kernel_cfg.c\"",
-    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/kernel_cfg.c"
-  },
-  {
-    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
-    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/kernel_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/kernel_cfg.h\"",
-    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/kernel_cfg.h"
-  },
-  {
-    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
-    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/kernel_cfg_asm.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/kernel_cfg_asm.S\"",
-    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/kernel_cfg_asm.S"
-  },
-  {
-    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
-    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/offset.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/offset.h\"",
-    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/offset.h"
-  },
-  {
-    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
     "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ/sample1.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/sample1.c\"",
     "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ/sample1.c"
   },
@@ -1438,6 +1408,16 @@
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
     "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/pdic/rx600/rx600_uart.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/pdic/rx600/rx600_uart.h\"",
     "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/pdic/rx600/rx600_uart.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/pdic/rx72m/rx72m_uart.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/pdic/rx72m/rx72m_uart.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/pdic/rx72m/rx72m_uart.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/pdic/rx72m/rx72m_uart.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/pdic/rx72m/rx72m_uart.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/pdic/rx72m/rx72m_uart.h"
   },
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",

@@ -3,12 +3,6 @@
  *      Toyohashi Open Platform for Embedded Real-Time Systems/
  *      Advanced Standard Profile Kernel
  * 
- *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
- *                              Toyohashi Univ. of Technology, JAPAN
- *  Copyright (C) 2003-2004 by Naoki Saito
- *             Nagoya Municipal Industrial Research Institute, JAPAN
- *  Copyright (C) 2003-2004 by Platform Development Center
- *                                          RICOH COMPANY,LTD. JAPAN
  *  Copyright (C) 2008-2010 by Witz Corporation, JAPAN
  * 
  *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
@@ -43,31 +37,93 @@
  */
 
 /*
- *  このインクルードファイルは，kernel.hでインクルードされる．他のファ
- *  イルから直接インクルードすることはない．このファイルをインクルード
- *  する前に，t_stddef.hがインクルードされるので，それらに依存してもよ
- *  い．
+ *  RX72M UART用 簡易SIOドライバ
  */
 
-#ifndef TOPPERS_TARGET_KERNEL_H
-#define TOPPERS_TARGET_KERNEL_H
+#ifndef TOPPERS_RX72M_UART_H
+#define TOPPERS_RX72M_UART_H
+
+/* 指定可能なクロックソース */
+#define CLK_F1	UINT_C(0x00)
+#define CLK_F4	UINT_C(0x01)
+#define CLK_F16	UINT_C(0x02)
+#define CLK_F64	UINT_C(0x03)
+
+#ifndef TOPPERS_MACRO_ONLY
 
 /*
- *  プロセッサで共通な定義
+ *  シリアルI/Oポート管理ブロックの定義
  */
-#include "rx72m_gcc/prc_kernel.h"
-
+typedef struct sio_port_control_block	SIOPCB;
 
 /*
- *  サポートする機能の定義
+ *  コールバックルーチンの識別番号
  */
-#define	TOPPERS_TARGET_SUPPORT_GET_UTM		/* get_utmをサポートする */
-
+#define SIO_RDY_SND    (1U)        /* 送信可能コールバック */
+#define SIO_RDY_RCV    (2U)        /* 受信通知コールバック */
 
 /*
- *  タイムティックの定義
+ *  SIOドライバの初期化ルーチン
  */
-#define	TIC_NUME		( 1U )		/* タイムティックの周期の分子 */
-#define	TIC_DENO		( 1U )		/* タイムティックの周期の分母 */
+extern void scic_uart_initialize(void);
 
-#endif /* TOPPERS_TARGET_KERNEL_H */
+/*
+ * カーネル起動時のバナー出力用の初期化
+ */
+extern void scic_uart_init(ID siopid , uint8_t baud , uint8_t clksrc);
+
+/*
+ *  シリアルI/Oポートへのポーリングでの出力
+ */
+extern void scic_uart_pol_putc(char c, ID siopid);
+
+/*
+ *  シリアルI/Oポートのオープン
+ */
+extern SIOPCB *scic_uart_opn_por
+	(ID siopid, intptr_t exinf , uint8_t baud , uint8_t clksrc);
+
+/*
+ *  シリアルI/Oポートのクローズ
+ */
+extern void scic_uart_cls_por(SIOPCB *p_siopcb);
+
+/*
+ *  シリアルI/Oポートへの文字送信
+ */
+extern bool_t scic_uart_snd_chr(SIOPCB *p_siopcb, char c);
+
+/*
+ *  シリアルI/Oポートからの文字受信
+ */
+extern int_t scic_uart_rcv_chr(SIOPCB *p_siopcb);
+
+/*
+ *  シリアルI/Oポートからのコールバックの許可
+ */
+extern void  scic_uart_ena_cbr(SIOPCB *p_siopcb, uint_t cbrtn);
+
+/*
+ *  シリアルI/Oポートからのコールバックの禁止
+ */
+extern void scic_uart_dis_cbr(SIOPCB *p_siopcb, uint_t cbrtn);
+
+/*
+ *  SIOの割込みサービスルーチン
+ */
+extern void scic_uart_tx_isr(ID siopid);
+extern void scic_uart_rx_isr(ID siopid);
+
+/*
+ *  シリアルI/Oポートからの送信可能コールバック
+ */
+extern void scic_uart_irdy_snd(intptr_t exinf);
+
+/*
+ *  シリアルI/Oポートからの受信通知コールバック
+ */
+extern void scic_uart_irdy_rcv(intptr_t exinf);
+
+
+#endif /* TOPPERS_MACRO_ONLY */
+#endif /* TOPPERS_RX72M_UART_H */

@@ -37,24 +37,17 @@
 #ifndef	TOPPERS_RTK0EMXDE0C00000BJ_H
 #define	TOPPERS_RTK0EMXDE0C00000BJ_H
 
-
 /*
  *  MCU依存情報の読み込み
  */
 #include <rx72m_gcc/rx72m.h>
 
-#ifndef TOPPERS_MACRO_ONLY
-//#include "target_device/target_device.h"
-#endif
-
-#define F_PCLKA		96000000UL	/* PCLKA frequency (configured by SCKCR.PCK) */
-#define F_PCLKB		48000000UL	/* PCLKB frequency (configured by SCKCR.PCK) */
 
 /*
  *  ボーレート設定
  */
-#define BAUD_38400BPS		UINT_C( 0x28 )
-#define UART_BAUDRATE		BAUD_38400BPS
+#define BAUD_9600BPS		UINT_C( 0xc2 )
+#define UART_BAUDRATE		BAUD_9600BPS
 
 /*
  *  クロックソース

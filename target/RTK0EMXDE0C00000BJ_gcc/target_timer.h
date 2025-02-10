@@ -80,7 +80,7 @@ typedef uint16_t	CLOCK;
 /*
  *  設定できる最大のタイマ周期（単位は内部表現）
  */
-#define	MAX_CLOCK	((CLOCK) 0xFFFFU)
+#define	MAX_CLOCK				((CLOCK) 0xFFFFU)
 
 /*
  *  性能評価用システム時刻を取り出す際の処理時間の見積り値（単位は内部表現）

@@ -16,17 +16,16 @@ GCC_TARGET = rx-elf
 #  コンパイルオプション
 #
 INCLUDES := $(INCLUDES) \
+	-I$(SRCDIR)/pdic \
 	-I$(TARGETDIR) \
+	-I$(TARGETDIR)/smc_gen/general \
 	-I$(TARGETDIR)/smc_gen/r_bsp \
 	-I$(TARGETDIR)/smc_gen/r_bsp/mcu/all \
 	-I$(TARGETDIR)/smc_gen/r_bsp/mcu/$(PRC) \
 	-I$(TARGETDIR)/smc_gen/r_byteq \
 	-I$(TARGETDIR)/smc_gen/r_cmt_rx \
 	-I$(TARGETDIR)/smc_gen/r_config \
-	-I$(TARGETDIR)/smc_gen/r_pincfg \
-	-I$(TARGETDIR)/smc_gen/r_sci_rx \
-	-I$(TARGETDIR)/smc_gen/r_sci_rx/src \
-	-I$(TARGETDIR)/smc_gen/r_sci_rx/src/targets/rx72m
+	-I$(TARGETDIR)/smc_gen/r_pincfg
 #COPTS :=
 #CDEFS :=
 #LDFLAGS :=
@@ -44,24 +43,17 @@ DRIVERDIR = \
 	$(TARGETDIR)/smc_gen/r_bsp/mcu/$(PRC) \
 	$(TARGETDIR)/smc_gen/r_byteq/src \
 	$(TARGETDIR)/smc_gen/r_cmt_rx/src \
-	$(TARGETDIR)/smc_gen/r_pincfg \
-	$(TARGETDIR)/smc_gen/r_sci_rx/src \
-	$(TARGETDIR)/smc_gen/r_sci_rx/src/targets/rx72m
+	$(TARGETDIR)/smc_gen/r_pincfg
 DRIVER_COBJS = \
-	lowsrc.o \
 	mcu_clocks.o \
 	mcu_locks.o \
+	Pin.o \
 	r_bsp_common.o \
 	r_bsp_cpu.o \
 	r_bsp_locking.o \
 	r_byteq.o \
 	r_cmt_rx.o \
 	r_rx_intrinsic_functions.o \
-	r_sci_rx.o \
-	r_sci_rx_pinset.o \
-	r_sci_rx72m.o \
-	r_sci_rx72m_data.o \
-	sbrk.o \
 	target_r_bsp_interrupts.o
 
 #
@@ -74,8 +66,8 @@ KERNEL_COBJS := $(KERNEL_COBJS) target_config.o target_timer.o $(DRIVER_COBJS)
 #
 #  システムサービスに関する定義
 #
-SYSSVC_DIR := $(SYSSVC_DIR) $(SRCDIR)/pdic/renesas
-SYSSVC_COBJS := $(SYSSVC_COBJS) target_serial.o tinet_target_config.o
+SYSSVC_DIR := $(SYSSVC_DIR) $(SRCDIR)/pdic/$(PRC)
+SYSSVC_COBJS := $(SYSSVC_COBJS) target_serial.o rx72m_uart.o tinet_target_config.o
 
 #
 #  コンフィギュレータ関係の変数の定義

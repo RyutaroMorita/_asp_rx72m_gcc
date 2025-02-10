@@ -41,27 +41,51 @@
  *	ターゲットシステム依存モジュール（RTK0EMXDE0C00000BJ用）
  */
 
+#include "kernel_impl.h"
 #include <stdbool.h>
 #include <sil.h>
-#include "kernel_impl.h"
-//#include "renesas/scic_uart.h"
-//#include <target_device/target_device.h>
+#include "target_board.h"
+#include "rx72m/rx72m_uart.h"
 #include "mcu_clocks.h"
-#include "platform.h"
 #include "r_bsp_cpu.h"
-#include "r_sci_rx72m_private.h"
-
-//#include "target_board.h"
+#include "Pin.h"
 
 
-static void usart_early_init()
+static void usart_early_init( void )
 {
-	//
-	MSTP(SCI6) = 0;
-	ch6_rom.regs->SCR.BYTE = 0;
-    /* Configure SMR */
-	ch6_rom.regs->SMR.BYTE = (uint8_t)((SCI_DATA_8BIT | SCI_STOPBITS_1) | (SCI_PARITY_OFF | SCI_EVEN_PARITY));
-	//sci_init_bit_rate();
+	R_Pins_Create();
+
+#if 0
+	/* unlock PFS write protection */
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSWE_BIT);
+
+	/* Set RXD6/SMISO6/SSCL6 pin */
+	sil_wrb_mem((void *)(MPC_PB0PFS_ADDR), MPC_PFS_PSELB);
+	sil_wrb_mem((void *)(PORTB_PMR_ADDR), (uint8_t)(sil_reb_mem((void *)PORTB_PMR_ADDR) | PORT_PMR_B0_BIT));
+
+	/* Set TXD6/SMOSI6/SSDA6 pin */
+	sil_wrb_mem((void *)(MPC_PB1PFS_ADDR), MPC_PFS_PSELB);
+	//sil_wrb_mem((void *)(PORTB_PMR_ADDR), (uint8_t)(sil_reb_mem((void *)PORTB_PMR_ADDR) | PORT_PMR_B1_BIT));
+#endif
+
+	/* lock PFS write */
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_B0WI_BIT);
+
+	// ポートの設定
+	scic_uart_init(TARGET_PUTC_PORTID, UART_BAUDRATE, UART_CLKSRC);
+
+	/* unlock PFS write protection */
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSWE_BIT);
+
+	// PORTB.PMR.BIT.B1 = 1U; // Please set the PMR bit after TE bit is set to 1.
+	sil_wrb_mem((void *)(PORTB_PMR_ADDR), (uint8_t)(sil_reb_mem((void *)PORTB_PMR_ADDR) | PORT_PMR_B1_BIT));
+
+	/* lock PFS write */
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
+	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_B0WI_BIT);
 }
 
 /*
@@ -69,6 +93,9 @@ static void usart_early_init()
  */
 void target_initialize( void )
 {
+	/*
+	 *  プロセッサ依存の初期化
+	 */
 	prc_initialize();
 
 	//target_clock_config();
@@ -77,7 +104,10 @@ void target_initialize( void )
     /* Initialize RAM */
     bsp_ram_initialize();
 
-    //usart_early_init();
+	/*
+	 *  ポートの設定
+	 */
+    usart_early_init();
 }
 
 /*
@@ -98,5 +128,8 @@ target_exit( void )
  */
 void target_fput_log( char c )
 {
-	(void)c;
+	if (c == '\n'){
+	   scic_uart_pol_putc('\r', TARGET_PUTC_PORTID);
+	}
+    scic_uart_pol_putc(c, TARGET_PUTC_PORTID);
 }

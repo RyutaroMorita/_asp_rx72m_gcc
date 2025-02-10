@@ -142,7 +142,7 @@ CFG2_OUT_SRCS := kernel_cfg.h kernel_cfg.c $(CFG2_OUT_SRCS)
 #
 #  共通コンパイルオプションの定義
 #
-COPTS := $(COPTS) -g 
+COPTS := $(COPTS) -g -Wno-attributes
 ifndef OMIT_WARNING_ALL
   COPTS := $(COPTS) -Wall
 endif

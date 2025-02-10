@@ -555,12 +555,12 @@ x_define_exc( EXCNO excno, FP exchdr )
 /*
  *  割込みハンドラの入口処理の生成マクロ
  */
-#define _INT_ENTRY(inhno, inthdr)				_kernel_##inthdr##_##inhno##_entry
-#define INT_ENTRY(inhno, inthdr)				_INT_ENTRY(inhno , inthdr)
+#define _INT_ENTRY(inhno, inthdr)					_kernel_##inthdr##_##inhno##_entry
+#define INT_ENTRY(inhno, inthdr)					_INT_ENTRY(inhno , inthdr)
 
 #define _INTHDR_ENTRY(inhno, inhno_num ,inthdr)	\
 		extern void _kernel_##inthdr##_##inhno##_entry(void);
-#define INTHDR_ENTRY(inhno, inhno_num ,inthdr)	_INTHDR_ENTRY(inhno, inhno_num ,inthdr)
+#define INTHDR_ENTRY(inhno, inhno_num ,inthdr)		_INTHDR_ENTRY(inhno, inhno_num ,inthdr)
 
 
 /*
@@ -570,7 +570,7 @@ x_define_exc( EXCNO excno, FP exchdr )
 #define EXC_ENTRY(excno , exchdr)					_EXC_ENTRY(excno , exchdr)
 
 #define _EXCHDR_ENTRY(excno , excno_num , exchdr)	\
-		extern _kernel_##exchdr##_##excno##_entry(void);
+		extern void _kernel_##exchdr##_##excno##_entry(void);
 #define EXCHDR_ENTRY(excno , excno_num , exchdr)	_EXCHDR_ENTRY(excno , excno_num , exchdr)
 
 

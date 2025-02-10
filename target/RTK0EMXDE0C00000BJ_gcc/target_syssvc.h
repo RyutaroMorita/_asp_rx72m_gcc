@@ -53,7 +53,6 @@
 #ifndef TOPPERS_TARGET_SYSSVC_H
 #define TOPPERS_TARGET_SYSSVC_H
 
-
 /*
  *  プロセッサ依存の定義
  */
@@ -100,7 +99,7 @@ extern void	target_fput_log( char c );
 /*
  *  シリアルポート数の定義
  */
-#define	TNUM_PORT			UINT_C( 4 )
+#define	TNUM_PORT			UINT_C( 1 )
 
 
 /*

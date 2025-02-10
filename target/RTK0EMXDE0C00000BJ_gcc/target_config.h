@@ -75,7 +75,7 @@ extern uint32_t	DEFAULT_ISTACK[];
 /*
  *  ターゲット依存の文字出力に使用するポートの定義
  */
-#define TARGET_PUTC_PORTID	( 6 )
+#define TARGET_PUTC_PORTID	( 1 )
 
 
 #ifndef TOPPERS_MACRO_ONLY

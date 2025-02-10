@@ -63,7 +63,7 @@ $  CFG_INT‚ÅŽg—p‚Å‚«‚éŠ„ž‚Ý”Ô†‚ÆŠ„ž‚Ý—Dæ“x
 $ 
 
 $INTNO_CFGINT_VALID = INHNO_VALID$
-$INTPRI_CFGINT_VALID = { -7, -6,...,-1 }$
+$INTPRI_CFGINT_VALID = { -15, -14,...,-1 }$
 
 
 $ 

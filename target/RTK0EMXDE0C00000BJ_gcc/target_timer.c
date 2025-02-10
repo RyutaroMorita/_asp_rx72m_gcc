@@ -58,6 +58,9 @@
 void
 target_timer_initialize(intptr_t exinf)
 {
+	/*
+	 * タイマー開始
+	 */
 	dis_int(INTNO_TIMER);
 	if (!R_CMT_CreatePeriodicAssignChannelPriority(1000, NULL, 0, -(INTPRI_TIMER)))
 		target_exit();
@@ -71,9 +74,10 @@ void
 target_timer_terminate(intptr_t exinf)
 {
 	/* 
-	 * タイマ停止
+	 * タイマー停止
 	 */
-	*CMT_CMSTR0_ADDR &= ~CMT_CMSTR0_STR0_BIT;
+	R_CMT_Stop(0);
+	dis_int(INTNO_TIMER);
 }
 
 /*

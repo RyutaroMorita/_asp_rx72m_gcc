@@ -11,300 +11,178 @@
  *                                          RICOH COMPANY,LTD. JAPAN
  *  Copyright (C) 2008-2010 by Witz Corporation, JAPAN
  * 
- *  ã‹L’˜ìŒ ŽÒ‚ÍCˆÈ‰º‚Ì(1)`(4)‚ÌðŒ‚ð–ž‚½‚·ê‡‚ÉŒÀ‚èC–{ƒ\ƒtƒgƒEƒF
- *  ƒAi–{ƒ\ƒtƒgƒEƒFƒA‚ð‰ü•Ï‚µ‚½‚à‚Ì‚ðŠÜ‚ÞDˆÈ‰º“¯‚¶j‚ðŽg—pE•¡»E‰ü
- *  •ÏEÄ”z•ziˆÈ‰ºC—˜—p‚ÆŒÄ‚Ôj‚·‚é‚±‚Æ‚ð–³ž‚Å‹–‘ø‚·‚éD
- *  (1) –{ƒ\ƒtƒgƒEƒFƒA‚ðƒ\[ƒXƒR[ƒh‚ÌŒ`‚Å—˜—p‚·‚éê‡‚É‚ÍCã‹L‚Ì’˜ì
- *      Œ •\Ž¦C‚±‚Ì—˜—pðŒ‚¨‚æ‚Ñ‰º‹L‚Ì–³•ÛØ‹K’è‚ªC‚»‚Ì‚Ü‚Ü‚ÌŒ`‚Åƒ\[
- *      ƒXƒR[ƒh’†‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚ÆD
- *  (2) –{ƒ\ƒtƒgƒEƒFƒA‚ðCƒ‰ƒCƒuƒ‰ƒŠŒ`Ž®‚È‚ÇC‘¼‚Ìƒ\ƒtƒgƒEƒFƒAŠJ”­‚ÉŽg
- *      —p‚Å‚«‚éŒ`‚ÅÄ”z•z‚·‚éê‡‚É‚ÍCÄ”z•z‚É”º‚¤ƒhƒLƒ…ƒƒ“ƒgi—˜—p
- *      ŽÒƒ}ƒjƒ…ƒAƒ‹‚È‚Çj‚ÉCã‹L‚Ì’˜ìŒ •\Ž¦C‚±‚Ì—˜—pðŒ‚¨‚æ‚Ñ‰º‹L
- *      ‚Ì–³•ÛØ‹K’è‚ðŒfÚ‚·‚é‚±‚ÆD
- *  (3) –{ƒ\ƒtƒgƒEƒFƒA‚ðC‹@Ší‚É‘g‚Ýž‚Þ‚È‚ÇC‘¼‚Ìƒ\ƒtƒgƒEƒFƒAŠJ”­‚ÉŽg
- *      —p‚Å‚«‚È‚¢Œ`‚ÅÄ”z•z‚·‚éê‡‚É‚ÍCŽŸ‚Ì‚¢‚¸‚ê‚©‚ÌðŒ‚ð–ž‚½‚·‚±
- *      ‚ÆD
- *    (a) Ä”z•z‚É”º‚¤ƒhƒLƒ…ƒƒ“ƒgi—˜—pŽÒƒ}ƒjƒ…ƒAƒ‹‚È‚Çj‚ÉCã‹L‚Ì’˜
- *        ìŒ •\Ž¦C‚±‚Ì—˜—pðŒ‚¨‚æ‚Ñ‰º‹L‚Ì–³•ÛØ‹K’è‚ðŒfÚ‚·‚é‚±‚ÆD
- *    (b) Ä”z•z‚ÌŒ`‘Ô‚ðC•Ê‚É’è‚ß‚é•û–@‚É‚æ‚Á‚ÄCTOPPERSƒvƒƒWƒFƒNƒg‚É
- *        •ñ‚·‚é‚±‚ÆD
- *  (4) –{ƒ\ƒtƒgƒEƒFƒA‚Ì—˜—p‚É‚æ‚è’¼Ú“I‚Ü‚½‚ÍŠÔÚ“I‚É¶‚¶‚é‚¢‚©‚È‚é‘¹
- *      ŠQ‚©‚ç‚àCã‹L’˜ìŒ ŽÒ‚¨‚æ‚ÑTOPPERSƒvƒƒWƒFƒNƒg‚ð–ÆÓ‚·‚é‚±‚ÆD
- *      ‚Ü‚½C–{ƒ\ƒtƒgƒEƒFƒA‚Ìƒ†[ƒU‚Ü‚½‚ÍƒGƒ“ƒhƒ†[ƒU‚©‚ç‚Ì‚¢‚©‚È‚é—
- *      —R‚ÉŠî‚Ã‚­¿‹‚©‚ç‚àCã‹L’˜ìŒ ŽÒ‚¨‚æ‚ÑTOPPERSƒvƒƒWƒFƒNƒg‚ð
- *      –ÆÓ‚·‚é‚±‚ÆD
+ *  ä¸Šè¨˜è‘—ä½œæ¨©è€…ã¯ï¼Œä»¥ä¸‹ã®(1)ï½ž(4)ã®æ¡ä»¶ã‚’æº€ãŸã™å ´åˆã«é™ã‚Šï¼Œæœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§
+ *  ã‚¢ï¼ˆæœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’æ”¹å¤‰ã—ãŸã‚‚ã®ã‚’å«ã‚€ï¼Žä»¥ä¸‹åŒã˜ï¼‰ã‚’ä½¿ç”¨ãƒ»è¤‡è£½ãƒ»æ”¹
+ *  å¤‰ãƒ»å†é…å¸ƒï¼ˆä»¥ä¸‹ï¼Œåˆ©ç”¨ã¨å‘¼ã¶ï¼‰ã™ã‚‹ã“ã¨ã‚’ç„¡å„Ÿã§è¨±è«¾ã™ã‚‹ï¼Ž
+ *  (1) æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’ã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰ã®å½¢ã§åˆ©ç”¨ã™ã‚‹å ´åˆã«ã¯ï¼Œä¸Šè¨˜ã®è‘—ä½œ
+ *      æ¨©è¡¨ç¤ºï¼Œã“ã®åˆ©ç”¨æ¡ä»¶ãŠã‚ˆã³ä¸‹è¨˜ã®ç„¡ä¿è¨¼è¦å®šãŒï¼Œãã®ã¾ã¾ã®å½¢ã§ã‚½ãƒ¼
+ *      ã‚¹ã‚³ãƒ¼ãƒ‰ä¸­ã«å«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ï¼Ž
+ *  (2) æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’ï¼Œãƒ©ã‚¤ãƒ–ãƒ©ãƒªå½¢å¼ãªã©ï¼Œä»–ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢é–‹ç™ºã«ä½¿
+ *      ç”¨ã§ãã‚‹å½¢ã§å†é…å¸ƒã™ã‚‹å ´åˆã«ã¯ï¼Œå†é…å¸ƒã«ä¼´ã†ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆï¼ˆåˆ©ç”¨
+ *      è€…ãƒžãƒ‹ãƒ¥ã‚¢ãƒ«ãªã©ï¼‰ã«ï¼Œä¸Šè¨˜ã®è‘—ä½œæ¨©è¡¨ç¤ºï¼Œã“ã®åˆ©ç”¨æ¡ä»¶ãŠã‚ˆã³ä¸‹è¨˜
+ *      ã®ç„¡ä¿è¨¼è¦å®šã‚’æŽ²è¼‰ã™ã‚‹ã“ã¨ï¼Ž
+ *  (3) æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’ï¼Œæ©Ÿå™¨ã«çµ„ã¿è¾¼ã‚€ãªã©ï¼Œä»–ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢é–‹ç™ºã«ä½¿
+ *      ç”¨ã§ããªã„å½¢ã§å†é…å¸ƒã™ã‚‹å ´åˆã«ã¯ï¼Œæ¬¡ã®ã„ãšã‚Œã‹ã®æ¡ä»¶ã‚’æº€ãŸã™ã“
+ *      ã¨ï¼Ž
+ *    (a) å†é…å¸ƒã«ä¼´ã†ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆï¼ˆåˆ©ç”¨è€…ãƒžãƒ‹ãƒ¥ã‚¢ãƒ«ãªã©ï¼‰ã«ï¼Œä¸Šè¨˜ã®è‘—
+ *        ä½œæ¨©è¡¨ç¤ºï¼Œã“ã®åˆ©ç”¨æ¡ä»¶ãŠã‚ˆã³ä¸‹è¨˜ã®ç„¡ä¿è¨¼è¦å®šã‚’æŽ²è¼‰ã™ã‚‹ã“ã¨ï¼Ž
+ *    (b) å†é…å¸ƒã®å½¢æ…‹ã‚’ï¼Œåˆ¥ã«å®šã‚ã‚‹æ–¹æ³•ã«ã‚ˆã£ã¦ï¼ŒTOPPERSãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«
+ *        å ±å‘Šã™ã‚‹ã“ã¨ï¼Ž
+ *  (4) æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®åˆ©ç”¨ã«ã‚ˆã‚Šç›´æŽ¥çš„ã¾ãŸã¯é–“æŽ¥çš„ã«ç”Ÿã˜ã‚‹ã„ã‹ãªã‚‹æ
+ *      å®³ã‹ã‚‰ã‚‚ï¼Œä¸Šè¨˜è‘—ä½œæ¨©è€…ãŠã‚ˆã³TOPPERSãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’å…è²¬ã™ã‚‹ã“ã¨ï¼Ž
+ *      ã¾ãŸï¼Œæœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®ãƒ¦ãƒ¼ã‚¶ã¾ãŸã¯ã‚¨ãƒ³ãƒ‰ãƒ¦ãƒ¼ã‚¶ã‹ã‚‰ã®ã„ã‹ãªã‚‹ç†
+ *      ç”±ã«åŸºã¥ãè«‹æ±‚ã‹ã‚‰ã‚‚ï¼Œä¸Šè¨˜è‘—ä½œæ¨©è€…ãŠã‚ˆã³TOPPERSãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ *      å…è²¬ã™ã‚‹ã“ã¨ï¼Ž
  * 
- *  –{ƒ\ƒtƒgƒEƒFƒA‚ÍC–³•ÛØ‚Å’ñ‹Ÿ‚³‚ê‚Ä‚¢‚é‚à‚Ì‚Å‚ ‚éDã‹L’˜ìŒ ŽÒ‚¨
- *  ‚æ‚ÑTOPPERSƒvƒƒWƒFƒNƒg‚ÍC–{ƒ\ƒtƒgƒEƒFƒA‚ÉŠÖ‚µ‚ÄC“Á’è‚ÌŽg—p–Ú“I
- *  ‚É‘Î‚·‚é“K‡«‚àŠÜ‚ß‚ÄC‚¢‚©‚È‚é•ÛØ‚às‚í‚È‚¢D‚Ü‚½C–{ƒ\ƒtƒgƒEƒF
- *  ƒA‚Ì—˜—p‚É‚æ‚è’¼Ú“I‚Ü‚½‚ÍŠÔÚ“I‚É¶‚¶‚½‚¢‚©‚È‚é‘¹ŠQ‚ÉŠÖ‚µ‚Ä‚àC‚»
- *  ‚ÌÓ”C‚ð•‰‚í‚È‚¢D
+ *  æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã¯ï¼Œç„¡ä¿è¨¼ã§æä¾›ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ã§ã‚ã‚‹ï¼Žä¸Šè¨˜è‘—ä½œæ¨©è€…ãŠ
+ *  ã‚ˆã³TOPPERSãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã¯ï¼Œæœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã«é–¢ã—ã¦ï¼Œç‰¹å®šã®ä½¿ç”¨ç›®çš„
+ *  ã«å¯¾ã™ã‚‹é©åˆæ€§ã‚‚å«ã‚ã¦ï¼Œã„ã‹ãªã‚‹ä¿è¨¼ã‚‚è¡Œã‚ãªã„ï¼Žã¾ãŸï¼Œæœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§
+ *  ã‚¢ã®åˆ©ç”¨ã«ã‚ˆã‚Šç›´æŽ¥çš„ã¾ãŸã¯é–“æŽ¥çš„ã«ç”Ÿã˜ãŸã„ã‹ãªã‚‹æå®³ã«é–¢ã—ã¦ã‚‚ï¼Œã
+ *  ã®è²¬ä»»ã‚’è² ã‚ãªã„ï¼Ž
  * 
  */
 
 /*
- *	RX72M UART—pƒVƒŠƒAƒ‹I/Oƒ‚ƒWƒ…[ƒ‹
+ *	RX72M UARTç”¨ã‚·ãƒªã‚¢ãƒ«I/Oãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
  */
 #include <kernel.h>
 #include <sil.h>
 #include <t_syslog.h>
 #include "target_board.h"
 #include "target_serial.h"
-#include "r_sci_rx_if.h"
-#include "r_sci_rx_pinset.h"
-#include "r_sci_rx_private.h"
-
-ID g_siopid;
-//sci_hdl_t g_uart_ctrl[TNUM_SIOP];
 
 /*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‰Šú‰»ƒuƒƒbƒN‚Ì’è‹`
+ *  SIOãƒ‰ãƒ©ã‚¤ãƒã®åˆæœŸåŒ–
  */
-typedef struct sio_port_initialization_block {
-	sci_hdl_t	hdl;
-	uint8_t		chan;
-} SIOPINIB;
-
-/*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒgŠÇ—ƒuƒƒbƒN‚Ì’è‹`
- */
-struct sio_port_control_block {
-	const SIOPINIB*	p_siopinib; 	/* ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‰Šú‰»ƒuƒƒbƒN */
-	intptr_t		exinf;			/* Šg’£î•ñ */
-	bool_t			openflag;		/* ƒI[ƒvƒ“Ï‚Ýƒtƒ‰ƒO */
-	bool_t			sendflag;		/* ‘—MŠ„ž‚ÝƒCƒl[ƒuƒ‹ƒtƒ‰ƒO */
-	bool_t			getready;		/* •¶Žš‚ðŽóM‚µ‚½ó‘Ô */
-	bool_t			putready;		/* •¶Žš‚ð‘—M‚Å‚«‚éó‘Ô */
-	bool_t			is_initialized; /* ƒfƒoƒCƒX‰Šú‰»Ï‚Ýƒtƒ‰ƒO */
-};
-
-/*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒgŠÇ—ƒuƒƒbƒN‚ÌƒGƒŠƒA
- */
-static SIOPCB	siopcb_table[TNUM_SIOP];
-
-/*  ƒŒƒWƒXƒ^ƒe[ƒuƒ‹ */
-static SIOPINIB siopinib_table[TNUM_SIOP];
-
-/*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒgID‚©‚çŠÇ—ƒuƒƒbƒN‚ðŽæ‚èo‚·‚½‚ß‚Ìƒ}ƒNƒ
- */
-#define INDEX_SIOP(siopid)	 ((uint_t)((siopid) - 1))
-#define get_siopcb(siopid)	 (&(siopcb_table[INDEX_SIOP(siopid)]))
-#define get_siopinib(siopid) (&(siopinib_table[INDEX_SIOP(siopid)]))
-
-/*
- *  SIO‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”
- */
-void sio_callback(void *p_args)
+void
+sio_initialize(intptr_t exinf)
 {
-	SIOPCB	*p_siopcb = get_siopcb(g_siopid);
-	sci_cb_args_t *args;
-	args = (sci_cb_args_t *)p_args;
-	if (args->event == SCI_EVT_RX_CHAR)
-	{
-		/*
-		 *  ŽóM’Ê’mƒR[ƒ‹ƒoƒbƒNƒ‹[ƒ`ƒ“‚ðŒÄ‚Ño‚·D
-		 */
-		sio_irdy_rcv(p_siopcb->exinf);
-	}
-	else
-	if (args->event == SCI_EVT_TEI)
-	{
-		/*
-		 *  ‘—M‰Â”\ƒR[ƒ‹ƒoƒbƒNƒ‹[ƒ`ƒ“‚ðŒÄ‚Ño‚·D
-		 */
-		sio_irdy_snd(p_siopcb->exinf);
-	}
+	scic_uart_initialize();
 }
 
 /*
- *  SIOƒhƒ‰ƒCƒo‚Ì‰Šú‰»
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã®ã‚ªãƒ¼ãƒ—ãƒ³
  */
-void sio_initialize(intptr_t exinf)
+SIOPCB *
+sio_opn_por(ID siopid, intptr_t exinf)
 {
-	SIOPCB	*p_siopcb;
-	uint_t	i;
+	SIOPCB  *p_siopcb = NULL;
+	ER      ercd;
 
 	/*
-	 *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒgŠÇ—ƒuƒƒbƒN‚Ì‰Šú‰»
+	 *  ã‚·ãƒªã‚¢ãƒ«I/Oå‰²è¾¼ã¿ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ï¼Ž
+	 *  (dis_inté–¢æ•°ã¯ã€"\kernel\interrupt.c"ã«è¨˜è¿°)
 	 */
-	for (p_siopcb = siopcb_table, i = 0; i < TNUM_SIOP; p_siopcb++, i++){
-		//siopinib_table[i].hdl = &g_uart_ctrl[i];
-		siopinib_table[i].chan = (6 + i);	// SCI6‚ð1”Ô–Ú‚Ìƒ|[ƒg‚Æ‚·‚é
-		p_siopcb->p_siopinib = &(siopinib_table[i]);
-		p_siopcb->openflag = false;
-		p_siopcb->sendflag = false;
-	}
-}
-
-/*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‚ÌƒI[ƒvƒ“
- */
-SIOPCB* sio_opn_por(ID siopid, intptr_t exinf)
-{
-	SIOPCB          *p_siopcb;
-	const SIOPINIB  *p_siopinib;
-	sci_cfg_t		cfg;
-
-	/*
-	 *  ƒVƒŠƒAƒ‹I/OŠ„ž‚Ý‚ðƒ}ƒXƒN‚·‚éD
-	 *  (dis_intŠÖ”‚ÍA"\kernel\interrupt.c"‚É‹Lq)
-	 */
-	dis_int(INTNO_SIO_TX);
-	dis_int(INTNO_SIO_RX);
-	dis_int(INTNO_SIO_TE);
+	ercd = dis_int(INTNO_SIO_TX);
+	assert(ercd == E_OK);
+	ercd = dis_int(INTNO_SIO_RX);
+	assert(ercd == E_OK);
 	
-	p_siopcb = get_siopcb(siopid);
-	p_siopinib = p_siopcb->p_siopinib;
+	p_siopcb =
+		scic_uart_opn_por(siopid , exinf , UART_BAUDRATE , UART_CLKSRC);
 
 	/*
-	 *  ƒn[ƒhƒEƒFƒA‚Ì‰Šú‰»
-	 *
-	 *  Šù‚É‰Šú‰»‚µ‚Ä‚¢‚éê‡‚Í, “ñd‚É‰Šú‰»‚µ‚È‚¢.
+	 *  ã‚·ãƒªã‚¢ãƒ«I/Oå‰²è¾¼ã¿ã‚’ãƒžã‚¹ã‚¯è§£é™¤ã™ã‚‹ï¼Ž
+	 *  (ena_inté–¢æ•°ã¯ã€"\kernel\interrupt.c"ã«è¨˜è¿°)
 	 */
-	if (!(p_siopcb->is_initialized)) {
-		cfg.async.baud_rate = 9600;
-		cfg.async.clk_src = SCI_CLK_INT;
-		cfg.async.data_size = SCI_DATA_8BIT;
-		cfg.async.parity_en = SCI_PARITY_OFF;
-		cfg.async.parity_type = SCI_EVEN_PARITY;
-		cfg.async.stop_bits = SCI_STOPBITS_1;
-		cfg.async.int_priority = 3;
-
-		R_SCI_Open(
-				p_siopinib->chan,
-				SCI_MODE_ASYNC,
-				&cfg,
-				sio_callback,
-				(sci_hdl_t * const)&p_siopinib->hdl
-		);
-		// PORTB.PMR.BIT.B1 = 1U; // Please set the PMR bit after TE bit is set to 1.
-		R_SCI_PinSet_SCI();
-
-		p_siopcb->is_initialized = true;
-	}
-
-	p_siopcb->exinf = exinf;
-	p_siopcb->getready = p_siopcb->putready = false;
-	p_siopcb->openflag = true;
-
-	/*
-	 *  ƒVƒŠƒAƒ‹I/OŠ„ž‚Ý‚ðƒ}ƒXƒN‰ðœ‚·‚éD
-	 *  (ena_intŠÖ”‚ÍA"\kernel\interrupt.c"‚É‹Lq)
-	 */
-	ena_int(INTNO_SIO_TX);
-	ena_int(INTNO_SIO_RX);
-	ena_int(INTNO_SIO_TE);
+	ercd = ena_int(INTNO_SIO_TX);
+	assert(ercd == E_OK);
+	ercd = ena_int(INTNO_SIO_RX);
+	assert(ercd == E_OK);
 
 	return(p_siopcb);
 }
 
 /*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‚ÌƒNƒ[ƒY
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã®ã‚¯ãƒ­ãƒ¼ã‚º
  */
-void sio_cls_por(SIOPCB *p_siopcb)
+void
+sio_cls_por(SIOPCB *p_siopcb)
 {
-	/*
-	 *  ƒfƒoƒCƒXˆË‘¶‚ÌƒNƒ[ƒYˆ—D
-	 */
-	R_SCI_Close(p_siopcb->p_siopinib->hdl);
-
-	p_siopcb->openflag = false;
-	p_siopcb->is_initialized = false;
+	ER        ercd;
 
 	/*
-	 *  ƒVƒŠƒAƒ‹I/OŠ„ž‚Ý‚ðƒ}ƒXƒN‚·‚éD
+	 *  ãƒ‡ãƒã‚¤ã‚¹ä¾å­˜ã®ã‚¯ãƒ­ãƒ¼ã‚ºå‡¦ç†ï¼Ž
 	 */
-	dis_int(INTNO_SIO_TX);
-	dis_int(INTNO_SIO_RX);
-	dis_int(INTNO_SIO_TE);
+	scic_uart_cls_por(p_siopcb);
+
+	/*
+	 *  ã‚·ãƒªã‚¢ãƒ«I/Oå‰²è¾¼ã¿ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ï¼Ž
+	 */
+	ercd = dis_int(INTNO_SIO_TX);
+	assert(ercd == E_OK);
+	ercd = dis_int(INTNO_SIO_RX);
+	assert(ercd == E_OK);
 }
 
 /*
- *  SIO‚ÌŠ„ž‚Ýƒnƒ“ƒhƒ‰
+ *  SIOã®å‰²è¾¼ã¿ãƒãƒ³ãƒ‰ãƒ©
  */
 void sio_tx_isr(intptr_t exinf)
 {
-	ID siopid = (ID)exinf;
-	SIOPCB	*p_siopcb = get_siopcb(siopid);
-	g_siopid = siopid;
-	txi_handler(p_siopcb->p_siopinib->hdl);
+	scic_uart_tx_isr(exinf);
 }
 
 /*
- *  SIO‚ÌŠ„ž‚Ýƒnƒ“ƒhƒ‰
+ *  SIOã®å‰²è¾¼ã¿ãƒãƒ³ãƒ‰ãƒ©
  */
 void sio_rx_isr(intptr_t exinf)
 {
-	ID siopid = (ID)exinf;
-	SIOPCB	*p_siopcb = get_siopcb(siopid);
-	g_siopid = siopid;
-	rxi_handler(p_siopcb->p_siopinib->hdl);
+	scic_uart_rx_isr(exinf);
 }
 
 /*
- *  SIO‚ÌŠ„ž‚Ýƒnƒ“ƒhƒ‰
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã¸ã®æ–‡å­—é€ä¿¡
  */
-void sio_te_isr(intptr_t exinf)
+bool_t
+sio_snd_chr(SIOPCB *siopcb, char c)
 {
-	ID siopid = (ID)exinf;
-	SIOPCB	*p_siopcb = get_siopcb(siopid);
-	g_siopid = siopid;
-	tei_handler(p_siopcb->p_siopinib->hdl);
+	return(scic_uart_snd_chr(siopcb, c));
 }
 
-
 /*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‚Ö‚Ì•¶Žš‘—M
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã‹ã‚‰ã®æ–‡å­—å—ä¿¡
  */
-bool_t sio_snd_chr(SIOPCB *p_siopcb, char c)
+int_t
+sio_rcv_chr(SIOPCB *siopcb)
 {
-	if (R_SCI_Send(p_siopcb->p_siopinib->hdl, (uint8_t*)&c, 1) != SCI_SUCCESS)
-		return false;
-	return true;
+	return(scic_uart_rcv_chr(siopcb));
 }
 
 /*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‚©‚ç‚Ì•¶ŽšŽóM
- */
-int_t sio_rcv_chr(SIOPCB *p_siopcb)
-{
-	int_t	c;
-	R_SCI_Receive(p_siopcb->p_siopinib->hdl, (uint8_t*)&c, 1);
-	return c;
-}
-
-/*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‚©‚ç‚ÌƒR[ƒ‹ƒoƒbƒN‚Ì‹–‰Â
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã‹ã‚‰ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã®è¨±å¯
  */
 void
-sio_ena_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
+sio_ena_cbr(SIOPCB *siopcb, uint_t cbrtn)
 {
-	switch (cbrtn) {
-	case SIO_RDY_SND:
-		//*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_TEIE_BIT;
-		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_TIE_BIT;
-		break;
-	case SIO_RDY_RCV:
-		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_RIE_BIT;
-		break;
-	}
+	scic_uart_ena_cbr(siopcb, cbrtn);
 }
 
 /*
- *  ƒVƒŠƒAƒ‹I/Oƒ|[ƒg‚©‚ç‚ÌƒR[ƒ‹ƒoƒbƒN‚Ì‹ÖŽ~
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã‹ã‚‰ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã®ç¦æ­¢
  */
 void
-sio_dis_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
+sio_dis_cbr(SIOPCB *siopcb, uint_t cbrtn)
 {
-	switch (cbrtn) {
-	case SIO_RDY_SND:
-		//*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_TEIE_BIT;
-		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_TIE_BIT;
-		break;
-	case SIO_RDY_RCV:
-		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_RIE_BIT;
-		break;
-	}
+	scic_uart_dis_cbr(siopcb, cbrtn);
+}
+
+/*
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã‹ã‚‰ã®é€ä¿¡å¯èƒ½ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
+ */
+void
+scic_uart_irdy_snd(intptr_t exinf)
+{
+	/* å…±é€šéƒ¨ï¼ˆsyssvc\serial.cï¼‰ã«ã‚ã‚‹sio_irdy_sndé–¢æ•°ã‚’å‘¼ã³å‡ºã—*/
+	sio_irdy_snd(exinf);
+}
+
+/*
+ *  ã‚·ãƒªã‚¢ãƒ«I/Oãƒãƒ¼ãƒˆã‹ã‚‰ã®å—ä¿¡é€šçŸ¥ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
+ */
+void
+scic_uart_irdy_rcv(intptr_t exinf)
+{
+	/* å…±é€šéƒ¨ï¼ˆsyssvc\serial.cï¼‰ã«ã‚ã‚‹sio_irdy_rcvé–¢æ•°ã‚’å‘¼ã³å‡ºã—*/
+	sio_irdy_rcv(exinf);
 }

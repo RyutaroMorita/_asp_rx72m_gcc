@@ -46,7 +46,7 @@
  *  í«â¡Ç∑ÇÈÇΩÇﬂÇÃÉ}ÉNÉçÅD
  */
 #define PRC_COPYRIGHT										\
-	"Copyright (C) 2010 by Witz Corporation, JAPAN\n"
+	"Copyright (C) 2025 by Aeterlink Corp., JAPAN\n"
 
 
 #endif	/* TOPPERS_PRC_SYSSVC_H */

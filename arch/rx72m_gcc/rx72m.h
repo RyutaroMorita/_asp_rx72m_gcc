@@ -781,6 +781,45 @@
 #define ICU_IPR_BIT					(0x0FU << 0U
 #define SET_ICU_IPR(intno, pri_num)	((*((volatile uint8_t*)(ICU_IPR_BASE | intno))) = pri_num)
 
+
+/*
+ * グループBL0/BL1/BL2 割り込み要求許可レジスタ
+ */
+#define ICU_GENBL0_ADDR				((volatile uint32_t*)0x00087670)
+#define ICU_GENBL0_EN00_BIT			(1UL <<  0U)
+#define ICU_GENBL0_EN01_BIT			(1UL <<  1U)
+#define ICU_GENBL0_EN02_BIT			(1UL <<  2U)
+#define ICU_GENBL0_EN03_BIT			(1UL <<  3U)
+#define ICU_GENBL0_EN04_BIT			(1UL <<  4U)
+#define ICU_GENBL0_EN05_BIT			(1UL <<  5U)
+#define ICU_GENBL0_EN06_BIT			(1UL <<  6U)
+#define ICU_GENBL0_EN07_BIT			(1UL <<  7U)
+#define ICU_GENBL0_EN08_BIT			(1UL <<  8U)
+#define ICU_GENBL0_EN09_BIT			(1UL <<  9U)
+#define ICU_GENBL0_EN10_BIT			(1UL << 10U)
+#define ICU_GENBL0_EN11_BIT			(1UL << 11U)
+#define ICU_GENBL0_EN12_BIT			(1UL << 12U)
+#define ICU_GENBL0_EN13_BIT			(1UL << 13U)
+#define ICU_GENBL0_EN14_BIT			(1UL << 14U)
+#define ICU_GENBL0_EN15_BIT			(1UL << 15U)
+#define ICU_GENBL0_EN16_BIT			(1UL << 16U)
+#define ICU_GENBL0_EN17_BIT			(1UL << 17U)
+#define ICU_GENBL0_EN18_BIT			(1UL << 18U)
+#define ICU_GENBL0_EN19_BIT			(1UL << 19U)
+#define ICU_GENBL0_EN20_BIT			(1UL << 20U)
+#define ICU_GENBL0_EN21_BIT			(1UL << 21U)
+#define ICU_GENBL0_EN22_BIT			(1UL << 22U)
+#define ICU_GENBL0_EN23_BIT			(1UL << 23U)
+#define ICU_GENBL0_EN24_BIT			(1UL << 24U)
+#define ICU_GENBL0_EN25_BIT			(1UL << 25U)
+#define ICU_GENBL0_EN26_BIT			(1UL << 26U)
+#define ICU_GENBL0_EN27_BIT			(1UL << 27U)
+#define ICU_GENBL0_EN28_BIT			(1UL << 28U)
+#define ICU_GENBL0_EN29_BIT			(1UL << 29U)
+#define ICU_GENBL0_EN30_BIT			(1UL << 30U)
+#define ICU_GENBL0_EN31_BIT			(1UL << 31U)
+
+
 /*
  * DTCER Register
  */

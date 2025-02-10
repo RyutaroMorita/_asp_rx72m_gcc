@@ -5,7 +5,7 @@
 ;* 
 ;*  Copyright (C) 2008-2010 by Witz Corporation, JAPAN
 ;* 
-;*  上記著作権者は，Free Software Foundation によって公表されている 
+;*  上記著作権者は，Free Software Foundation によって公表されている
 ;*  GNU General Public License の Version 2 に記述されている条件か，以
 ;*  下の(1)～(4)の条件を満たす場合に限り，本ソフトウェア（本ソフトウェ
 ;*  アを改変したものを含む．以下同じ）を使用・複製・改変・再配布（以下，
@@ -34,7 +34,7 @@
 
 
 ;
-;  ターゲットシステム依存セクション定義ファイル(スターターキット用)
+;  ターゲットシステム依存セクション定義ファイル(RTK0EMXDE0C00000BJ用)
 ;
 
 ;
