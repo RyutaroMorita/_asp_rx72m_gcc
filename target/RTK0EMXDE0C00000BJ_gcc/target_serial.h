@@ -54,10 +54,12 @@
 /*
  *  SIOの割込みハンドラのベクタ番号
  */
-#define INHNO_SIO_TX		INT_ICU_GROUPBL0		/* 割込みハンドラ番号 */
-#define INTNO_SIO_TX		INT_ICU_GROUPBL0		/* 割込み番号 */
+#define INHNO_SIO_TX		INT_SCI6_TXI6			/* 割込みハンドラ番号 */
+#define INTNO_SIO_TX		INT_SCI6_TXI6			/* 割込み番号 */
 #define INHNO_SIO_RX		INT_SCI6_RXI6			/* 割込みハンドラ番号 */
 #define INTNO_SIO_RX		INT_SCI6_RXI6			/* 割込み番号 */
+#define INHNO_SIO_TE		INT_ICU_GROUPBL0		/* 割込みハンドラ番号 */
+#define INTNO_SIO_TE		INT_ICU_GROUPBL0		/* 割込み番号 */
 #define INTPRI_SIO			-4						/* 割込み優先度 */
 #define INTATR_SIO			(TA_NULL)				/* 割込み属性 */
 #define R_SCI_PinSet_SCI	R_SCI_PinSet_SCI6
@@ -96,6 +98,7 @@ extern void		sio_cls_por(SIOPCB *p_siopcb);
  */
 extern void 	sio_tx_isr(intptr_t exinf);
 extern void 	sio_rx_isr(intptr_t exinf);
+extern void 	sio_te_isr(intptr_t exinf);
 
 /*
  *  シリアルI/Oポートへの文字送信

@@ -58,8 +58,10 @@
 void
 target_timer_initialize(intptr_t exinf)
 {
-	if (!R_CMT_CreatePeriodicAssignChannelPriority(10, NULL, 0, -(INTPRI_TIMER)))
+	dis_int(INTNO_TIMER);
+	if (!R_CMT_CreatePeriodicAssignChannelPriority(1000, NULL, 0, -(INTPRI_TIMER)))
 		target_exit();
+	ena_int(INTNO_TIMER);
 }
 
 /*

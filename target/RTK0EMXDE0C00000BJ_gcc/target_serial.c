@@ -153,6 +153,7 @@ SIOPCB* sio_opn_por(ID siopid, intptr_t exinf)
 	 */
 	dis_int(INTNO_SIO_TX);
 	dis_int(INTNO_SIO_RX);
+	dis_int(INTNO_SIO_TE);
 	
 	p_siopcb = get_siopcb(siopid);
 	p_siopinib = p_siopcb->p_siopinib;
@@ -194,6 +195,7 @@ SIOPCB* sio_opn_por(ID siopid, intptr_t exinf)
 	 */
 	ena_int(INTNO_SIO_TX);
 	ena_int(INTNO_SIO_RX);
+	ena_int(INTNO_SIO_TE);
 
 	return(p_siopcb);
 }
@@ -216,6 +218,7 @@ void sio_cls_por(SIOPCB *p_siopcb)
 	 */
 	dis_int(INTNO_SIO_TX);
 	dis_int(INTNO_SIO_RX);
+	dis_int(INTNO_SIO_TE);
 }
 
 /*
@@ -226,7 +229,7 @@ void sio_tx_isr(intptr_t exinf)
 	ID siopid = (ID)exinf;
 	SIOPCB	*p_siopcb = get_siopcb(siopid);
 	g_siopid = siopid;
-	tei_handler(p_siopcb->p_siopinib->hdl);
+	txi_handler(p_siopcb->p_siopinib->hdl);
 }
 
 /*
@@ -241,10 +244,21 @@ void sio_rx_isr(intptr_t exinf)
 }
 
 /*
+ *  SIOの割込みハンドラ
+ */
+void sio_te_isr(intptr_t exinf)
+{
+	ID siopid = (ID)exinf;
+	SIOPCB	*p_siopcb = get_siopcb(siopid);
+	g_siopid = siopid;
+	tei_handler(p_siopcb->p_siopinib->hdl);
+}
+
+
+/*
  *  シリアルI/Oポートへの文字送信
  */
-bool_t
-sio_snd_chr(SIOPCB *p_siopcb, char c)
+bool_t sio_snd_chr(SIOPCB *p_siopcb, char c)
 {
 	if (R_SCI_Send(p_siopcb->p_siopinib->hdl, (uint8_t*)&c, 1) != SCI_SUCCESS)
 		return false;
@@ -254,8 +268,7 @@ sio_snd_chr(SIOPCB *p_siopcb, char c)
 /*
  *  シリアルI/Oポートからの文字受信
  */
-int_t
-sio_rcv_chr(SIOPCB *p_siopcb)
+int_t sio_rcv_chr(SIOPCB *p_siopcb)
 {
 	int_t	c;
 	R_SCI_Receive(p_siopcb->p_siopinib->hdl, (uint8_t*)&c, 1);
@@ -270,7 +283,8 @@ sio_ena_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
 {
 	switch (cbrtn) {
 	case SIO_RDY_SND:
-		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_TEIE_BIT;
+		//*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_TEIE_BIT;
+		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_TIE_BIT;
 		break;
 	case SIO_RDY_RCV:
 		*(uint8_t*)SCI_SCR_ADDR |= SCI_SCR_RIE_BIT;
@@ -286,7 +300,8 @@ sio_dis_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
 {
 	switch (cbrtn) {
 	case SIO_RDY_SND:
-		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_TEIE_BIT;
+		//*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_TEIE_BIT;
+		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_TIE_BIT;
 		break;
 	case SIO_RDY_RCV:
 		*(uint8_t*)SCI_SCR_ADDR &= ~SCI_SCR_RIE_BIT;

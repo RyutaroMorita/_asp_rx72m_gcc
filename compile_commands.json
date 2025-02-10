@@ -2036,6 +2036,96 @@
   },
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/sectrx.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/sectrx.S\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/sectrx.S"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/sectrx.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/sectrx.inc\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/sectrx.inc"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/starter_kit.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/starter_kit.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/starter_kit.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_cfg1_out.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_cfg1_out.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_cfg1_out.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_config.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_config.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_config.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_config.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_config.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_config.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_kernel.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_kernel.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_kernel.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_rename.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_rename.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_rename.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_serial.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_serial.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_serial.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_serial.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_serial.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_serial.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_sil.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_sil.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_sil.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_stddef.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_stddef.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_stddef.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_support.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_support.S\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_support.S"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_syssvc.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_syssvc.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_syssvc.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_test.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_test.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_test.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_timer.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_timer.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_timer.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_timer.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_timer.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_timer.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/rx_gcc/target_unrename.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_unrename.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/rx_gcc/target_unrename.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
     "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/target/sakura_gcc/DTCa_vecter.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/sakura_gcc/DTCa_vecter.S\"",
     "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/target/sakura_gcc/DTCa_vecter.S"
   },
