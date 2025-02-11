@@ -46,6 +46,9 @@ Typedef definitions
 /***********************************************************************************************************************
 Global functions
 ***********************************************************************************************************************/
+/* ICU IRQ0 */
+void r_Config_ICU_irq0_interrupt(void) __attribute__ ((interrupt(".rvectors",VECT(ICU,IRQ0))));
+
 /* Start user code for function. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
 #endif

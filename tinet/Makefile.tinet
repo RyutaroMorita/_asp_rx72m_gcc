@@ -270,7 +270,7 @@ TINET_LIB_OBJS = $(TINET_LCOBJS)
 
 ifeq ($(TARGET_KERNEL),ASP)
 
-TINET_CFG = ../../tinet_$(APPLNAME).cfg
+TINET_CFG = tinet_$(APPLNAME).cfg
 TINET_CFG_OUT = tinet_cfg.c tinet_cfg.h tinet_kern.cfg
 TINET_KERNEL_CFG :=	$(TINET_KERNEL_CFG) \
 			$(TINET_ROOT)/tinet_asp.cfg $(TINET_ROOT)/net/net_asp.cfg 

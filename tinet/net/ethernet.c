@@ -372,13 +372,6 @@ ether_input_task(intptr_t exinf)
 
 	ether_ifnet.ic = ic;
 
-//#ifdef SUPPORT_E1
-//	/* 送信可能になるまでの時間稼ぎ */
-//	dly_tsk(3000);
-//	/* 初回APRアナウンス */
-//	arp_request((T_IF_ADDR*)ether_ifnet.ic->ifaddr.lladdr, ether_ifnet.in_ifaddr.addr);
-//#endif
-
 	while (true) {
 		syscall(wai_sem(ic->semid_rxb_ready));
 		if ((input = IF_ETHER_NIC_READ(ic)) != NULL) {

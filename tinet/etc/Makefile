@@ -173,7 +173,7 @@ NET_IF = ether
 
 #  イーサネット・ディバイスドライバの選択
 
-NET_DEV = if_rx62n
+NET_DEV = if_rx72m
 
 #  ネットワーク層の選択、何れか一つ選択する。
 

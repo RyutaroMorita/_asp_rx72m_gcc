@@ -157,12 +157,12 @@
  */
 
 #define LCP_CFG_MRU		UINT_C(0x0001)	/* MRU					*/
-#define LCP_CFG_ACCM		UINT_C(0x0002)	/* ACCM					*/
-#define LCP_CFG_MAGIC		UINT_C(0x0004)	/* マジック番号				*/
-#define LCP_CFG_PCOMP		UINT_C(0x0008)	/* プロトコル部圧縮機能			*/
-#define LCP_CFG_ACCOMP		UINT_C(0x0010)	/* アドレス・制御部圧縮			*/
+#define LCP_CFG_ACCM	UINT_C(0x0002)	/* ACCM					*/
+#define LCP_CFG_MAGIC	UINT_C(0x0004)	/* マジック番号				*/
+#define LCP_CFG_PCOMP	UINT_C(0x0008)	/* プロトコル部圧縮機能		*/
+#define LCP_CFG_ACCOMP	UINT_C(0x0010)	/* アドレス・制御部圧縮		*/
 #define LCP_CFG_PAP		UINT_C(0x0020)	/* PAP					*/
-/*#define LCP_CFG_CHAP		UINT_C(0x0040)	   CHAP は実装予定			*/
+/*#define LCP_CFG_CHAP	UINT_C(0x0040)	   CHAP は実装予定		*/
 
 #ifdef LCP_CFG_MAGIC
 
@@ -183,21 +183,21 @@
  *  RX72M Ethernet Controler に関する定義
  */
 
-#define NUM_IF_RX62N_TXBUF		4	/* 送信バッファ数			*/
-#define NUM_IF_RX62N_RXBUF		4	/* 受信バッファ数			*/
-//#define IF_RX62N_BUF_PAGE_SIZE	1518	/* バッファサイズ */
-#define IF_RX62N_BUF_PAGE_SIZE	0x600	/* バッファサイズ */
+#define NUM_IF_RX72M_TXBUF		4	/* 送信バッファ数			*/
+#define NUM_IF_RX72M_RXBUF		4	/* 受信バッファ数			*/
+//#define IF_RX72M_BUF_PAGE_SIZE	1518	/* バッファサイズ */
+#define IF_RX72M_BUF_PAGE_SIZE	0x600	/* バッファサイズ */
 
-#define TMO_IF_RX62N_GET_NET_BUF	1	/* [ms]、受信用 net_buf 獲得タイムアウト	*/
+#define TMO_IF_RX72M_GET_NET_BUF	1	/* [ms]、受信用 net_buf 獲得タイムアウト	*/
 					/* [s]、 送信タイムアウト			*/
-#define TMO_IF_RX62N_XMIT		(2*IF_TIMER_HZ)
+#define TMO_IF_RX72M_XMIT		(2*IF_TIMER_HZ)
 
-/*#define IF_RX62N_CFG_ACCEPT_ALL		 マルチキャスト、エラーフレームも受信するときはコメントを外す。*/
+/*#define IF_RX72M_CFG_ACCEPT_ALL		 マルチキャスト、エラーフレームも受信するときはコメントを外す。*/
 
 /*
  *  イーサネット出力時に、NIC で net_buf を開放する場合に指定する。
  *
- *  注意: 以下の指定は、指定例であり、if_rx62n では、
+ *  注意: 以下の指定は、指定例であり、if_rx72m では、
  *        開放しないので、以下のコメントを外してはならない。
  */
 
@@ -207,12 +207,12 @@
  *  RX72M Ethernet Controller に関する定義
  */
 
-#define RX72M_BASE_ADDRESS		ULONG_C(0x00200000)	/* NIC のレジスタベースアドレス */
+#define RX72M_BASE_ADDRESS	ULONG_C(0x00200000)	/* NIC のレジスタベースアドレス */
 
-#define INHNO_IF_RX62N_TRX	INT_ETHER_EINT	/* パケット送受信 */
-#define INTNO_IF_RX62N_TRX	INT_ETHER_EINT	/* パケット送受信 */
-#define INTATR_IF_RX62N_TRX	(TA_NULL)	/* 割込み属性	*/
-#define INTPRI_IF_RX62N_TRX	(-5)		/* 割込み優先度	*/
+#define INHNO_IF_RX72M_TRX	INT_ICU_GROUPAL1	/* パケット送受信 */
+#define INTNO_IF_RX72M_TRX	INT_ICU_GROUPAL1	/* パケット送受信 */
+#define INTATR_IF_RX72M_TRX	(TA_NULL)	/* 割込み属性	*/
+#define INTPRI_IF_RX72M_TRX	(-5)		/* 割込み優先度	*/
 
 /*
  *  ARP に関する定義
@@ -321,7 +321,7 @@
 /*
  *  注意!!
  *
- *  RX72M Ethernet Controler のディバイスドライバ（if_rx62n）の最低割当て長は
+ *  RX72M Ethernet Controler のディバイスドライバ（if_rx72m）の最低割当て長は
  *  60（アラインして 62）オクテットのため IF + IP +TCP よりは
  *  64 オクテットのネットワークバッファの方が最適である。
  */
@@ -488,8 +488,8 @@
  *  関数
  */
 
-extern void rx62n_bus_init (void);
-extern void rx62n_inter_init (void);
+extern void rx72m_bus_init (void);
+extern void rx72m_inter_init (void);
 
 #endif	/* of #ifndef TOPPERS_MACRO_ONLY */
 

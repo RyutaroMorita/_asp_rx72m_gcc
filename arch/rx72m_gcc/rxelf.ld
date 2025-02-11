@@ -48,6 +48,10 @@ SECTIONS
 		*(B)
 		*(B_1)
 		*(B_2)
+		*(ETH_RX_BUFF_MEM)
+		*(ETH_TX_BUFF_MEM)
+		*(ETH_RX_DESC_MEM)
+		*(ETH_TX_DESC_MEM)
 		*(SI) /* SI is kernel stack section*/
 	    __bss_end = .;
 	} > SRAM

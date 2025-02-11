@@ -54,7 +54,6 @@ TARGET = rtk0emxde0c00000bj_gcc
 #  TCP/IP プロトコル・スタックの定義
 #
 NET_SP = none
-#NET_SP = tinet
 
 #
 #  プログラミング言語の定義
@@ -190,7 +189,7 @@ ifeq ($(NET_SP),tinet)
   NET_IF = ether
   #  イーサネット・ディバイスドライバの選択
   #NET_DEV = if_ed
-  NET_DEV = if_rx62n
+  NET_DEV = if_rx72m
   #  ネットワーク層の選択、何れか一つ選択する。
   SUPPORT_INET4 = true
   #SUPPORT_INET6 = true

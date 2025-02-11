@@ -34,6 +34,8 @@ Pragma directive
 Includes
 ***********************************************************************************************************************/
 #include "r_cg_macrodriver.h"
+#include "Config_PORT.h"
+#include "Config_ICU.h"
 #include "r_smc_cgc.h"
 #include "r_smc_interrupt.h"
 /* Start user code for include. Do not edit comment generated here */
@@ -86,6 +88,10 @@ void R_Systeminit(void)
 
     /* Initialize clocks settings */
     R_CGC_Create();
+
+    /* Set peripheral settings */
+    R_Config_PORT_Create();
+    R_Config_ICU_Create();
 
     /* Set interrupt settings */
     R_Interrupt_Create();

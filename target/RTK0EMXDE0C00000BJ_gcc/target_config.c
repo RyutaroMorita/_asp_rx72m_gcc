@@ -48,32 +48,24 @@
 #include "rx72m/rx72m_uart.h"
 #include "mcu_clocks.h"
 #include "r_bsp_cpu.h"
-#include "Pin.h"
+#include "r_smc_entry.h"
+//#include "Pin.h"
+//#include "Config_PORT.h"
+//#include "Config_ICU.h"
 
 
 static void usart_early_init( void )
 {
+	/*
+	 *  ターゲットのポート設定
+	 */
 	R_Pins_Create();
+	R_Config_PORT_Create();
+	R_Config_ICU_Create();
 
-#if 0
-	/* unlock PFS write protection */
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSWE_BIT);
-
-	/* Set RXD6/SMISO6/SSCL6 pin */
-	sil_wrb_mem((void *)(MPC_PB0PFS_ADDR), MPC_PFS_PSELB);
-	sil_wrb_mem((void *)(PORTB_PMR_ADDR), (uint8_t)(sil_reb_mem((void *)PORTB_PMR_ADDR) | PORT_PMR_B0_BIT));
-
-	/* Set TXD6/SMOSI6/SSDA6 pin */
-	sil_wrb_mem((void *)(MPC_PB1PFS_ADDR), MPC_PFS_PSELB);
-	//sil_wrb_mem((void *)(PORTB_PMR_ADDR), (uint8_t)(sil_reb_mem((void *)PORTB_PMR_ADDR) | PORT_PMR_B1_BIT));
-#endif
-
-	/* lock PFS write */
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_PFSW_CLEAR);
-	sil_wrb_mem((void *)(MPC_PWPR_ADDR), MPC_PWPR_B0WI_BIT);
-
-	// ポートの設定
+	/*
+	 *  カーネル起動時のバナー出力用の初期化
+	 */
 	scic_uart_init(TARGET_PUTC_PORTID, UART_BAUDRATE, UART_CLKSRC);
 
 	/* unlock PFS write protection */
