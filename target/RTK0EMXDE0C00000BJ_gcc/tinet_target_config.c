@@ -80,6 +80,14 @@ void rx72m_bus_init(void)
 	//lock register access
 	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
 
+	/*
+	 *  EINT0 (ステータス割り込み)
+	 */
+	sil_wrw_mem(
+			(void *)(ICU_GENAL1_ADDR),
+			(uint32_t)(sil_rew_mem((void *)(ICU_GENAL1_ADDR)) | ICU_GENAL1_EN04_BIT)
+	);
+
 	slp_tsk();	// 後で main.c から wup_tsk(ETHER_INPUT_TASK) される
 }
 

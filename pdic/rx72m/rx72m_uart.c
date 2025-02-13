@@ -294,7 +294,7 @@ scic_uart_opn_por
 	}
 
 	/*
-	 * SCI6 TEI6 (‘—MŠ®—¹)
+	 *  SCI6 TEI6 (‘—MŠ®—¹)
 	 */
 	sil_wrw_mem(
 			(void *)p_siopcb->p_siopinib->grpiereg,

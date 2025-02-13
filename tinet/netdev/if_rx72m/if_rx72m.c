@@ -105,6 +105,7 @@
 #include <stdlib.h>
 #endif
 
+#define PHY_ADDR	1
 extern uint8_t mac_addr[ETHER_ADDR_LEN];
 
 
@@ -291,7 +292,7 @@ rx72m_init_sub (T_IF_SOFTC *ic)
 		| (uint32_t)mac_addr[5]);
 
 	/* PHYリセット */
-	phy_reset(0);
+	phy_reset(PHY_ADDR);
 
 	/* Clear all ETHERC status BFR, PSRTO, LCHNG, MPD, ICD */
 	sil_wrw_mem(ETHERC_ECSR, 0x00000037);
@@ -300,7 +301,7 @@ rx72m_init_sub (T_IF_SOFTC *ic)
 //	sil_wrw_mem(ETHERC_ECSIPR, sil_rew_mem(ETHERC_ECSIPR) | ETHERC_ECSIPR_LCHNGIP);
 
 	/* Clear all ETHERC and EDMAC status bits */
-	sil_wrw_mem(EDMAC_EESR, 0x47FF0F9F);
+	sil_wrw_mem(EDMAC_EESR, 0x477F0F9F);
 
 	/* 送受信割り込み有効 */
 	sil_wrw_mem(EDMAC_EESIPR, (EDMAC_EESIPR_TCIP | EDMAC_EESIPR_FRIP | EDMAC_EESIPR_RDEIP | EDMAC_EESIPR_FROFIP));
@@ -331,7 +332,7 @@ rx72m_init_sub (T_IF_SOFTC *ic)
 	sil_wrw_mem(EDMAC_RMCR, 0x00000001);
 
 	/* PHYの初期化 */
-	mode = phy_initialize(0);	// 活線挿抜をサポートする場合は 「rx72m_tick()」で行われるため削除
+	mode = phy_initialize(PHY_ADDR);	// 活線挿抜をサポートする場合は 「rx72m_tick()」で行われるため削除
 
 	/* ECMRレジスタの設定 */
 	rx72m_set_ecmr(ic, mode);	// 活線挿抜をサポートする場合は 「rx72m_tick()」で行われるため削除
@@ -554,7 +555,7 @@ rx72m_read (T_IF_SOFTC *ic)
 		sc->link_pre = sc->link_now;
 		if ( sc->link_pre ) {
 			/* PHYの初期化 */
-			mode = phy_initialize(0);
+			mode = phy_initialize(PHY_ADDR);
 
 			/* ECMRレジスタの設定 */
 			rx72m_set_ecmr(ic, mode);
@@ -769,7 +770,7 @@ void rx72m_tick(intptr_t exinf)
 
 	while ( 1 ) {
 		dly_tsk(100);
-		if ( phy_is_link(0) )
+		if ( phy_is_link(PHY_ADDR) )
 			sc->link_now = false;
 		else
 			sc->link_now = true;
@@ -784,7 +785,7 @@ void rx72m_tick(intptr_t exinf)
 				syscall(dis_int(INTNO_IF_RX72M_TRX));
 #endif
 				rx72m_stop(sc);
-				mode = phy_initialize(0);	// PHYの初期化
+				mode = phy_initialize(PHY_ADDR);	// PHYの初期化
 				rx72m_set_ecmr(ic, mode);	// ECMRレジスタの設定
 				/* NIC からの割り込みを許可する。*/
 #ifdef TARGET_KERNEL_JSP

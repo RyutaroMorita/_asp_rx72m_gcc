@@ -111,6 +111,12 @@ enum phy_mode_t phy_initialize(uint8_t phy_addr)
 	uint_t result = 0;
 	uint16_t status;
 
+	//phy_put(dev_num, 0x16U, 0x0001U);
+	phy_write_reg(phy_addr, 0x16U, 0x0001U);
+
+	//phy_put(dev_num, 0x1fU, 0x8110U);
+	phy_write_reg(phy_addr, 0x1FU, 0x8110U);
+
 	/* ƒŠƒ“ƒNŠ®—¹‚ÌŠm”F */
 	while((phy_read_reg(phy_addr, PHY_STATUS_REGISTER) & PHY_STATUS_LINK_STATUS) == 0)
 		tslp_tsk(1);
