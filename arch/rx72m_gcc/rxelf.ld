@@ -1,7 +1,7 @@
 MEMORY
 {
-    FLASH (rx) : ORIGIN = 0xFFF00000, LENGTH = 1024K
-    SRAM (rwx) : ORIGIN = 0x00000000, LENGTH = 64K
+	FLASH (rx) : ORIGIN = 0xFFF00000, LENGTH = 1024K
+	SRAM (rwx) : ORIGIN = 0x00000000, LENGTH = 64K
 }
 
 PROVIDE(hardware_init_hook = 0);
@@ -11,7 +11,6 @@ STARTUP(start.o)
 
 SECTIONS
 {
-
 	.text :
 	{
 		__text = .;
@@ -22,7 +21,7 @@ SECTIONS
 	} > FLASH
 	_etext = .;
 	PROVIDE(etext = .);
-
+	
 	.rodata :
 	{
 		*(.rodata)
@@ -32,31 +31,24 @@ SECTIONS
 		*(C)
 		*(C$VECT)
 	} > FLASH
-    __rodata_end = .;
+	__rodata_end = .;
 	__exidx_start = .;
 	__exidx_end = .;
-
+	
 	. = 0x0; /*SRAM START ADDRES*/
 	.bss : 
 	{
 		__bss_start  = .;
-        *(DTCA_VECTOR_SEC)
-        __dtca_start = .;
 		*(.bss)
-		*(.bss.*)
 		*(COMMON)
 		*(B)
 		*(B_1)
 		*(B_2)
-		*(ETH_RX_BUFF_MEM)
-		*(ETH_TX_BUFF_MEM)
-		*(ETH_RX_DESC_MEM)
-		*(ETH_TX_DESC_MEM)
 		*(SI) /* SI is kernel stack section*/
 	    __bss_end = .;
 	} > SRAM
-
-    . = __rodata_end;
+	
+	. = __rodata_end;
 	. = ALIGN(4);
 	__idata_start = .;
 	.data : 
@@ -69,16 +61,16 @@ SECTIONS
 		*(D_2)
 	    __data_end = .;
 	} > SRAM AT> FLASH
-    
+	
 	__idata_end = __idata_start + SIZEOF(.data);
 	_edata = .;
 	PROVIDE(edata = .);
-    
+	
 	. = ALIGN(4);
-    .fvectors 0xFFFFFF80 :
-   {
-      *(.fvect)
-    } > FLASH
+	.fvectors 0xFFFFFF80 :
+	{
+	  *(.fvect)
+	} > FLASH
 	_end = .;
 	PROVIDE(end = .);
 }

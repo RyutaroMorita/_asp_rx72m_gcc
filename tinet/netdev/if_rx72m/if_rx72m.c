@@ -138,10 +138,16 @@ typedef struct t_rx72m_buf {
 
 T_RX72M_BUF rx72m_buf;
 
+#if 0
 uint8_t rx_buff_mem[NUM_IF_RX72M_RXBUF][32 * (((int)&((T_NET_BUF *)0)->buf + IF_RX72M_BUF_PAGE_SIZE + 31) / 32)+ALIGN_OF_BUF] __attribute__ ((section("ETH_RX_BUFF_MEM"), aligned(ALIGN_OF_BUF)));
 uint8_t tx_buff_mem[NUM_IF_RX72M_TXBUF][32 * ((IF_RX72M_BUF_PAGE_SIZE + 31) / 32)+ALIGN_OF_BUF] __attribute__ ((section("ETH_TX_BUFF_MEM"), aligned(ALIGN_OF_BUF)));
 uint8_t rx_desc_mem[sizeof(T_RX72M_RX_DESC)*NUM_IF_RX72M_RXBUF+ALIGN_OF_DESC] __attribute__ ((section("ETH_RX_DESC_MEM"), aligned(ALIGN_OF_DESC)));
 uint8_t tx_desc_mem[sizeof(T_RX72M_TX_DESC)*NUM_IF_RX72M_TXBUF+ALIGN_OF_DESC] __attribute__ ((section("ETH_TX_DESC_MEM"), aligned(ALIGN_OF_DESC)));
+#endif
+uint8_t rx_buff_mem[NUM_IF_RX72M_RXBUF][32 * (((int)&((T_NET_BUF *)0)->buf + IF_RX72M_BUF_PAGE_SIZE + 31) / 32)+ALIGN_OF_BUF] __attribute__ ((aligned(ALIGN_OF_BUF)));
+uint8_t tx_buff_mem[NUM_IF_RX72M_TXBUF][32 * ((IF_RX72M_BUF_PAGE_SIZE + 31) / 32)+ALIGN_OF_BUF] __attribute__ ((aligned(ALIGN_OF_BUF)));
+uint8_t rx_desc_mem[sizeof(T_RX72M_RX_DESC)*NUM_IF_RX72M_RXBUF+ALIGN_OF_DESC] __attribute__ ((aligned(ALIGN_OF_DESC)));
+uint8_t tx_desc_mem[sizeof(T_RX72M_TX_DESC)*NUM_IF_RX72M_TXBUF+ALIGN_OF_DESC] __attribute__ ((aligned(ALIGN_OF_DESC)));
 /*
 #if defined(__RX)
 #pragma	section	ETH_MEMORY
@@ -522,9 +528,6 @@ rx72m_init (T_IF_SOFTC *ic)
 		sil_wrw_mem(EDMAC_EDRRR, EDMAC_EDRRR_RR);
 	}
 
-//	sta_cyc(CYC_LNK);
-	//act_tsk(TSK_LNK);
-
 	/* NIC からの割り込みを許可する。*/
 #ifdef TARGET_KERNEL_JSP
 	rx72m_ena_inter(ipm);
@@ -547,37 +550,11 @@ rx72m_read (T_IF_SOFTC *ic)
 	uint16_t align;
 	uint8_t *dst;
 	ER error;
-//	enum phy_mode_t mode;
 
-#if 0
-	/* リンク状態に変化あり */
-	if (sc->link_pre != sc->link_now) {
-		sc->link_pre = sc->link_now;
-		if ( sc->link_pre ) {
-			/* PHYの初期化 */
-			mode = phy_initialize(PHY_ADDR);
-
-			/* ECMRレジスタの設定 */
-			rx72m_set_ecmr(ic, mode);
-		}
-#ifdef SUPPORT_E1
-		rx72m_link(sc->link_pre);
-#endif
-		return;
-	}
-#endif
-
-	if (sc->over_flow) {
+	if (sc->over_flow)
 		sc->over_flow = false;
-//		if (sil_rew_mem(EDMAC_EDRRR) == 0) {
-//			sil_wrw_mem(EDMAC_EDRRR, EDMAC_EDRRR_RR);
-//		}
-	}
 
 	desc = sc->rx_read;
-
-//	if ( desc->ract != 0 )
-//		return NULL;
 
 	while (desc->ract != 0) {
 		tslp_tsk(1);
@@ -616,9 +593,6 @@ rx72m_read (T_IF_SOFTC *ic)
 		desc = rx72m_buf.rx_desc;
 	}
 	sc->rx_read = desc;
-
-//	desc->rfp = 0;
-//	desc->ract = 1;
 
 	if (sil_rew_mem(EDMAC_EDRRR) == 0) {
 		sil_wrw_mem(EDMAC_EDRRR, EDMAC_EDRRR_RR);
@@ -698,24 +672,6 @@ if_rx72m_trx_handler (void)
 
 	ic = &if_softc;
 	sc = ic->sc;
-
-#if 0
-	ecsr = sil_rew_mem(ETHERC_ECSR);
-
-	if (ecsr & ETHERC_ECSR_LCHNG) {
-		/* ETHERC部割り込み要因クリア */
-		sil_wrw_mem(ETHERC_ECSR, ETHERC_ECSR_LCHNG);
-
-		psr = sil_rew_mem(ETHERC_PSR);
-		sc->link_now = (psr & ETHERC_PSR_LMON) != 0;
-
-		/* リンク状態に変化あり */
-		if (sc->link_pre != sc->link_now) {
-			/* 受信割り込み処理 */
-			isig_sem(ic->semid_rxb_ready);
-		}
-	}
-#endif
 
 	eesr = sil_rew_mem(EDMAC_EESR);
 

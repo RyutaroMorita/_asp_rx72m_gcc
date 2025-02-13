@@ -1,10 +1,10 @@
 /*
  *  TINET (TCP/IP Protocol Stack)
- *
+ * 
  *  Copyright (C) 2001-2009 by Dep. of Computer Science and Engineering
  *                   Tomakomai National College of Technology, JAPAN
  *
- *  上記著作権者は，以下の (1)～(4) の条件か，Free Software Foundation
+ *  上記著作権者は，以下の (1)～(4) の条件か，Free Software Foundation 
  *  によって公表されている GNU General Public License の Version 2 に記
  *  述されている条件を満たす場合に限り，本ソフトウェア（本ソフトウェア
  *  を改変したものを含む．以下同じ）を使用・複製・改変・再配布（以下，
@@ -27,24 +27,70 @@
  *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，その適用可能性も
  *  含めて，いかなる保証も行わない．また，本ソフトウェアの利用により直
  *  接的または間接的に生じたいかなる損害に関しても，その責任を負わない．
- *
- *  @(#) $Id: tinet_sample1n.cfg,v 1.5 2009/12/24 06:20:39 abe Exp abe $
+ * 
+ *  @(#) $Id: route_cfg.c,v 1.5 2009/12/24 06:20:39 abe Exp $
  */
 
-/*
- *  ネットワーク対応 main.c プログラムの TCP/IP コンフィギュレーションファイル
+/* 
+ *  ルーティング表
  */
 
-#include "main.h"
+#include <kernel.h>
 
+#include <tinet_defs.h>
+#include <tinet_config.h>
 
-/* UDP 受付口 */
-//UDP_CRE_CEP (ID_UDP4DHCP,	{ 0, { IPV4_ADDRANY, UDP_PORT_BOOTPC}, (FP)dhcp_callback} );
-UDP_CRE_CEP (ID_UDP0,	{ 0, { IPV4_ADDRANY, 0xC000}, NULL } );
-UDP_CRE_CEP (ID_UDP1,	{ 0, { IPV4_ADDRANY, 0xC001}, NULL } );
-UDP_CRE_CEP (ID_UDP2,	{ 0, { IPV4_ADDRANY, 0xC002}, NULL } );
-UDP_CRE_CEP (ID_UDP3,	{ 0, { IPV4_ADDRANY, 0xC003}, NULL } );
+#include <netinet/in.h>
+#include <netinet/in_var.h>
 
-/* TCP 受付口 */
-TCP_CRE_REP (ID_REP,	{ 0, { IPV4_ADDRANY, 23 } } );
-VRID_TCP_CEP(ID_CEP);
+/* IPv4 に関する定義 */
+
+#ifdef SUPPORT_INET4
+
+#ifdef SUPPORT_LOOP
+
+T_IN4_RTENTRY routing_tbl[NUM_ROUTE_ENTRY] = {
+	{ 0, 0, 0 },
+	};
+
+#endif	/* of #ifdef SUPPORT_LOOP */
+
+#ifdef SUPPORT_PPP
+
+T_IN4_RTENTRY routing_tbl[NUM_ROUTE_ENTRY] = {
+	{ 0, 0, 0 },
+	};
+
+#endif	/* of #ifdef SUPPORT_PPP */
+
+#ifdef SUPPORT_ETHER
+
+T_IN4_RTENTRY routing_tbl[NUM_ROUTE_ENTRY] = {
+
+	/* 異なる LAN、default gateway による間接配送	*/
+	{ 0,			0,			IPV4_ADDR_DEFAULT_GW	},
+
+	/* 同一 LAN 内、直接配送				*/
+	{ IPV4_ADDR_LOCAL &
+	  IPV4_ADDR_LOCAL_MASK,	IPV4_ADDR_LOCAL_MASK,	0			},
+
+	/* 同一 LAN 内へのブロードキャスト、直接配送	*/
+	{ 0xffffffff,		0xffffffff,		0			},
+
+	};
+
+#endif	/* of #ifdef SUPPORT_ETHER */
+
+#endif	/* of #ifdef SUPPORT_INET4 */
+
+/* IPv6 に関する定義 */
+
+#ifdef SUPPORT_INET6
+
+#if NUM_ROUTE_ENTRY > 0
+
+T_IN6_RTENTRY routing_tbl[NUM_ROUTE_ENTRY] = { };
+
+#endif	/* of #if NUM_ROUTE_ENTRY > 0 */
+
+#endif	/* of #ifdef SUPPORT_INET6 */
