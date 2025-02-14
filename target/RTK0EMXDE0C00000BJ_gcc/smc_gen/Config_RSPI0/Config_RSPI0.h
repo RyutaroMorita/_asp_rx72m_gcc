@@ -18,70 +18,43 @@
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
-* File Name        : r_smc_interrupt.c
-* Version          : 1.2.50
+* File Name        : Config_RSPI0.h
+* Component Version: 1.10.0
 * Device(s)        : R5F572MNDxBD
-* Description      : This file implements interrupt setting.
+* Description      : This file implements device driver for Config_RSPI0.
 ***********************************************************************************************************************/
 
-/***********************************************************************************************************************
-Pragma directive
-***********************************************************************************************************************/
-/* Start user code for pragma. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
+#ifndef CFG_Config_RSPI0_H
+#define CFG_Config_RSPI0_H
 
 /***********************************************************************************************************************
 Includes
 ***********************************************************************************************************************/
-#include "r_cg_macrodriver.h"
-#include "r_smc_interrupt.h"
-/* Start user code for include. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
-#include "r_cg_userdefine.h"
+#include "r_cg_rspi.h"
 
 /***********************************************************************************************************************
-Global variables and functions
+Macro definitions (Register bit)
 ***********************************************************************************************************************/
-/* Start user code for global. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
-* Function Name: R_Interrupt_Create
-* Description  : This function Used to set the fast interrupt or group interrupt 
-* Arguments    : None
-* Return Value : None
+Macro definitions
 ***********************************************************************************************************************/
 
-void R_Interrupt_Create(void)
-{
-    /* Disable group BL0 interrupt*/
-    IEN(ICU,GROUPBL0) = 0U;
-    
-    /* Disable group AL0 interrupt*/
-    IEN(ICU,GROUPAL0) = 0U;
-    
-    /* Disable group AL1 interrupt*/
-    IEN(ICU,GROUPAL1) = 0U;
-    
+/***********************************************************************************************************************
+Typedef definitions
+***********************************************************************************************************************/
 
-    /* Set group BL0 interrupt priority level */
-    IPR(ICU,GROUPBL0) = _03_ICU_PRIORITY_LEVEL3;
-
-    /* Set group AL0 interrupt priority level */
-    IPR(ICU,GROUPAL0) = _03_ICU_PRIORITY_LEVEL3;
-
-    /* Set group AL1 interrupt priority level */
-    IPR(ICU,GROUPAL1) = _02_ICU_PRIORITY_LEVEL2;
-
-    /* Enable group BL0 interrupt */
-    IEN(ICU,GROUPBL0) = 1U;
-
-    /* Enable group AL0 interrupt */
-    IEN(ICU,GROUPAL0) = 1U;
-
-    /* Enable group AL1 interrupt */
-    IEN(ICU,GROUPAL1) = 1U;
-}
-
-/* Start user code for adding. Do not edit comment generated here */
+/***********************************************************************************************************************
+Global functions
+***********************************************************************************************************************/
+void R_Config_RSPI0_Create(void);
+void R_Config_RSPI0_Create_UserInit(void);
+void R_Config_RSPI0_Start(void);
+void R_Config_RSPI0_Stop(void);
+MD_STATUS R_Config_RSPI0_Send_Receive(uint8_t * const tx_buf, uint16_t tx_num, uint8_t * const rx_buf);
+void r_Config_RSPI0_error_interrupt(void);
+static void r_Config_RSPI0_callback_transmitend(void);
+static void r_Config_RSPI0_callback_receiveend(void);
+/* Start user code for function. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
+#endif

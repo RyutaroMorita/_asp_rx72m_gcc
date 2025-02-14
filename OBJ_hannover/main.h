@@ -83,9 +83,23 @@
 #define UDP_PORT_TEST		49152	/* DYNAMIC AND/OR PRIVATE PORTS(ダイナミック/プライベートポート番号) */
 
 /*
+ *
+ */
+#define INHNO_RSPI_TX	INT_RSPI0_SPTI0	/* 割込みハンドラ番号 */
+#define INTNO_RSPI_TX	INT_RSPI0_SPTI0	/* 割込み番号 */
+#define INHNO_RSPI_RX	INT_RSPI0_SPRI0	/* 割込みハンドラ番号 */
+#define INTNO_RSPI_RX	INT_RSPI0_SPRI0	/* 割込み番号 */
+#define INTPRI_RSPI		-3				/* 割込み優先度 */
+#define INTATR_RSPI		(TA_NULL)		/* 割込み属性 */
+
+
+/*
  *  関数のプロトタイプ宣言
  */
 #ifndef TOPPERS_MACRO_ONLY
+
+void rspi_tx_handler(void);
+void rspi_rx_handler(void);
 
 extern void	main_task(intptr_t exinf);
 extern void	udp_task(intptr_t exinf);

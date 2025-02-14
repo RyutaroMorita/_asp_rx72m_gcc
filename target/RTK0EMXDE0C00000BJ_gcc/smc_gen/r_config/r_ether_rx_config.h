@@ -91,7 +91,7 @@
  Please set the value 0 ETHER_CFG_CH0_PHY_ACCESS and ETHER_CFG_CH1_PHY_ACCESS when use default setting of the RSK+RX72M.
  Please set the value 1 ETHER_CFG_CH1_PHY_ACCESS when use default setting of the RSK+RX72N.
  */
-    #define ETHER_CFG_CH0_PHY_ACCESS                    (1)
+    #define ETHER_CFG_CH0_PHY_ACCESS                    (0)
     #define ETHER_CFG_CH1_PHY_ACCESS                    (1)
 
 /* Define the access timing of MII/RMII register */

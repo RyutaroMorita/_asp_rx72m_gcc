@@ -34,6 +34,7 @@ Includes
 #include "Pin.h"
 #include "Config_PORT.h"
 #include "Config_ICU.h"
+#include "Config_RSPI0.h"
 
 /***********************************************************************************************************************
 Macro definitions (Register bit)

@@ -48,10 +48,7 @@
 #include "rx72m/rx72m_uart.h"
 #include "mcu_clocks.h"
 #include "r_bsp_cpu.h"
-#include "r_smc_entry.h"
-//#include "Pin.h"
-//#include "Config_PORT.h"
-//#include "Config_ICU.h"
+#include "Pin.h"
 
 
 static void usart_early_init( void )
@@ -60,8 +57,6 @@ static void usart_early_init( void )
 	 *  ターゲットのポート設定
 	 */
 	R_Pins_Create();
-	R_Config_PORT_Create();
-	R_Config_ICU_Create();
 
 	/*
 	 *  カーネル起動時のバナー出力用の初期化

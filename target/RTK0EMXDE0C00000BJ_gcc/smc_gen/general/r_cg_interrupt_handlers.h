@@ -46,6 +46,12 @@ Typedef definitions
 /***********************************************************************************************************************
 Global functions
 ***********************************************************************************************************************/
+/* RSPI0 SPRI0 */
+void r_Config_RSPI0_receive_interrupt(void) __attribute__ ((interrupt(".rvectors",VECT(RSPI0,SPRI0))));
+
+/* RSPI0 SPTI0 */
+void r_Config_RSPI0_transmit_interrupt(void) __attribute__ ((interrupt(".rvectors",VECT(RSPI0,SPTI0))));
+
 /* ICU IRQ0 */
 void r_Config_ICU_irq0_interrupt(void) __attribute__ ((interrupt(".rvectors",VECT(ICU,IRQ0))));
 

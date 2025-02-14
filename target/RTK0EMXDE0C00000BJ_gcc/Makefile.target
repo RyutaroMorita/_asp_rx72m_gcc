@@ -18,8 +18,7 @@ GCC_TARGET = rx-elf
 INCLUDES := $(INCLUDES) \
 	-I$(SRCDIR)/pdic \
 	-I$(TARGETDIR) \
-	-I$(TARGETDIR)/smc_gen/Config_ICU \
-	-I$(TARGETDIR)/smc_gen/Config_PORT \
+	-I$(TARGETDIR)/smc_gen \
 	-I$(TARGETDIR)/smc_gen/general \
 	-I$(TARGETDIR)/smc_gen/r_bsp \
 	-I$(TARGETDIR)/smc_gen/r_bsp/mcu/all \
@@ -41,18 +40,12 @@ INCLUDES := $(INCLUDES) \
 #
 #include $(DRIVERDIR)/Makefile.driver
 DRIVERDIR = \
-	$(TARGETDIR)/smc_gen/Config_ICU \
-	$(TARGETDIR)/smc_gen/Config_PORT \
 	$(TARGETDIR)/smc_gen/r_bsp/mcu/all \
 	$(TARGETDIR)/smc_gen/r_bsp/mcu/$(PRC) \
 	$(TARGETDIR)/smc_gen/r_byteq/src \
 	$(TARGETDIR)/smc_gen/r_cmt_rx/src \
 	$(TARGETDIR)/smc_gen/r_pincfg
 DRIVER_COBJS = \
-	Config_ICU.o \
-	Config_ICU_user.o \
-	Config_PORT.o \
-	Config_PORT_user.o \
 	mcu_clocks.o \
 	mcu_locks.o \
 	Pin.o \

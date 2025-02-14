@@ -48,7 +48,6 @@
 #include "kernel_cfg.h"
 #include "main.h"
 #include "target_board.h"
-#include "r_smc_entry.h"
 
 #include "tinet_cfg.h"
 #include <tinet_config.h>
@@ -58,12 +57,40 @@
 #include <netinet/in_itron.h>
 #include <netinet/tcp.h>
 
+/*
+ *  smc_gen ディレクトリ内の内容に依存するため r_smc_entry.h はインクルードしない.
+ */
+#include "r_cg_macrodriver.h"
+#include "Pin.h"
+#include "Config_ICU/Config_ICU.h"
+#include "Config_PORT/Config_PORT.h"
+#include "Config_RSPI0/Config_RSPI0.h"
+
+
+void rspi_tx_handler(void)
+{
+	r_Config_RSPI0_transmit_interrupt();
+}
+
+
+void rspi_rx_handler(void)
+{
+	r_Config_RSPI0_receive_interrupt();
+}
+
 
 /*
  *  メインタスク
  */
+#define LENGTH	11
+uint8_t tx_buf[32];
+uint8_t rx_buf[32];
 void main_task(intptr_t exinf)
 {
+	R_Config_PORT_Create();
+	R_Config_ICU_Create();
+	R_Config_RSPI0_Create();
+
 	/*
 	 *  PHY(KSZ8081MNX/RNB)のリセット
 	 */
@@ -73,11 +100,17 @@ void main_task(intptr_t exinf)
 
 	wup_tsk(ETHER_INPUT_TASK);
 
-	act_tsk(UDP_TASK);
+	//act_tsk(UDP_TASK);
+
+	R_Config_RSPI0_Start();
+	ena_int(INTNO_RSPI_TX);
+	ena_int(INTNO_RSPI_RX);
 
 	while (1) {
-		syslog(LOG_NOTICE, "main_task is running.");
-		dly_tsk(1000);
+		R_Config_RSPI0_Send_Receive(tx_buf, LENGTH, rx_buf);
+		//syslog(LOG_NOTICE, "main_task is running.");
+		slp_tsk();
+//		dly_tsk(1000);
 	}
 }
 

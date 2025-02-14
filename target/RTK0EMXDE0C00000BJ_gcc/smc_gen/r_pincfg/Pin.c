@@ -136,9 +136,25 @@ void R_Pins_Create(void)
     PORT1.PMR.BYTE &= 0xFEU;
     PORT1.PDR.BYTE &= 0xFEU;
 
+    /* Set MISOA pin */
+    MPC.PC7PFS.BYTE = 0x0DU;
+    PORTC.PMR.BYTE |= 0x80U;
+
+    /* Set MOSIA pin */
+    MPC.PC6PFS.BYTE = 0x0DU;
+    PORTC.PMR.BYTE |= 0x40U;
+
+    /* Set RSPCKA pin */
+    MPC.PC5PFS.BYTE = 0x0DU;
+    PORTC.PMR.BYTE |= 0x20U;
+
     /* Set RXD6 pin */
     MPC.PB0PFS.BYTE = 0x0BU;
     PORTB.PMR.BYTE |= 0x01U;
+
+    /* Set SSLA0 pin */
+    MPC.PC4PFS.BYTE = 0x0DU;
+    PORTC.PMR.BYTE |= 0x10U;
 
     /* Set TXD6 pin */
     PORTB.PODR.BYTE |= 0x02U;

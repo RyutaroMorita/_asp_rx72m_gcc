@@ -48,7 +48,6 @@
 #include "kernel_cfg.h"
 #include "main.h"
 #include "target_board.h"
-#include "r_smc_entry.h"
 
 #include "tinet_cfg.h"
 #include <tinet_config.h>
@@ -58,12 +57,23 @@
 #include <netinet/in_itron.h>
 #include <netinet/tcp.h>
 
+/*
+ *  smc_gen ディレクトリ内の内容に依存するため r_smc_entry.h はインクルードしない.
+ */
+#include "r_cg_macrodriver.h"
+#include "Pin.h"
+#include "Config_ICU/Config_ICU.h"
+#include "Config_PORT/Config_PORT.h"
+
 
 /*
  *  メインタスク
  */
 void main_task(intptr_t exinf)
 {
+	R_Config_PORT_Create();
+	R_Config_ICU_Create();
+
 	/*
 	 *  PHY(KSZ8081MNX/RNB)のリセット
 	 */

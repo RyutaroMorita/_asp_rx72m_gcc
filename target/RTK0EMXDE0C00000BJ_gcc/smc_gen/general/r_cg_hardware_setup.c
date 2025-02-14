@@ -36,6 +36,7 @@ Includes
 #include "r_cg_macrodriver.h"
 #include "Config_PORT.h"
 #include "Config_ICU.h"
+#include "Config_RSPI0.h"
 #include "r_smc_cgc.h"
 #include "r_smc_interrupt.h"
 /* Start user code for include. Do not edit comment generated here */
@@ -92,6 +93,7 @@ void R_Systeminit(void)
     /* Set peripheral settings */
     R_Config_PORT_Create();
     R_Config_ICU_Create();
+    R_Config_RSPI0_Create();
 
     /* Set interrupt settings */
     R_Interrupt_Create();
@@ -101,6 +103,9 @@ void R_Systeminit(void)
     /* Register undefined interrupt */
     R_BSP_InterruptWrite(BSP_INT_SRC_UNDEFINED_INTERRUPT,(bsp_int_cb_t)r_undefined_exception);
 #endif /* BSP_CFG_BOOTLOADER_PROJECT == 0 */
+
+    /* Register group AL0 interrupt SPEI0 (RSPI0) */
+    R_BSP_InterruptWrite(BSP_INT_SRC_AL0_RSPI0_SPEI0,(bsp_int_cb_t)r_Config_RSPI0_error_interrupt);
 
     /* Disable writing to MPC pin function control registers */
     MPC.PWPR.BIT.PFSWE = 0U;
