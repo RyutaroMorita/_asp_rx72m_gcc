@@ -11,6 +11,31 @@
   },
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/asm_config.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/asm_config.inc\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/asm_config.inc"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/cfg1_out.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/cfg1_out.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/cfg1_out.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/kernel_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/kernel_cfg.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/kernel_cfg.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/kernel_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/kernel_cfg.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/kernel_cfg.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/kernel_cfg_asm.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/kernel_cfg_asm.S\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/kernel_cfg_asm.S"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
     "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/main.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/main.c\"",
     "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/main.c"
   },
@@ -21,13 +46,43 @@
   },
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/offset.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/offset.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/offset.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
     "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/route_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/route_cfg.c\"",
     "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/route_cfg.c"
   },
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/spi.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/spi.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/spi.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/spi.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/spi.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/spi.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
     "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/tinet_app_config.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_app_config.h\"",
     "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_app_config.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/tinet_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_cfg.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_cfg.c"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/tinet_cfg.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_cfg.h\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_cfg.h"
+  },
+  {
+    "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",
+    "command": "\"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/デフォルト/OBJ_hannover/tinet_cfg1_out.o\" \"C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_cfg1_out.c\"",
+    "file": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc/OBJ_hannover/tinet_cfg1_out.c"
   },
   {
     "directory": "C:/cygwin64/home/RyutarouMorita/asp_rx72m_gcc",

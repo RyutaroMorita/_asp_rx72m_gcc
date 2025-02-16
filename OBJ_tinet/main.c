@@ -71,8 +71,14 @@
  */
 void main_task(intptr_t exinf)
 {
+	//unlock register access
+	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
+
 	R_Config_PORT_Create();
 	R_Config_ICU_Create();
+
+	//lock register access
+	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
 
 	/*
 	 *  PHY(KSZ8081MNX/RNB)‚ÌƒŠƒZƒbƒg

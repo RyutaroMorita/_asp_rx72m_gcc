@@ -48,6 +48,7 @@ extern volatile uint8_t * gp_rspi0_rx_address;             /* RSPI0 receive buff
 extern volatile uint16_t g_rspi0_rx_count;                 /* RSPI0 receive data number */
 extern volatile uint16_t g_rspi0_rx_length;                /* RSPI0 receive data length */
 /* Start user code for global. Do not edit comment generated here */
+extern volatile bool rspi_recieved; // 受信完了フラグ
 /* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
@@ -88,7 +89,6 @@ void r_Config_RSPI0_transmit_interrupt(void)
         {
             /* Disable transmit interrupt */
             RSPI0.SPCR.BIT.SPTIE = 0U;
-            r_Config_RSPI0_callback_transmitend();
             break;
         }
     }
@@ -126,47 +126,6 @@ void r_Config_RSPI0_receive_interrupt(void)
 }
 
 /***********************************************************************************************************************
-* Function Name: r_Config_RSPI0_error_interrupt
-* Description  : This function is SPEI0 interrupt service routine
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-
-void r_Config_RSPI0_error_interrupt(void)
-{
-    /* Disable RSPI function */
-    RSPI0.SPCR.BIT.SPE = 0U;
-
-    /* Disable transmit interrupt */
-    RSPI0.SPCR.BIT.SPTIE = 0U;
-
-    /* Disable receive interrupt */
-    RSPI0.SPCR.BIT.SPRIE = 0U;
-
-    /* Disable error interrupt */
-    RSPI0.SPCR.BIT.SPEIE = 0U;
-
-    /* Disable idle interrupt */
-    RSPI0.SPCR2.BIT.SPIIE = 0U;
-
-    /* Clear error sources */
-    RSPI0.SPSR.BYTE = 0xA0U;
-}
-
-/***********************************************************************************************************************
-* Function Name: r_Config_RSPI0_callback_transmitend
-* Description  : This function is a callback function when RSPI0 finishes transmission
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-
-static void r_Config_RSPI0_callback_transmitend(void)
-{
-    /* Start user code for r_Config_RSPI0_callback_transmitend. Do not edit comment generated here */
-    /* End user code. Do not edit comment generated here */
-}
-
-/***********************************************************************************************************************
 * Function Name: r_Config_RSPI0_callback_receiveend
 * Description  : This function is a callback function when RSPI0 finishes reception
 * Arguments    : None
@@ -176,6 +135,7 @@ static void r_Config_RSPI0_callback_transmitend(void)
 static void r_Config_RSPI0_callback_receiveend(void)
 {
     /* Start user code for r_Config_RSPI0_callback_receiveend. Do not edit comment generated here */
+	rspi_recieved = true; // 受信完了フラグ
     /* End user code. Do not edit comment generated here */
 }
 

@@ -98,8 +98,10 @@
  */
 #ifndef TOPPERS_MACRO_ONLY
 
-void rspi_tx_handler(void);
-void rspi_rx_handler(void);
+//extern void r_Config_RSPI0_transmit_interrupt(void);
+//extern void r_Config_RSPI0_receive_interrupt(void);
+extern void rspi_tx_handler(void);
+extern void rspi_rx_handler(void);
 
 extern void	main_task(intptr_t exinf);
 extern void	udp_task(intptr_t exinf);

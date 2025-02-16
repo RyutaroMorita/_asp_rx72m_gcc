@@ -52,8 +52,6 @@ void R_Config_RSPI0_Create_UserInit(void);
 void R_Config_RSPI0_Start(void);
 void R_Config_RSPI0_Stop(void);
 MD_STATUS R_Config_RSPI0_Send_Receive(uint8_t * const tx_buf, uint16_t tx_num, uint8_t * const rx_buf);
-void r_Config_RSPI0_error_interrupt(void);
-static void r_Config_RSPI0_callback_transmitend(void);
 static void r_Config_RSPI0_callback_receiveend(void);
 /* Start user code for function. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */

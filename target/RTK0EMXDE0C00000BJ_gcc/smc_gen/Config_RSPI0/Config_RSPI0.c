@@ -64,7 +64,6 @@ void R_Config_RSPI0_Create(void)
     /* Disable RSPI interrupts */
     IEN(RSPI0,SPTI0) = 0U;
     IEN(RSPI0,SPRI0) = 0U;
-    ICU.GENAL0.BIT.EN17 = 0U;
 
     /* Cancel RSPI0 module stop state */
     MSTP(RSPI0) = 0U;
@@ -127,7 +126,6 @@ void R_Config_RSPI0_Start(void)
     /* Enable RSPI interrupts */
     IEN(RSPI0,SPTI0) = 1U;
     IEN(RSPI0,SPRI0) = 1U;
-    ICU.GENAL0.BIT.EN17 = 1U;
 
     /* Clear error sources */
     dummy = RSPI0.SPSR.BYTE;
@@ -149,7 +147,6 @@ void R_Config_RSPI0_Stop(void)
     /* Disable RSPI interrupts */
     IEN(RSPI0,SPTI0) = 0U;
     IEN(RSPI0,SPRI0) = 0U;
-    ICU.GENAL0.BIT.EN17 = 0U;
 
     /* Disable RSPI function */
     RSPI0.SPCR.BIT.SPE = 0U;
@@ -197,9 +194,6 @@ MD_STATUS R_Config_RSPI0_Send_Receive(uint8_t * const tx_buf, uint16_t tx_num, u
 
         /* Enable receive interrupt */
         RSPI0.SPCR.BIT.SPRIE = 1U;
-
-        /* Enable error interrupt */
-        RSPI0.SPCR.BIT.SPEIE = 1U;
 
         /* Enable RSPI function */
         RSPI0.SPCR.BIT.SPE = 1U;

@@ -104,9 +104,6 @@ void R_Systeminit(void)
     R_BSP_InterruptWrite(BSP_INT_SRC_UNDEFINED_INTERRUPT,(bsp_int_cb_t)r_undefined_exception);
 #endif /* BSP_CFG_BOOTLOADER_PROJECT == 0 */
 
-    /* Register group AL0 interrupt SPEI0 (RSPI0) */
-    R_BSP_InterruptWrite(BSP_INT_SRC_AL0_RSPI0_SPEI0,(bsp_int_cb_t)r_Config_RSPI0_error_interrupt);
-
     /* Disable writing to MPC pin function control registers */
     MPC.PWPR.BIT.PFSWE = 0U;
     MPC.PWPR.BIT.B0WI = 1U;
