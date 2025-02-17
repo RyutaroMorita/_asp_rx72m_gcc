@@ -28,6 +28,8 @@
 Pragma directive
 ***********************************************************************************************************************/
 /* Start user code for pragma. Do not edit comment generated here */
+#include <kernel.h>
+#include "kernel_cfg.h"
 /* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
@@ -37,7 +39,6 @@ Includes
 #include "Config_RSPI0.h"
 /* Start user code for include. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
-#include "r_cg_userdefine.h"
 
 /***********************************************************************************************************************
 Global variables and functions
@@ -48,7 +49,6 @@ extern volatile uint8_t * gp_rspi0_rx_address;             /* RSPI0 receive buff
 extern volatile uint16_t g_rspi0_rx_count;                 /* RSPI0 receive data number */
 extern volatile uint16_t g_rspi0_rx_length;                /* RSPI0 receive data length */
 /* Start user code for global. Do not edit comment generated here */
-extern volatile bool rspi_recieved; // 受信完了フラグ
 /* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
@@ -135,7 +135,7 @@ void r_Config_RSPI0_receive_interrupt(void)
 static void r_Config_RSPI0_callback_receiveend(void)
 {
     /* Start user code for r_Config_RSPI0_callback_receiveend. Do not edit comment generated here */
-	rspi_recieved = true; // 受信完了フラグ
+	iwup_tsk(MAIN_TASK);
     /* End user code. Do not edit comment generated here */
 }
 

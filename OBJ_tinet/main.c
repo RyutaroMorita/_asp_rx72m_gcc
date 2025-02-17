@@ -71,6 +71,9 @@
  */
 void main_task(intptr_t exinf)
 {
+	/*
+	 *  ƒyƒŠƒtƒFƒ‰ƒ‹‚Ì‰Šú‰»
+	 */
 	//unlock register access
 	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
 

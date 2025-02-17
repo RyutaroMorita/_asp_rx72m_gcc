@@ -72,16 +72,31 @@ extern void r_Config_RSPI0_transmit_interrupt(void);
 extern void r_Config_RSPI0_receive_interrupt(void);
 
 
-uint8_t			TCP_SWBUFT[(TCP_MSS * 4)];
-uint8_t			TCP_RWBUFT[(TCP_MSS * 4)];
+#define SPI_PAYLOAD_LENGTH		11
+#define SLAVE_ADDR				0x01
+uint8_t tx_buf[32];
+uint8_t rx_buf[32];
+//uint8_t snd_buf[] = {0x01, 0x66, 0x00, 0x00, 0x00, 0x06, 0x01, 0x03, 0x00, 0x00, 0x00, 0x0A};
+uint8_t snd_buf[TCP_MSS];
+uint8_t rcv_buf[TCP_MSS];
+uint8_t SPSR;	// デバッグのためグローバル変数とする
+
+uint8_t TCP_SWBUFT[(TCP_MSS * 4)];
+uint8_t TCP_RWBUFT[(TCP_MSS * 4)];
 
 
+/*
+ *  SPI 送信割り込みハンドラ
+ */
 void rspi_tx_handler(void)
 {
 	r_Config_RSPI0_transmit_interrupt();
 }
 
 
+/*
+ *  SPI 受信割り込みハンドラ
+ */
 void rspi_rx_handler(void)
 {
 	r_Config_RSPI0_receive_interrupt();
@@ -91,21 +106,20 @@ void rspi_rx_handler(void)
 /*
  *  メインタスク
  */
-#define LENGTH	11
-uint8_t tx_buf[32];
-uint8_t rx_buf[32];
-uint8_t snd_buf[] = {0x01, 0x66, 0x00, 0x00, 0x00, 0x06, 0x01, 0x03, 0x00, 0x00, 0x00, 0x0A};
-uint8_t rcv_buf[TCP_MSS];
-volatile bool rspi_recieved = false;
 void main_task(intptr_t exinf)
 {
-	ER ercd;
 	T_IPV4EP src;
 	T_IPV4EP dst;
-	int count;
+	ER ercd;
+	volatile uint8_t dummy;
+	int index;
 	int i;
 	uint8_t msg[80];
+	uint8_t count = 0;
 
+	/*
+	 *  ペリフェラルの初期化
+	 */
 	//unlock register access
 	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
 
@@ -116,27 +130,9 @@ void main_task(intptr_t exinf)
 	//lock register access
 	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
 
-#if 0
-    /* Set RSPCKA pin */
-    MPC.PC5PFS.BYTE = 0x0DU;
-    PORTC.ODR1.BYTE &= 0xFBU;
-    PORTC.PMR.BYTE |= 0x20U;
-
-    /* Set MOSIA pin */
-    MPC.PC6PFS.BYTE = 0x0DU;
-    PORTC.ODR1.BYTE &= 0xEFU;
-    PORTC.PMR.BYTE |= 0x40U;
-
-    /* Set MISOA pin */
-    MPC.PC7PFS.BYTE = 0x0DU;
-    PORTC.ODR1.BYTE &= 0xBFU;
-    PORTC.PMR.BYTE |= 0x80U;
-
-    /* Set SSLA0 pin */
-    MPC.PC4PFS.BYTE = 0x0DU;
-    PORTC.ODR1.BYTE &= 0xFEU;
-    PORTC.PMR.BYTE |= 0x10U;
-#endif
+	/*
+	 *  プルアップ抵抗の設定
+	 */
     sil_wrb_mem(
     		(void *)(PORTC_PCR_ADDR),
 			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B4_BIT)
@@ -149,10 +145,9 @@ void main_task(intptr_t exinf)
     		(void *)(PORTC_PCR_ADDR),
 			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B6_BIT)
 	);
-    sil_wrb_mem(
-    		(void *)(PORTC_PCR_ADDR),
-			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B7_BIT)
-	);
+
+	syslog(LOG_NOTICE, "\r\nWPT Demo Program for Hannover Release 0.5.0");
+	syslog(LOG_NOTICE, "Copyrigth (C) 2025 by Aeterlink Corp., JAPAN\r\n");
 
 	/*
 	 *  PHY(KSZ8081MNX/RNB)のリセット
@@ -164,17 +159,20 @@ void main_task(intptr_t exinf)
 	wup_tsk(ETHER_INPUT_TASK);
 
 	//act_tsk(UDP_TASK);
+
 	src.ipaddr = IPV4_ADDR_LOCAL;
 	src.portno = 0xC010;
 	dst.ipaddr = MAKE_IPV4_ADDR(192,168,0,1);
 	dst.portno = 502;
-	ercd = tcp_con_cep(ID_CEP0, &src, &dst, TMO_FEVR);
+	ercd = tcp_con_cep(ID_CEP0, &src, &dst, 10000);
 	if (ercd != E_OK) {
-		syslog(LOG_NOTICE, "Error <- tcp_con_cep()");
+		syslog(LOG_NOTICE, "ERROR: PLC(192.168.0.1:502) not found!");
+	} else {
+		syslog(LOG_NOTICE, "Connected to PLC(192.168.0.1:502)...");
 	}
 
 	/*
-	 *  R_Config_RSPI0_Start();
+	 *  SPI の初期化
 	 */
 	ena_int(INTNO_RSPI_TX);
 	ena_int(INTNO_RSPI_RX);
@@ -182,37 +180,100 @@ void main_task(intptr_t exinf)
 
 	while (1) {
 		/*
-		 *  R_Config_RSPI0_Send_Receive(tx_buf, LENGTH, rx_buf);
+		 *  SPI の受信開始
 		 */
-		R_Config_RSPI0_Send_Receive(tx_buf, LENGTH, rx_buf);
-		if (tslp_tsk(5000) == E_TMOUT) {
-			syslog(LOG_NOTICE, "Timeout <- R_Config_RSPI0_Send_Receive()");
+		R_Config_RSPI0_Send_Receive(tx_buf, SPI_PAYLOAD_LENGTH, rx_buf);
+		if (tslp_tsk(2000) == E_TMOUT) {
+			SPSR = RSPI0.SPSR.BYTE;
+			if (SPSR & 0x1D) {
+				// エラーステータスのクリア（次の通信のために必要！）
+				dummy = RSPI0.SPSR.BYTE;
+				RSPI0.SPSR.BYTE = 0xA0;
+			}
+			syslog(LOG_NOTICE, "ERROR: Not Received Data from SPI!");
 			continue;
 		}
-		count = 0;
-		for (i = 0; i < LENGTH; i++) {
-			msg[count] = '0' + ((rx_buf[i] / 100) % 10);
-			count++;
-			msg[count] = '0' + ((rx_buf[i] / 10) % 10);
-			count++;
-			msg[count] = '0' + ((rx_buf[i] / 1) % 10);
-			count++;
-			if (i < (LENGTH - 1)) {
-				msg[count] = ',';
-				count++;
+
+		index = 0;
+		msg[index] = '>';
+		index++;
+		msg[index] = '>';
+		index++;
+		msg[index] = ' ';
+		index++;
+		for (i = 0; i < SPI_PAYLOAD_LENGTH; i++) {
+			msg[index] = '0' + ((rx_buf[i] / 100) % 10);
+			index++;
+			msg[index] = '0' + ((rx_buf[i] / 10) % 10);
+			index++;
+			msg[index] = '0' + ((rx_buf[i] / 1) % 10);
+			index++;
+			if (i < (SPI_PAYLOAD_LENGTH - 1)) {
+				msg[index] = ',';
+				index++;
 			} else {
-				msg[count] = 0;
+				msg[index] = 0;
 			}
 		}
+
 		syslog(LOG_NOTICE, (const char *)msg);
-		ercd = tcp_snd_dat(ID_CEP0, (void *)snd_buf, sizeof(snd_buf), TMO_FEVR);
-		if (ercd <= 0) {
-			syslog(LOG_NOTICE, "Error <- tcp_snd_dat()");
+
+		snd_buf[ 0] = 0x01;					// トランザクション識別子1
+		snd_buf[ 1] = count;				// トランザクション識別子2（カウンタ）
+		count++;
+		snd_buf[ 2] = 0x00;					// プロトコル識別子＝ 0
+		snd_buf[ 3] = 0x00;					// プロトコル識別子＝ 0
+		snd_buf[ 4] = 0x00;					// フィールド長（上位バイト）＝ 0（なぜなら全てのメッセージは256 以下だから）
+		snd_buf[ 5] = 27;					// フィールド長（下位バイト）＝以下に続くバイト列の数
+
+		snd_buf[ 6] = SLAVE_ADDR;			// ユニット識別子（スレーブ・アドレスと言っていたもの）
+		snd_buf[ 7] = 16;					// Modbus ファンクションコード(Preset Multiple Registers（16，0x10）)
+		snd_buf[ 8] = 0x00;					// 開始アドレス（上位）
+		snd_buf[ 9] = 0x00;					// 開始アドレス（下位）
+		snd_buf[10] = 0x00;					// レジスタの数（上位）
+		snd_buf[11] = 0x0A;					// レジスタの数（下位）
+		snd_buf[12] = 0x14;					// バイト数
+
+		/* R40001 */
+		snd_buf[13] = 0;					// ネットワークID（上位）
+		snd_buf[14] = rx_buf[ 0];			// ネットワークID（下位）
+		/* R40002 */
+		snd_buf[15] = 0;					// SlaveID（上位）
+		snd_buf[16] = rx_buf[ 1];			// SlaveID（下位）
+		/* R40003 */
+		snd_buf[17] = 0;					// バッテリー電圧（上位）
+		snd_buf[18] = rx_buf[ 2];			// バッテリー電圧（下位）
+		/* R40004 */
+		snd_buf[19] = 0;					// Rect電圧（上位）
+		snd_buf[20] = rx_buf[ 3];			// Rect電圧（下位）
+		/* R40005 */
+		snd_buf[21] = rx_buf[ 4];			// センサーデータ0
+		snd_buf[22] = rx_buf[ 5];			// センサーデータ1
+		/* R40006 */
+		snd_buf[23] = rx_buf[ 6];			// センサーデータ2
+		snd_buf[24] = rx_buf[ 7];			// センサーデータ3
+		/* R40007 */
+		snd_buf[25] = 0;					// 受電状態（上位）
+		snd_buf[26] = rx_buf[ 8] >> 4;		// 受電状態（下位）
+		/* R40008 */
+		snd_buf[27] = 0;					// 再送回数（上位）
+		snd_buf[28] = rx_buf[ 8] & 0x0F;	// 再送回数（下位）
+		/* R40009 */
+		snd_buf[29] = 0;					// 受信RSSI（上位）
+		snd_buf[30] = rx_buf[ 9];			// 受信RSSI（下位）
+		/* R40010 */
+		snd_buf[31] = 0;					// チャンネル（上位）
+		snd_buf[32] = rx_buf[10];			// チャンネル（下位）
+
+		/*
+		 *  Modbus 通信
+		 */
+		if (ercd != E_OK)
 			continue;
-		}
-		ercd = tcp_rcv_dat(ID_CEP0, (void *)rcv_buf, TCP_MSS, TMO_FEVR);
-		if (ercd <= 0) {
-			syslog(LOG_NOTICE, "Error <- tcp_rcv_dat()");
+
+		tcp_snd_dat(ID_CEP0, (void *)snd_buf, 33, TMO_FEVR);
+		if (tcp_rcv_dat(ID_CEP0, (void *)rcv_buf, TCP_MSS, 1000) <= 0) {
+			syslog(LOG_NOTICE, "ERROR: Not Received Data from PLC!");
 			continue;
 		}
 	}
@@ -267,7 +328,7 @@ void udp_task(intptr_t exinf)
 
 
 /*
- *  以下、 syscalls のダミー.
+ *  以下 syscalls のダミー.
  */
 int getpid(void)
 {
