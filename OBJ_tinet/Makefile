@@ -149,11 +149,11 @@ endif
 ifndef OMIT_OPTIMIZATION
   COPTS := $(COPTS) -O2
 endif
-CDEFS := $(CDEFS) 
+# smc_gen ‚Å’ñ‹Ÿ‚³‚ê‚é r_cg_interrupt_handlers.h ‚ð–³Œø‰»‚·‚é
+CDEFS := $(CDEFS) -DINTERRUPT_HANDLERS_H
 INCLUDES := -I. -I$(SRCDIR)/include -I$(SRCDIR)/arch -I$(SRCDIR) $(INCLUDES) \
 	-I$(TARGETDIR)/smc_gen/Config_ICU \
-	-I$(TARGETDIR)/smc_gen/Config_PORT \
-	-I$(TARGETDIR)/smc_gen/Config_RSPI0
+	-I$(TARGETDIR)/smc_gen/Config_PORT
 LDFLAGS := $(LDFLAGS) 
 CFG1_OUT_LDFLAGS := $(CFG1_OUT_LDFLAGS) 
 LIBS := $(LIBS) $(CXXLIBS) 
@@ -165,8 +165,7 @@ CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
 APPLNAME = main
 APPLDIR = \
 	$(TARGETDIR)/smc_gen/Config_ICU \
-	$(TARGETDIR)/smc_gen/Config_PORT \
-	$(TARGETDIR)/smc_gen/Config_RSPI0
+	$(TARGETDIR)/smc_gen/Config_PORT
 APPL_CFG = $(APPLNAME).cfg
 APPL_SRCS = \
 	Config_ICU.o \

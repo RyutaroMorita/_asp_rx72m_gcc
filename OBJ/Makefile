@@ -148,7 +148,8 @@ endif
 ifndef OMIT_OPTIMIZATION
   COPTS := $(COPTS) -O2
 endif
-CDEFS := $(CDEFS) 
+# smc_gen ‚Å’ñ‹Ÿ‚³‚ê‚é r_cg_interrupt_handlers.h ‚ð–³Œø‰»‚·‚é
+CDEFS := $(CDEFS) -DINTERRUPT_HANDLERS_H
 INCLUDES := -I. -I$(SRCDIR)/include -I$(SRCDIR)/arch -I$(SRCDIR) $(INCLUDES)
 LDFLAGS := $(LDFLAGS) 
 CFG1_OUT_LDFLAGS := $(CFG1_OUT_LDFLAGS) 

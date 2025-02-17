@@ -149,8 +149,12 @@ endif
 ifndef OMIT_OPTIMIZATION
   COPTS := $(COPTS) -O2
 endif
-CDEFS := $(CDEFS) 
-INCLUDES := -I. -I$(SRCDIR)/include -I$(SRCDIR)/arch -I$(SRCDIR) $(INCLUDES)
+# smc_gen で提供される r_cg_interrupt_handlers.h を無効化する
+CDEFS := $(CDEFS) -DINTERRUPT_HANDLERS_H
+INCLUDES := -I. -I$(SRCDIR)/include -I$(SRCDIR)/arch -I$(SRCDIR) $(INCLUDES) \
+	-I$(TARGETDIR)/smc_gen/Config_ICU \
+	-I$(TARGETDIR)/smc_gen/Config_PORT \
+	-I$(TARGETDIR)/smc_gen/Config_RSPI0
 LDFLAGS := $(LDFLAGS) 
 CFG1_OUT_LDFLAGS := $(CFG1_OUT_LDFLAGS) 
 LIBS := $(LIBS) $(CXXLIBS) 
@@ -160,9 +164,18 @@ CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
 #  アプリケーションプログラムに関する定義
 #
 APPLNAME = main
-APPLDIR =
+APPLDIR = \
+	$(TARGETDIR)/smc_gen/Config_ICU \
+	$(TARGETDIR)/smc_gen/Config_PORT \
+	$(TARGETDIR)/smc_gen/Config_RSPI0
 APPL_CFG = $(APPLNAME).cfg
 APPL_SRCS = \
+	Config_ICU.o \
+	Config_ICU_user.o \
+	Config_PORT.o \
+	Config_PORT_user.o \
+	Config_RSPI0.o \
+	Config_RSPI0_user.o \
 	main.o
 #	nondhcp.o
 

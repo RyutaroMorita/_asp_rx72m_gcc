@@ -46,7 +46,6 @@
 #include <t_syslog.h>
 #include <t_stdlib.h>
 #include "kernel_cfg.h"
-#include "main.h"
 #include "target_board.h"
 
 #include "tinet_cfg.h"
@@ -57,150 +56,67 @@
 #include <netinet/in_itron.h>
 #include <netinet/tcp.h>
 
+#include "main.h"
+
 /*
  *  smc_gen ディレクトリ内の内容に依存するため r_smc_entry.h はインクルードしない.
  */
-//#include "r_cg_macrodriver.h"
-#include "platform.h"
-#include "r_cg_port.h"
-#include "r_cg_icu.h"
-#include "r_cg_rspi.h"
+#include "r_cg_macrodriver.h"
 #include "Pin.h"
-//#include "Config_ICU/Config_ICU.h"
-//#include "Config_PORT/Config_PORT.h"
-//#include "Config_RSPI0/Config_RSPI0.h"
+#include "Config_ICU/Config_ICU.h"
+#include "Config_PORT/Config_PORT.h"
+#include "Config_RSPI0/Config_RSPI0.h"
 
 
-volatile uint8_t * gp_rspi0_tx_address;             /* RSPI0 transmit buffer address */
-volatile uint16_t g_rspi0_tx_count;                 /* RSPI0 transmit data number */
-volatile uint8_t * gp_rspi0_rx_address;             /* RSPI0 receive buffer address */
-volatile uint16_t g_rspi0_rx_count;                 /* RSPI0 receive data number */
-volatile uint16_t g_rspi0_rx_length;                /* RSPI0 receive data length */
+extern void r_Config_RSPI0_transmit_interrupt(void);
+extern void r_Config_RSPI0_receive_interrupt(void);
+
+
+uint8_t			TCP_SWBUFT[(TCP_MSS * 4)];
+uint8_t			TCP_RWBUFT[(TCP_MSS * 4)];
 
 
 void rspi_tx_handler(void)
 {
-    uint16_t frame_cnt;
-
-    /* WAIT_LOOP */
-    for (frame_cnt = 0U; frame_cnt < (_00_RSPI_FRAMES_1 + 1U); frame_cnt++)
-    {
-        if (g_rspi0_tx_count > 0U)
-        {
-            /* Write data for transmission */
-            RSPI0.SPDR.BYTE.HH = (*(uint8_t*)gp_rspi0_tx_address);
-            gp_rspi0_tx_address++;
-            g_rspi0_tx_count--;
-        }
-        else
-        {
-            /* Disable transmit interrupt */
-            RSPI0.SPCR.BIT.SPTIE = 0U;
-            break;
-        }
-    }
+	r_Config_RSPI0_transmit_interrupt();
 }
 
 
 void rspi_rx_handler(void)
 {
-    uint16_t frame_cnt;
-
-    /* WAIT_LOOP */
-    for (frame_cnt = 0U; frame_cnt < (_00_RSPI_FRAMES_1 + 1U); frame_cnt++)
-    {
-        if (g_rspi0_rx_length > g_rspi0_rx_count)
-        {
-            *(uint8_t *)gp_rspi0_rx_address = RSPI0.SPDR.BYTE.HH;
-            gp_rspi0_rx_address++;
-            g_rspi0_rx_count++;
-
-            if (g_rspi0_rx_length == g_rspi0_rx_count)
-            {
-                /* Disable receive interrupt */
-                RSPI0.SPCR.BIT.SPRIE = 0U;
-                iwup_tsk(MAIN_TASK);
-                break;
-            }
-        }
-    }
+	r_Config_RSPI0_receive_interrupt();
 }
 
 
-static void main_init(void)
+/*
+ *  メインタスク
+ */
+#define LENGTH	11
+uint8_t tx_buf[32];
+uint8_t rx_buf[32];
+uint8_t snd_buf[] = {0x01, 0x66, 0x00, 0x00, 0x00, 0x06, 0x01, 0x03, 0x00, 0x00, 0x00, 0x0A};
+uint8_t rcv_buf[TCP_MSS];
+volatile bool rspi_recieved = false;
+void main_task(intptr_t exinf)
 {
-    volatile uint8_t spcr_dummy;
+	ER ercd;
+	T_IPV4EP src;
+	T_IPV4EP dst;
+	int count;
+	int i;
+	uint8_t msg[80];
 
 	//unlock register access
 	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
 
-	/*
-	 *  R_Config_PORT_Create
-	 */
-    /* Set PORTA registers */
-    PORTA.PODR.BYTE = _00_Pm6_OUTPUT_0;
-    PORTA.ODR0.BYTE = _00_Pm0_CMOS_OUTPUT | _00_Pm1_CMOS_OUTPUT | _00_Pm2_CMOS_OUTPUT | _00_Pm3_CMOS_OUTPUT;
-    PORTA.ODR1.BYTE = _00_Pm4_CMOS_OUTPUT | _00_Pm5_CMOS_OUTPUT | _00_Pm6_CMOS_OUTPUT | _00_Pm7_CMOS_OUTPUT;
-    PORTA.DSCR.BYTE = _00_Pm0_HIDRV_OFF | _00_Pm1_HIDRV_OFF | _00_Pm2_HIDRV_OFF | _00_Pm3_HIDRV_OFF |
-                      _00_Pm4_HIDRV_OFF | _00_Pm5_HIDRV_OFF | _00_Pm6_HIDRV_OFF | _00_Pm7_HIDRV_OFF;
-    PORTA.DSCR2.BYTE = _00_Pm0_HISPEED_OFF | _00_Pm1_HISPEED_OFF | _00_Pm2_HISPEED_OFF | _00_Pm3_HISPEED_OFF |
-                       _00_Pm4_HISPEED_OFF | _00_Pm5_HISPEED_OFF | _00_Pm6_HISPEED_OFF | _00_Pm7_HISPEED_OFF;
-    PORTA.PMR.BYTE = _00_Pm6_PIN_GPIO;
-    PORTA.PDR.BYTE = _40_Pm6_MODE_OUTPUT;
+	R_Config_PORT_Create();
+	R_Config_ICU_Create();
+	R_Config_RSPI0_Create();
 
-    /*
-     *  R_Config_ICU_Create
-     */
-    /* Disable IRQ interrupts */
-    ICU.IER[0x08].BYTE = 0x00U;
-    ICU.IER[0x09].BYTE = 0x00U;
+	//lock register access
+	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
 
-    /* Disable software interrupt */
-    IEN(ICU,SWINT) = 0U;
-    IEN(ICU,SWINT2) = 0U;
-
-    /* Disable IRQ digital filter */
-    ICU.IRQFLTE0.BYTE &= ~(_01_ICU_IRQ0_FILTER_ENABLE);
-
-    /* Set IRQ0 pin */
-    MPC.P10PFS.BYTE = 0x40U;
-    PORT1.PDR.BYTE &= 0xFEU;
-    PORT1.PMR.BYTE &= 0xFEU;
-
-    /* Set IRQ detection type */
-    ICU.IRQCR[0].BYTE = _00_ICU_IRQ_EDGE_LOW_LEVEL;
-
-    /* Set IRQ priority level */
-    IPR(ICU,IRQ0) = _06_ICU_PRIORITY_LEVEL6;
-
-    /*
-     *  R_Config_RSPI0_Create
-     */
-    /* Disable RSPI interrupts */
-    IEN(RSPI0,SPTI0) = 0U;
-    IEN(RSPI0,SPRI0) = 0U;
-
-    /* Cancel RSPI0 module stop state */
-    MSTP(RSPI0) = 0U;
-
-    /* Disable RSPI function */
-    RSPI0.SPCR.BIT.SPE = 0U;
-
-    /* Set control registers */
-    RSPI0.SSLP.BYTE = _00_RSPI_SSL0_POLARITY_LOW;
-    RSPI0.SPPCR.BYTE = _00_RSPI_LOOPBACK_DISABLED | _00_RSPI_LOOPBACK2_DISABLED;
-    RSPI0.SPDCR.BYTE = _40_RSPI_ACCESS_BYTE | _00_RSPI_FRAMES_1;
-    RSPI0.SPCR2.BYTE = _00_RSPI_PARITY_DISABLE;
-    RSPI0.SPCMD0.WORD = _0001_RSPI_RSPCK_SAMPLING_EVEN | _0000_RSPI_RSPCK_POLARITY_LOW |
-                        _0400_RSPI_DATA_LENGTH_BITS_8 | _0000_RSPI_MSB_FIRST;
-    RSPI0.SPDCR2.BYTE = _00_RSPI_BYTESWAP_DISABLED;
-
-    /* Set SPTI0 priority level */
-    IPR(RSPI0,SPTI0) = _03_RSPI_PRIORITY_LEVEL3;
-
-    /* Set SPRI0 priority level */
-    IPR(RSPI0,SPRI0) = _03_RSPI_PRIORITY_LEVEL3;
-
+#if 0
     /* Set RSPCKA pin */
     MPC.PC5PFS.BYTE = 0x0DU;
     PORTC.ODR1.BYTE &= 0xFBU;
@@ -220,75 +136,23 @@ static void main_init(void)
     MPC.PC4PFS.BYTE = 0x0DU;
     PORTC.ODR1.BYTE &= 0xFEU;
     PORTC.PMR.BYTE |= 0x10U;
-
-    RSPI0.SPCR.BYTE = _00_RSPI_MODE_SPI | _00_RSPI_FULL_DUPLEX_SYNCHRONOUS | _00_RSPI_SLAVE_MODE;
-    spcr_dummy = RSPI0.SPCR.BYTE;
-
-	//lock register access
-	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
-}
-
-
-static void RSPI0_Send_Receive(uint8_t * const tx_buf, uint16_t tx_num, uint8_t * const rx_buf)
-{
-    if (tx_num < 1U)
-    {
-        return;
-    }
-    else
-    {
-        /* Initialize the global counters */
-        gp_rspi0_tx_address = tx_buf;
-        g_rspi0_tx_count = tx_num;
-        gp_rspi0_rx_address = rx_buf;
-        g_rspi0_rx_length = tx_num;
-        g_rspi0_rx_count = 0U;
-
-        /* Clear SPE bit to ensure transmit buffer empty interrupt be generated
-           when state of SPE bit changing from 0 to 1 is satisfied later        */
-        if(1U == RSPI0.SPCR.BIT.SPE)
-        {
-            RSPI0.SPCR.BIT.SPE = 0U;
-        }
-
-        /* Enable transmit interrupt */
-        RSPI0.SPCR.BIT.SPTIE = 1U;
-
-        /* Enable receive interrupt */
-        RSPI0.SPCR.BIT.SPRIE = 1U;
-
-        /* Enable RSPI function */
-        RSPI0.SPCR.BIT.SPE = 1U;
-    }
-}
-
-/*
- *  メインタスク
- */
-#define LENGTH	11
-uint8_t tx_buf[32];
-uint8_t rx_buf[32];
-volatile bool rspi_recieved = false;
-void main_task(intptr_t exinf)
-{
-	volatile uint8_t dummy;
-	int count;
-	int i;
-	uint8_t msg[80];
-
-#if 0
-	//unlock register access
-	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY | SYSTEM_PRC1);
-
-	R_Config_PORT_Create();
-	R_Config_ICU_Create();
-	R_Config_RSPI0_Create();
-
-	//lock register access
-	sil_wrh_mem((void *)(SYSTEM_PRCR_ADDR), SYSTEM_PRKEY);
 #endif
-
-	main_init();
+    sil_wrb_mem(
+    		(void *)(PORTC_PCR_ADDR),
+			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B4_BIT)
+	);
+    sil_wrb_mem(
+    		(void *)(PORTC_PCR_ADDR),
+			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B5_BIT)
+	);
+    sil_wrb_mem(
+    		(void *)(PORTC_PCR_ADDR),
+			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B6_BIT)
+	);
+    sil_wrb_mem(
+    		(void *)(PORTC_PCR_ADDR),
+			(uint8_t)(sil_reb_mem((void *)PORTC_PCR_ADDR) | PORT_PCR_B7_BIT)
+	);
 
 	/*
 	 *  PHY(KSZ8081MNX/RNB)のリセット
@@ -300,25 +164,31 @@ void main_task(intptr_t exinf)
 	wup_tsk(ETHER_INPUT_TASK);
 
 	//act_tsk(UDP_TASK);
+	src.ipaddr = IPV4_ADDR_LOCAL;
+	src.portno = 0xC010;
+	dst.ipaddr = MAKE_IPV4_ADDR(192,168,0,1);
+	dst.portno = 502;
+	ercd = tcp_con_cep(ID_CEP0, &src, &dst, TMO_FEVR);
+	if (ercd != E_OK) {
+		syslog(LOG_NOTICE, "Error <- tcp_con_cep()");
+	}
 
 	/*
 	 *  R_Config_RSPI0_Start();
 	 */
 	ena_int(INTNO_RSPI_TX);
 	ena_int(INTNO_RSPI_RX);
-    /* Clear error sources */
-    dummy = RSPI0.SPSR.BYTE;
-    RSPI0.SPSR.BYTE = 0xA0U;
-
-    /* Disable idle interrupt */
-    RSPI0.SPCR2.BIT.SPIIE = 0U;
+	R_Config_RSPI0_Start();
 
 	while (1) {
 		/*
 		 *  R_Config_RSPI0_Send_Receive(tx_buf, LENGTH, rx_buf);
 		 */
-		RSPI0_Send_Receive(tx_buf, LENGTH, rx_buf);
-		slp_tsk();
+		R_Config_RSPI0_Send_Receive(tx_buf, LENGTH, rx_buf);
+		if (tslp_tsk(5000) == E_TMOUT) {
+			syslog(LOG_NOTICE, "Timeout <- R_Config_RSPI0_Send_Receive()");
+			continue;
+		}
 		count = 0;
 		for (i = 0; i < LENGTH; i++) {
 			msg[count] = '0' + ((rx_buf[i] / 100) % 10);
@@ -335,6 +205,16 @@ void main_task(intptr_t exinf)
 			}
 		}
 		syslog(LOG_NOTICE, (const char *)msg);
+		ercd = tcp_snd_dat(ID_CEP0, (void *)snd_buf, sizeof(snd_buf), TMO_FEVR);
+		if (ercd <= 0) {
+			syslog(LOG_NOTICE, "Error <- tcp_snd_dat()");
+			continue;
+		}
+		ercd = tcp_rcv_dat(ID_CEP0, (void *)rcv_buf, TCP_MSS, TMO_FEVR);
+		if (ercd <= 0) {
+			syslog(LOG_NOTICE, "Error <- tcp_rcv_dat()");
+			continue;
+		}
 	}
 }
 

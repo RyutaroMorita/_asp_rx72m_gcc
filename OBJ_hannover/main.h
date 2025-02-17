@@ -82,6 +82,9 @@
 #define UDP_PORT_BOOTPC		68		/* Bootstrap Protocol Client */
 #define UDP_PORT_TEST		49152	/* DYNAMIC AND/OR PRIVATE PORTS(ダイナミック/プライベートポート番号) */
 
+extern uint8_t			TCP_SWBUFT[];
+extern uint8_t			TCP_RWBUFT[];
+
 /*
  *
  */
@@ -89,7 +92,7 @@
 #define INTNO_RSPI_TX	INT_RSPI0_SPTI0	/* 割込み番号 */
 #define INHNO_RSPI_RX	INT_RSPI0_SPRI0	/* 割込みハンドラ番号 */
 #define INTNO_RSPI_RX	INT_RSPI0_SPRI0	/* 割込み番号 */
-#define INTPRI_RSPI		-3				/* 割込み優先度 */
+#define INTPRI_RSPI		-7				/* 割込み優先度 */
 #define INTATR_RSPI		(TA_NULL)		/* 割込み属性 */
 
 
