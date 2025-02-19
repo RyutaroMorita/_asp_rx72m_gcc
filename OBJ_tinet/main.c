@@ -149,7 +149,7 @@ void udp_task(intptr_t exinf)
 
 
 /*
- *  以下、 syscalls のダミー.
+ *  以下 syscalls のダミー.
  */
 int getpid(void)
 {

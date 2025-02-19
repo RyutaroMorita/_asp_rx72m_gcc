@@ -74,6 +74,8 @@ extern void r_Config_RSPI0_receive_interrupt(void);
 
 #define SPI_PAYLOAD_LENGTH		11
 #define SLAVE_ADDR				0x01
+
+ID main_wtid = 0;
 uint8_t tx_buf[32];
 uint8_t rx_buf[32];
 //uint8_t snd_buf[] = {0x01, 0x66, 0x00, 0x00, 0x00, 0x06, 0x01, 0x03, 0x00, 0x00, 0x00, 0x0A};
@@ -111,7 +113,8 @@ void main_task(intptr_t exinf)
 	T_IPV4EP src;
 	T_IPV4EP dst;
 	ER ercd;
-	volatile uint8_t dummy;
+	ER_UINT wupcnt;
+	//volatile uint8_t dummy;
 	int index;
 	int i;
 	uint8_t msg[80];
@@ -159,6 +162,7 @@ void main_task(intptr_t exinf)
 	wup_tsk(ETHER_INPUT_TASK);
 
 	//act_tsk(UDP_TASK);
+	act_tsk(SPI_TASK);
 
 	src.ipaddr = IPV4_ADDR_LOCAL;
 	src.portno = 0xC010;
@@ -171,14 +175,17 @@ void main_task(intptr_t exinf)
 		syslog(LOG_NOTICE, "Connected to PLC(192.168.0.1:502)...");
 	}
 
+#if 0
 	/*
 	 *  SPI の初期化
 	 */
 	ena_int(INTNO_RSPI_TX);
 	ena_int(INTNO_RSPI_RX);
 	R_Config_RSPI0_Start();
+#endif
 
 	while (1) {
+#if 0
 		/*
 		 *  SPI の受信開始
 		 */
@@ -193,7 +200,26 @@ void main_task(intptr_t exinf)
 			syslog(LOG_NOTICE, "ERROR: Not Received Data from SPI!");
 			continue;
 		}
+#endif
+		/*
+		 *  SPI タスクからの受信完了待ち
+		 */
+		get_tid(&main_wtid);
+		ercd = tslp_tsk(5000);
+		main_wtid = 0;
+		// 複数回 iwup_tsk された場合の対策
+		do {
+			wupcnt = can_wup(TSK_SELF);
+		} while (wupcnt);
 
+		if (ercd == E_TMOUT) {
+			syslog(LOG_NOTICE, "ERROR: Not Received Data from SPI!");
+			continue;
+		}
+
+		/*
+		 *  デバッグ出力
+		 */
 		index = 0;
 		msg[index] = '>';
 		index++;
@@ -218,6 +244,9 @@ void main_task(intptr_t exinf)
 
 		syslog(LOG_NOTICE, (const char *)msg);
 
+		/*
+		 *  Modbus パケット作成
+		 */
 		snd_buf[ 0] = 0x01;					// トランザクション識別子1
 		snd_buf[ 1] = count;				// トランザクション識別子2（カウンタ）
 		count++;
@@ -281,7 +310,50 @@ void main_task(intptr_t exinf)
 
 
 /*
- * UDPテストタスク
+ *  SPI 通信タスク
+ *
+ *  ※可能な限り高い優先度に設定すること.
+ */
+void spi_task(intptr_t exinf)
+{
+	volatile uint8_t dummy;
+	ID tid;
+
+	/*
+	 *  SPI の初期化
+	 */
+	ena_int(INTNO_RSPI_TX);
+	ena_int(INTNO_RSPI_RX);
+	R_Config_RSPI0_Start();
+
+	while (1) {
+		/*
+		 *  SPI の受信開始
+		 */
+		R_Config_RSPI0_Send_Receive(tx_buf, SPI_PAYLOAD_LENGTH, rx_buf);
+		if (tslp_tsk(2000) == E_TMOUT) {
+			SPSR = RSPI0.SPSR.BYTE;
+			if (SPSR & 0x1D) {
+				// エラーステータスのクリア（次の通信のために必要！）
+				dummy = RSPI0.SPSR.BYTE;
+				RSPI0.SPSR.BYTE = 0xA0;
+			}
+			continue;
+		}
+
+		/*
+		 *  MAIN タスクの受信完了待ち解除
+		 */
+		if ((tid = main_wtid) != 0) {
+			main_wtid = 0;
+			wup_tsk((ID)tid);
+		}
+	}
+}
+
+
+/*
+ *  UDP テストタスク
  */
 #define UDP_MAX_DATA_SIZE	1024
 static uint_t		buffer[2][UDP_MAX_DATA_SIZE/sizeof(uint_t)];

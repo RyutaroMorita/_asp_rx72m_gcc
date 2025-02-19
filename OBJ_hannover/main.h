@@ -107,6 +107,7 @@ extern void rspi_tx_handler(void);
 extern void rspi_rx_handler(void);
 
 extern void	main_task(intptr_t exinf);
+extern void	spi_task(intptr_t exinf);
 extern void	udp_task(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */

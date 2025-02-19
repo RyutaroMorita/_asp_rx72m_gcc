@@ -135,7 +135,7 @@ void r_Config_RSPI0_receive_interrupt(void)
 static void r_Config_RSPI0_callback_receiveend(void)
 {
     /* Start user code for r_Config_RSPI0_callback_receiveend. Do not edit comment generated here */
-	iwup_tsk(MAIN_TASK);
+	iwup_tsk(SPI_TASK);
     /* End user code. Do not edit comment generated here */
 }
 

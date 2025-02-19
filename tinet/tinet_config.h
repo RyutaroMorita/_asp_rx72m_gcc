@@ -315,39 +315,39 @@
  */
 
 #ifndef TCP_OUT_TASK_PRIORITY
-#define TCP_OUT_TASK_PRIORITY	1	/* TCP 出力タスクの優先度			*/
+#define TCP_OUT_TASK_PRIORITY	2	/* TCP 出力タスクの優先度			*/
 #endif
 
 #ifndef UDP_OUT_TASK_PRIORITY
-#define UDP_OUT_TASK_PRIORITY	1	/* UDP 出力タスクの優先度				*/
+#define UDP_OUT_TASK_PRIORITY	2	/* UDP 出力タスクの優先度				*/
 #endif
 
 #ifndef PPP_INPUT_PRIORITY
-#define PPP_INPUT_PRIORITY	2	/* PPP タスクの優先度			*/
+#define PPP_INPUT_PRIORITY	3	/* PPP タスクの優先度			*/
 #endif
 
 #ifndef PPP_OUTPUT_PRIORITY
-#define PPP_OUTPUT_PRIORITY	2	/* PPP タスクの優先度			*/
+#define PPP_OUTPUT_PRIORITY	3	/* PPP タスクの優先度			*/
 #endif
 
 #ifndef ETHER_INPUT_PRIORITY
-#define ETHER_INPUT_PRIORITY	1	/* Ethernet 入力タスクの優先度		*/
+#define ETHER_INPUT_PRIORITY	2	/* Ethernet 入力タスクの優先度		*/
 #endif
 
 #ifndef ETHER_OUTPUT_PRIORITY
-#define ETHER_OUTPUT_PRIORITY	1	/* Ethernet 出力タスクの優先度		*/
+#define ETHER_OUTPUT_PRIORITY	2	/* Ethernet 出力タスクの優先度		*/
 #endif
 
 #ifndef LOOP_INPUT_PRIORITY
-#define LOOP_INPUT_PRIORITY	2	/* ループバック入力タスクの優先度		*/
+#define LOOP_INPUT_PRIORITY	3	/* ループバック入力タスクの優先度		*/
 #endif
 
 #ifndef LOOP_OUTPUT_PRIORITY
-#define LOOP_OUTPUT_PRIORITY	2	/* ループバック出力タスクの優先度		*/
+#define LOOP_OUTPUT_PRIORITY	3	/* ループバック出力タスクの優先度		*/
 #endif
 
 #ifndef NET_TIMER_PRIORITY
-#define NET_TIMER_PRIORITY	1	/* ネットワークタイマタスクの優先度 */
+#define NET_TIMER_PRIORITY	2	/* ネットワークタイマタスクの優先度 */
 #endif
 
 /*
